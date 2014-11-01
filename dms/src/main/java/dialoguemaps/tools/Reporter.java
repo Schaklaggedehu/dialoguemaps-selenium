@@ -25,9 +25,8 @@ public class Reporter {
 	}
 
 	static void appendMethodReport(String method, String errormessage) {
-		if(_classname.isEmpty()){
-			_classname = method.substring(method.indexOf("(")+1, method.indexOf(")"));
-		}
+		_errorNumber++;
+		_classname = method.substring(method.indexOf("(")+1, method.indexOf(")"));
 		_items.add(method + " " + errormessage);
 	}
 

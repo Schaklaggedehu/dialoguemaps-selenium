@@ -20,7 +20,6 @@ public abstract class AbstractSelenium2Test extends AbstractSeleniumAssertTest {
 	protected static List<WebDriver> _drivers = new ArrayList<>();
 	protected static SeleniumAdapter _adapter;
 	
-//	@BeforeClass
 	public static void initSelenium2Test(int userCount) {
 		Properties prop = PropertyReader.load(); 		
 		MAXIMUM_RETRIES = Integer.parseInt((String) prop.get("maximumRetries"));

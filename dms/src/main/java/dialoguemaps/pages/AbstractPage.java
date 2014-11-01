@@ -59,11 +59,6 @@ abstract class AbstractPage<T> {
 		waitUntilPageLoaded();
 	}
 
-	protected void waitUntilClickableFor(final By locator) {
-		new WebDriverWait(_driver, WAIT_TIMEOUT).until(ExpectedConditions
-				.elementToBeClickable(locator));
-	}
-
 	protected boolean waitUntilVisible(final By locator) {
 		if(locator==null){
 			return false;
@@ -110,16 +105,6 @@ abstract class AbstractPage<T> {
 			final long timeoutInSeconds) {
 		new WebDriverWait(_driver, timeoutInSeconds).until(ExpectedConditions
 				.visibilityOfElementLocated(locator));
-	}
-
-	protected void waitUntilPresent(final By locator) {
-		new WebDriverWait(_driver, WAIT_TIMEOUT).until(ExpectedConditions
-				.presenceOfElementLocated(locator));
-	}
-
-	protected void waitUntilDisappearance(final By locator) {
-		new WebDriverWait(_driver, WAIT_TIMEOUT).until(ExpectedConditions
-				.invisibilityOfElementLocated(locator));
 	}
 
 	public void waitUntilPageLoaded() {
