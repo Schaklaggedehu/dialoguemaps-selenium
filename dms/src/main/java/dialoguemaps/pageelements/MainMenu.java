@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
  * 
  * @author janis
  */
-public class MainMenu {
+public class MainMenu implements PageElement{
 
 	private WebElement _mainMenuToolStrip;
 	private List<WebElement> _mainMenuButtons;
@@ -76,5 +76,10 @@ public class MainMenu {
 
 	public WebElement getInfoButton() {
 		return _mainMenuButtons.get(11);
+	}
+
+	@Override
+	public void clear() {
+		_menu = null;
 	}
 }

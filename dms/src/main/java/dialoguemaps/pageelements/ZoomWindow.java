@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
  * 
  * @author janis
  */
-public class ZoomWindow {
+public class ZoomWindow implements PageElement{
 
 	private WebElement _zoomWindow;
 	private List<WebElement> _zoomButtons;
@@ -57,5 +57,9 @@ public class ZoomWindow {
 	}
 	public WebElement getToggleHomeButton(){
 		return _zoomButtons.get(9);
+	}
+	@Override
+	public void clear() {
+		_window = null;
 	}
 }

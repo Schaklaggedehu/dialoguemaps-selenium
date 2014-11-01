@@ -73,12 +73,12 @@ abstract class AbstractPage<T> {
 		
 	}
 	
-	protected boolean waitUntilTextPresent(final WebElement element, String text) {
+	protected boolean waitUntilTextPresent(final WebElement element, String text, int timeout) {
 		if(element==null){
 			return false;
 		}
 		try {
-			new WebDriverWait(_driver, WAIT_TIMEOUT).until(ExpectedConditions
+			new WebDriverWait(_driver, timeout).until(ExpectedConditions
 					.textToBePresentInElement(element, text));
 			return true;
 		} catch (Exception e) {
@@ -96,9 +96,19 @@ abstract class AbstractPage<T> {
 			return true;
 		} catch (Exception e) {
 			return false;
-			
 		}			
-		
+	}
+	protected boolean waitUntilClickable(final WebElement element) {
+		if(element==null){
+			return false;
+		}
+		try {
+			new WebDriverWait(_driver,WAIT_TIMEOUT).
+			                  until(ExpectedConditions.elementToBeClickable(element));
+			return true;
+		}catch(Exception e){
+			return false;
+		}		
 	}
 
 	protected void waitUntilVisible(final By locator,

@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
  * 
  * @author janis
  */
-public class MapMenu {
+public class MapMenu implements PageElement{
 
 	private WebElement _mapToolsMenuToolStrip;
 	private List<WebElement> _mapMenuButtons;
@@ -52,5 +52,9 @@ public class MapMenu {
 
 	public WebElement getReturnButton() {
 		return _mapMenuButtons.get(5);
+	}
+	@Override
+	public void clear() {
+		_menu = null;
 	}
 }

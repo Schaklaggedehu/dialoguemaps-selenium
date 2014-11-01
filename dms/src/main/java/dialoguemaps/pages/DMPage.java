@@ -6,10 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import dialoguemaps.pageelements.InterActionWindow;
-import dialoguemaps.pageelements.MainMenu;
-import dialoguemaps.pageelements.MapMenu;
-import dialoguemaps.pageelements.PenWindow;
 import dialoguemaps.tools.EventHelper;
 
 /**
@@ -18,11 +14,7 @@ import dialoguemaps.tools.EventHelper;
  */
 public class DMPage extends PageElementCreator {
 
-	private MainMenu _mainMenu;
-	private InterActionWindow _interactionWindow;
 	private EventHelper _eventhelper = new EventHelper(_driver);
-	private PenWindow _penWindow;
-	private MapMenu _mapMenu;
 
 	public DMPage(final WebDriver driver) {
 		super(driver, By.id("isc_G"));
@@ -33,15 +25,10 @@ public class DMPage extends PageElementCreator {
 	}
 
 	public void openNewMap() {
-		_mainMenu = getMainMenu();
-		waitUntilVisible(_mainMenu.getMapToolsButton());
-		_mainMenu.getMapToolsButton().click();
-		sleepXseconds(2);// TODO wait until mapmenu visible
-		_mapMenu = getMapMenu();
-		waitUntilVisible(_mapMenu.getNewMapButton());
+		switchFromMainMenuToMapToolMenu();
 		_eventhelper.click(_mapMenu.getNewMapButton());
 		List<WebElement> tabs = findElements(By.cssSelector("#isc_IH>*>*>*>*>*>*"));
-		waitUntilTextPresent(tabs.get(0), "undefined");
+		waitUntilTextPresent(tabs.get(0), "undefined", 2);
 	}
 
 	public boolean isNewMapOpen() {
@@ -49,12 +36,24 @@ public class DMPage extends PageElementCreator {
 		return "undefined".equals(tabs.get(0).getText()) && tabs.size() / 4 == 1;
 	}
 
-	public void openPenWindow() {
-		_mapMenu = getMapMenu();
-		_eventhelper.click(_mapMenu.getReturnButton());
-		sleepXseconds(2);// TODO wait until mapmenu visible
+	public void switchFromMainMenuToMapToolMenu(){
+		waitUntilVisible(By.cssSelector("#isc_FW"));
 		_mainMenu = getMainMenu();
-		waitUntilVisible(_mainMenu.getInteractionButton());
+		_eventhelper.click(_mainMenu.getMapToolsButton());
+		waitUntilClickable(findElement(By.cssSelector("#isc_H8")));
+		_mapMenu = getMapMenu();
+	}
+	
+	public void switchFromMapToolMenuToMainMenu(){
+		waitUntilVisible(By.cssSelector("#isc_H8"));
+		_mapMenu = getMapMenu();
+		_eventhelper.doubleClick(_mapMenu.getMapToolMenuToolStrip());
+		waitUntilClickable(findElement(By.cssSelector("#isc_FW")));
+		_mainMenu = getMainMenu();
+	}
+	
+	public void openPenWindow() {
+		switchFromMapToolMenuToMainMenu();
 		_eventhelper.click(_mainMenu.getInteractionButton());
 		_interactionWindow = getInteractionWindow();
 		waitUntilVisible(_interactionWindow.getPenButton());
@@ -65,4 +64,5 @@ public class DMPage extends PageElementCreator {
 		_penWindow = getPenWindow();
 		return waitUntilVisible(_penWindow.getPenWindow());
 	}
+
 }

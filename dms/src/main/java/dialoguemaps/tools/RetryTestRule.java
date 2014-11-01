@@ -4,6 +4,8 @@ import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
+import dialoguemaps.pages.PageElementCreator;
+
 
 /**
  * 
@@ -35,6 +37,7 @@ class RetryTestRule implements TestRule {
 						return;
 					} catch (Throwable t) {
 						caughtThrowable = t;
+						PageElementCreator.clearAllMenusAndWindows();
                         if (i == _retryCount - (i + 1)) {
                             
                         	Reporter.appendMethodReport(description.getDisplayName(), ": run " + (i + 1) + " failed");

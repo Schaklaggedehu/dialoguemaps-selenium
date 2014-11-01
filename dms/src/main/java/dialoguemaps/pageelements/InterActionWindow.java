@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
  * 
  * @author janis
  */
-public class InterActionWindow {
+public class InterActionWindow implements PageElement{
 
 	private WebElement _interactionWindow;
 	private List<WebElement> _interactionButtons;
@@ -159,5 +159,9 @@ public class InterActionWindow {
 	}	
 	public WebElement getRightColorPickerButton(){
 		return _interactionButtons.get(34);
+	}
+	@Override
+	public void clear() {
+		_window = null;
 	}
 }

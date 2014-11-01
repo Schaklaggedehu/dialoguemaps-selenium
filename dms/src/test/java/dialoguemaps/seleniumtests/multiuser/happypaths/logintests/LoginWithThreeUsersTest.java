@@ -22,17 +22,15 @@ public class LoginWithThreeUsersTest extends AbstractSelenium2Test {
 	private static final List<String> _loginPerson0= Arrays.asList("dev","dev");
 	private static final List<String> _loginPerson1= Arrays.asList("dev","dev");
 	private static final List<String> _loginPerson2= Arrays.asList("dev","dev");
-	DMPage _dm0;
-	DMPage _dm1;
-	DMPage _dm2;
+	private DMPage _dm0;
+	private DMPage _dm1;
+	private DMPage _dm2;
 
 	@BeforeClass
 	public static void test(){
-		AbstractSelenium2Test.initSelenium2Test(3);
+		AbstractSelenium2Test.initSelenium2Test(_userCount);
 	}
-//	public LoginWithThreeUsersTest(){
-//		super(_userCount);
-//	}
+
 	@Before
 	public void setUp() {
 		_dm0 = new DMPage(_drivers.get(0));

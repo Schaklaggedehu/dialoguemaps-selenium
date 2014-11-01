@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
  * 
  * @author janis
  */
-public class PenWindow {
+public class PenWindow implements PageElement{
 
 	private static WebElement _penWindow;
 	private List<WebElement> _penButtons;
@@ -41,5 +41,8 @@ public class PenWindow {
 	public WebElement getThickButton() {
 		return _penButtons.get(2);
 	}
-
+	@Override
+	public void clear() {
+		_window = null;
+	}
 }

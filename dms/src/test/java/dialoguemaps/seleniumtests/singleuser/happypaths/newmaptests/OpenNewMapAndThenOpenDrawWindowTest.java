@@ -15,16 +15,16 @@ import dialoguemaps.tools.AbstractSelenium2Test;
  */
 public class OpenNewMapAndThenOpenDrawWindowTest extends AbstractSelenium2Test {
 
-	@BeforeClass
-	public static void test(){
-		AbstractSelenium2Test.initSelenium2Test(1);
-	}
-//	public OpenNewMapAndThenOpenDrawWindowTest() {
-//		super(1);
-//	}
+
+	private static final int _userCount = 1;
 	private static final String NAME = "dev";
 	private static final String PASSWORD = "dev";
-	DMPage _dm;
+	private DMPage _dm;
+
+	@BeforeClass
+	public static void test(){
+		AbstractSelenium2Test.initSelenium2Test(_userCount);
+	}
 
 	@Before
 	public void setUp() {
@@ -34,7 +34,6 @@ public class OpenNewMapAndThenOpenDrawWindowTest extends AbstractSelenium2Test {
 	@Test
 	public void openNewMapAndOpenPenWindow() {
 		_dm.open();
-		_dm.sleepXseconds(2);
 		assertThat("mainpage not open", _dm.isOpen(), is(true));
 		_dm.logIntoMainpage(NAME, PASSWORD);
 		assertThat("couldn't log in", _dm.isLoggedIntoMainPage(), is(true));
