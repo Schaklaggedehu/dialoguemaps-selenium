@@ -21,11 +21,26 @@ import dialoguemaps.pageelements.ZoomWindow;
  */
 public class PageElementCreator extends AbstractPage<DMPage> {
 
+	String _cssSelectorWholeMap = "#isc_FQ";
+	
+	String _cssSelectorMainMenu = "#isc_FW"; 
 	MainMenu _mainMenu;
+
+	String _cssSelectorMapMenu = "#isc_H8"; 
 	MapMenu _mapMenu;
+	
+	String _cssSelectorInteractionWindow = "#isc_K1"; 
 	InterActionWindow _interactionWindow;
+	
+	String _cssSelectorPenWindow = "#isc_9P"; 
 	PenWindow _penWindow;
+	
+	String _cssSelectorZoomWindow = "#isc_92"; 
 	ZoomWindow _zoomWindow;
+	
+	String _cssSelectorDialogueMap = "#DialogueMap";
+	DialogueMap _dialogueMap;
+	
 	private static Set<PageElement> _pageElements = new HashSet<>();
 
 	PageElementCreator(WebDriver driver, By pageLocator) {
@@ -37,10 +52,11 @@ public class PageElementCreator extends AbstractPage<DMPage> {
 			pageElement.clear();
 		}
 	}
-	
+
 	public void sleepXseconds(final long seconds) {
 		for (int i = 0; i < 8; i++) {
-			System.out.println("!DEBUG ONLY! Start sleeping for " + seconds + " seconds. !DEBUG ONLY!");
+			System.out.println("!!DEBUG ONLY!!DEBUG ONLY!!DEBUG ONLY!! Start sleeping for " + seconds
+					+ " seconds. !!DEBUG ONLY!!DEBUG ONLY!!DEBUG ONLY!!");
 		}
 		try {
 			Thread.sleep(seconds * 1000);
@@ -57,73 +73,67 @@ public class PageElementCreator extends AbstractPage<DMPage> {
 		passwordField.submit();
 		WebElement signIn = findElement(By.cssSelector("#isc_1E"));
 		signIn.click();
+		waitUntilPresenceOfAllElementsLocatedBy(By.cssSelector(_cssSelectorDialogueMap+">g>g>*"), 2);
+
 	}
 
 	protected InterActionWindow getInteractionWindow() {
-		InterActionWindow window;
-		if (isVisible(By.cssSelector("#isc_K1"))) {
-			WebElement interactionWindow = findElement(By.cssSelector("#isc_K1"));
-			List<WebElement> interactionButtons = findElements(By.cssSelector("#isc_K1>*>*>*>*>*>*>*>*>*>*>*>img"));
-			window = InterActionWindow.getInterActionWindow(interactionWindow, interactionButtons);
-		} else {
-			window = InterActionWindow.getInterActionWindow(null, null);
-		}
+		waitUntilVisible(By.cssSelector(_cssSelectorInteractionWindow));
+		WebElement interactionWindow = findElement(By.cssSelector(_cssSelectorInteractionWindow));
+		List<WebElement> interactionButtons = findElements(By.cssSelector(_cssSelectorInteractionWindow+">*>*>*>*>*>*>*>*>*>img"));
+		InterActionWindow window = InterActionWindow.getInterActionWindow(interactionWindow, interactionButtons);
 		_pageElements.add(window);
 		return window;
 	}
 
 	protected PenWindow getPenWindow() {
-		PenWindow window;
-		if (isVisible(By.cssSelector("#isc_9P"))) {
-			WebElement penWindow = findElement(By.cssSelector("#isc_9P"));
-			List<WebElement> penButtons = findElements(By.cssSelector("#isc_9P>*>*>*>*>*>*>*>img"));
-			window = PenWindow.getPenWindow(penWindow, penButtons);
-		} else {
-			window = PenWindow.getPenWindow(null, null);
-		}
+		waitUntilVisible(By.cssSelector(_cssSelectorPenWindow));
+		WebElement penWindow = findElement(By.cssSelector(_cssSelectorPenWindow));
+		List<WebElement> penButtons = findElements(By.cssSelector(_cssSelectorPenWindow+">*>*>*>*>*>*>*>img"));
+		WebElement penCloseButton = findElements(By.cssSelector(_cssSelectorPenWindow+">*>*>*>*>*>img")).get(1);
+		PenWindow window = PenWindow.getPenWindow(penWindow, penButtons, penCloseButton);
 		_pageElements.add(window);
 		return window;
 	}
 
 	protected ZoomWindow getZoomWindow() {
-		ZoomWindow window;
-		if (isVisible(By.cssSelector("#isc_92"))) {
-			WebElement zoomWindow = findElement(By.cssSelector("#isc_92"));
-			List<WebElement> zoomButtons = findElements(By.cssSelector("#isc_92>*>*>*>img"));
-			zoomButtons.addAll(findElements(By.cssSelector("#isc_92>*>*>*>*>*>img")));
-			zoomButtons.add(findElement(By.cssSelector("#isc_92>*>*>*>*>*>*>*>img")));
-			zoomButtons.remove(0);
-			window = ZoomWindow.getZoomWindow(zoomWindow, zoomButtons);
-		} else {
-			window = ZoomWindow.getZoomWindow(null, null);
-		}
+		waitUntilVisible(By.cssSelector(_cssSelectorZoomWindow));
+		WebElement zoomWindow = findElement(By.cssSelector(_cssSelectorZoomWindow));
+		List<WebElement> zoomButtons = findElements(By.cssSelector(_cssSelectorZoomWindow+">*>*>*>img"));
+		zoomButtons.addAll(findElements(By.cssSelector(_cssSelectorZoomWindow+">*>*>*>*>*>img")));
+		zoomButtons.add(findElement(By.cssSelector(_cssSelectorZoomWindow+">*>*>*>*>*>*>*>img")));
+		zoomButtons.remove(0);
+		ZoomWindow window = ZoomWindow.getZoomWindow(zoomWindow, zoomButtons);
 		_pageElements.add(window);
 		return window;
 	}
 
 	protected MainMenu getMainMenu() {
-		MainMenu menu;
-		if (isVisible(By.cssSelector("#isc_FW"))) {
-			WebElement mainMenu = findElement(By.cssSelector("#isc_FW"));
-			List<WebElement> mainMenuButtons = findElements(By.cssSelector("#isc_FW>*>*>*>img"));
-			menu = MainMenu.getMainMenu(mainMenu, mainMenuButtons);
-		} else {
-			menu = MainMenu.getMainMenu(null, null);
-		}
+		waitUntilVisible(By.cssSelector(_cssSelectorMainMenu));
+		WebElement mainMenu = findElement(By.cssSelector(_cssSelectorMainMenu));
+		List<WebElement> mainMenuButtons = findElements(By.cssSelector(_cssSelectorMainMenu+">*>*>*>img"));
+		MainMenu menu = MainMenu.getMainMenu(mainMenu, mainMenuButtons);
 		_pageElements.add(menu);
 		return menu;
 	}
 
 	protected MapMenu getMapMenu() {
-		MapMenu menu;
-		if (isVisible(By.cssSelector("#isc_H8"))) {
-			WebElement mapMenu = findElement(By.cssSelector("#isc_H8"));
-			List<WebElement> mapMenuButtons = findElements(By.cssSelector("#isc_H8>*>*>*>img"));
-			menu = MapMenu.getMapMenu(mapMenu, mapMenuButtons);
-		} else {
-			menu = MapMenu.getMapMenu(null, null);
-		}
+		waitUntilVisible(By.cssSelector(_cssSelectorMapMenu));
+		WebElement mapMenu = findElement(By.cssSelector(_cssSelectorMapMenu));
+		List<WebElement> mapMenuButtons = findElements(By.cssSelector(_cssSelectorMapMenu+">*>*>*>img"));
+		MapMenu menu = MapMenu.getMapMenu(mapMenu, mapMenuButtons);
 		_pageElements.add(menu);
 		return menu;
 	}
+	protected DialogueMap getDialogueMap() {
+		waitUntilVisible(By.cssSelector(_cssSelectorDialogueMap));
+		WebElement dialogueMap = findElement(By.cssSelector(_cssSelectorDialogueMap));
+		List<WebElement> dialogueMapCategories = findElements(By.cssSelector(_cssSelectorDialogueMap+">g>g"));
+		WebElement dmShapeElementCategory = dialogueMapCategories.get(0);
+		WebElement dmDrawElementCategory = dialogueMapCategories.get(1);
+		DialogueMap map = DialogueMap.getDialogueMap(dialogueMap, dmShapeElementCategory, dmDrawElementCategory);
+		_pageElements.add(map);
+		return map;
+	}
+
 }

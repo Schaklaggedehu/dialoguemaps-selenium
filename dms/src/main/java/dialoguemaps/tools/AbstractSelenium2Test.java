@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Properties;
 
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -18,7 +19,7 @@ public abstract class AbstractSelenium2Test extends AbstractSeleniumAssertTest {
 	private static int MAXIMUM_RETRIES;
 	protected static List<WebDriver> _drivers = new ArrayList<>();
 	protected static SeleniumAdapter _adapter;
-	
+		
 	public static void initSelenium2Test(int userCount) {
 		Properties prop = PropertyReader.load(); 		
 		MAXIMUM_RETRIES = Integer.parseInt((String) prop.get("maximumRetries"));

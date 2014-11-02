@@ -27,7 +27,7 @@ public class LoginWithThreeUsersTest extends AbstractSelenium2Test {
 	private DMPage _dm2;
 
 	@BeforeClass
-	public static void test(){
+	public static void initSelenium2Test(){
 		AbstractSelenium2Test.initSelenium2Test(_userCount);
 	}
 

@@ -44,4 +44,10 @@ public class EventHelper {
 		String keys = Keys.chord(Keys.CONTROL, "a");
 		actions.sendKeys(keys).build().perform();		
 	}
+
+	public void drawHouse(WebElement element) {
+		Actions actions = new Actions(_driver);
+		actions.clickAndHold(element).moveByOffset(0, -50).moveByOffset(50, 0).
+		moveByOffset(0, 50).moveByOffset(-50, 0).release().build().perform();
+	}
 }

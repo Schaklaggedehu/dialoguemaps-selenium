@@ -5,6 +5,7 @@ import static org.hamcrest.core.Is.is;
 
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -72,6 +73,19 @@ abstract class AbstractPage<T> {
 			}			
 		
 	}
+	protected boolean waitUntilPresenceOfAllElementsLocatedBy(final By locator, int timeout) {
+		if(locator==null){
+			return false;
+		}
+		try {
+			new WebDriverWait(_driver, timeout).until(ExpectedConditions
+					.presenceOfAllElementsLocatedBy(locator));
+			return true;
+		} catch (Exception e) {
+			return false;
+		}			
+		
+	}
 	
 	protected boolean waitUntilTextPresent(final WebElement element, String text, int timeout) {
 		if(element==null){
@@ -105,6 +119,18 @@ abstract class AbstractPage<T> {
 		try {
 			new WebDriverWait(_driver,WAIT_TIMEOUT).
 			                  until(ExpectedConditions.elementToBeClickable(element));
+			return true;
+		}catch(Exception e){
+			return false;
+		}		
+	}
+	protected boolean waitUntilInvisibilityOfElementLocated(final By locator) {
+		if(locator==null){
+			return false;
+		}
+		try {
+			new WebDriverWait(_driver,WAIT_TIMEOUT).
+			until(ExpectedConditions.invisibilityOfElementLocated(locator));
 			return true;
 		}catch(Exception e){
 			return false;
