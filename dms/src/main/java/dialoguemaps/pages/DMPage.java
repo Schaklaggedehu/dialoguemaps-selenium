@@ -1,10 +1,7 @@
 package dialoguemaps.pages;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import dialoguemaps.tools.EventHelper;
 
@@ -27,13 +24,14 @@ public class DMPage extends PageElementCreator {
 	public void openNewMap() {
 		_mapMenu = getMapMenu();
 		_eventhelper.click(_mapMenu.getNewMapButton());
-		List<WebElement> tabs = findElements(By.cssSelector("#isc_IH>*>*>*>*>*>*"));
-		waitUntilTextPresent(tabs.get(0), "undefined", 2);
+		_tabMenu = getTabMenu();
+		waitUntilTextPresent(_tabMenu.getAllTabs().get(0), "undefined", 2);
 	}
 
 	public boolean isNewMapOpen() {
-		List<WebElement> tabs = findElements(By.cssSelector("#isc_IH>*>*>*>*>*>*"));
-		return "undefined".equals(tabs.get(0).getText()) && tabs.size() / 4 == 1;
+		_tabMenu = getTabMenu();
+		return "undefined".equals(_tabMenu.getAllTabs().get(0).getText()) && 
+				_tabMenu.getAllTabs().size() == 1;
 	}
 
 	public void switchFromMainMenuToMapToolMenu() {
@@ -50,9 +48,12 @@ public class DMPage extends PageElementCreator {
 		_mainMenu = getMainMenu();
 	}
 
-	public void openPenWindow() {
+	public void openInteractionWindow() {
 		_mainMenu = getMainMenu();
 		_eventhelper.click(_mainMenu.getInteractionButton());
+	}
+
+	public void openPenWindow() {
 		_interactionWindow = getInteractionWindow();
 		_eventhelper.click(_interactionWindow.getPenButton());
 	}
@@ -62,12 +63,17 @@ public class DMPage extends PageElementCreator {
 		return waitUntilVisible(_penWindow.getPenWindow());
 	}
 
+	public boolean isInteractionWindowOpen() {
+		_interactionWindow = getInteractionWindow();
+		return waitUntilVisible(_interactionWindow.getInteractionWindow());
+	}
+
 	public void clickNormalPenButton() {
 		_penWindow = getPenWindow();
 		_eventhelper.click(_penWindow.getNormalButton());
 	}
 
-	public void drawHouseOnMap() {
+	public void drawOneHouseOnMap() {
 		_eventhelper.drawHouse(findElement(By.cssSelector(_cssSelectorWholeMap)));
 	}
 
@@ -83,7 +89,14 @@ public class DMPage extends PageElementCreator {
 		_dialogueMap = getDialogueMap();
 		return _dialogueMap.getAllDrawElements().size();
 	}
-	public boolean waitForNewDrawElement(){
-		return waitUntilPresenceOfAllElementsLocatedBy(By.cssSelector(_cssSelectorDialogueMap+">*>*>g"), 5);
+
+	public void waitUntilNewDrawElementsCreated(int sizeAfter) {
+		_dialogueMap = getDialogueMap();
+		for (int i = 0; i < 5; i++) {
+			if (_dialogueMap.getAllDrawElements().size() == sizeAfter) {
+				break;
+			}
+			sleep(1);
+		}
 	}
 }

@@ -15,14 +15,13 @@ import dialoguemaps.tools.AbstractSelenium2Test;
  */
 public class DrawingOnMapTest extends AbstractSelenium2Test {
 
-
 	private static final int _userCount = 1;
 	private static final String NAME = "dev";
 	private static final String PASSWORD = "dev";
 	private DMPage _dm;
 
 	@BeforeClass
-	public static void initSelenium2Test(){
+	public static void initSelenium2Test() {
 		AbstractSelenium2Test.initSelenium2Test(_userCount);
 	}
 
@@ -30,29 +29,27 @@ public class DrawingOnMapTest extends AbstractSelenium2Test {
 	public void setUp() {
 		_dm = new DMPage(_drivers.get(0));
 	}
-	
+
 	@Test
 	public void usePenToDraw() {
 		_dm.open();
 		assertThat("mainpage not open", _dm.isOpen(), is(true));
 		_dm.logIntoMainpage(NAME, PASSWORD);
 		assertThat("couldn't log in", _dm.isLoggedIntoMainPage(), is(true));
+		_dm.openInteractionWindow();
+		assertThat("couldn't open interaction window", _dm.isInteractionWindowOpen(), is(true));	
 		_dm.openPenWindow();
 		assertThat("couldn't open pen window", _dm.isPenWindowOpen(), is(true));
 		_dm.clickNormalPenButton();
 		int drawnElementsBeforeDrawing = _dm.getSizeOfDrawnElements();
-		_dm.drawHouseOnMap();
-		int drawnElementsAfterDrawing = _dm.getSizeOfDrawnElements();
-		assertThat("shouldn't save before closing pen window", 
-				drawnElementsBeforeDrawing==drawnElementsAfterDrawing, is(true));
+		_dm.drawOneHouseOnMap();
 		_dm.closePenWindow();
 		assertThat("couldn't close penwindow", _dm.isPenWindowClosed(), is(true));
-		_dm.waitForNewDrawElement();
-		_dm.sleepXseconds(2);
+		_dm.waitUntilNewDrawElementsCreated(drawnElementsBeforeDrawing + 1);
 		int drawnElementsAfterSaving = _dm.getSizeOfDrawnElements();
-		assertThat("didn't save drawing", 
-				drawnElementsBeforeDrawing==drawnElementsAfterSaving-1, is(true));
+		assertThat("didn't save drawing", drawnElementsAfterSaving == (drawnElementsBeforeDrawing + 1), is(true));
 	}
+
 	@Test
 	public void openNewMapAndUsePenToDraw() {
 		_dm.open();
@@ -63,18 +60,17 @@ public class DrawingOnMapTest extends AbstractSelenium2Test {
 		_dm.openNewMap();
 		assertThat("couldn't open new map", _dm.isNewMapOpen(), is(true));
 		_dm.switchFromMapToolMenuToMainMenu();
+		_dm.openInteractionWindow();
+		assertThat("couldn't open interaction window", _dm.isInteractionWindowOpen(), is(true));	
 		_dm.openPenWindow();
 		assertThat("couldn't open pen window", _dm.isPenWindowOpen(), is(true));
 		_dm.clickNormalPenButton();
 		int drawnElementsBeforeDrawing = _dm.getSizeOfDrawnElements();
-		_dm.drawHouseOnMap();
-		int drawnElementsAfterDrawing = _dm.getSizeOfDrawnElements();
-		assertThat("shouldn't save before closing pen window", 
-				drawnElementsBeforeDrawing==drawnElementsAfterDrawing, is(true));
+		_dm.drawOneHouseOnMap();
 		_dm.closePenWindow();
 		assertThat("couldn't close penwindow", _dm.isPenWindowClosed(), is(true));
+		_dm.waitUntilNewDrawElementsCreated(drawnElementsBeforeDrawing + 1);
 		int drawnElementsAfterSaving = _dm.getSizeOfDrawnElements();
-		assertThat("didn't save drawing", 
-				drawnElementsBeforeDrawing==drawnElementsAfterSaving-1, is(true));
+		assertThat("didn't save drawing", drawnElementsAfterSaving == (drawnElementsBeforeDrawing + 1), is(true));
 	}
 }
