@@ -37,7 +37,7 @@ public class DrawingOnMapTest extends AbstractSelenium2Test {
 		_dm.logIntoMainpage(NAME, PASSWORD);
 		assertThat("couldn't log in", _dm.isLoggedIntoMainPage(), is(true));
 		_dm.openInteractionWindow();
-		assertThat("couldn't open interaction window", _dm.isInteractionWindowOpen(), is(true));	
+		assertThat("couldn't open interaction window", _dm.isInteractionWindowOpen(), is(true));
 		_dm.openPenWindow();
 		assertThat("couldn't open pen window", _dm.isPenWindowOpen(), is(true));
 		_dm.clickNormalPenButton();
@@ -47,7 +47,7 @@ public class DrawingOnMapTest extends AbstractSelenium2Test {
 		assertThat("couldn't close penwindow", _dm.isPenWindowClosed(), is(true));
 		_dm.waitUntilNewDrawElementsCreated(drawnElementsBeforeDrawing + 1);
 		int drawnElementsAfterSaving = _dm.getSizeOfDrawnElements();
-		assertThat("didn't save drawing", drawnElementsAfterSaving == (drawnElementsBeforeDrawing + 1), is(true));
+		assertThat("didn't save drawing", drawnElementsAfterSaving, is(drawnElementsBeforeDrawing + 1));
 	}
 
 	@Test
@@ -61,7 +61,7 @@ public class DrawingOnMapTest extends AbstractSelenium2Test {
 		assertThat("couldn't open new map", _dm.isNewMapOpen(), is(true));
 		_dm.switchFromMapToolMenuToMainMenu();
 		_dm.openInteractionWindow();
-		assertThat("couldn't open interaction window", _dm.isInteractionWindowOpen(), is(true));	
+		assertThat("couldn't open interaction window", _dm.isInteractionWindowOpen(), is(true));
 		_dm.openPenWindow();
 		assertThat("couldn't open pen window", _dm.isPenWindowOpen(), is(true));
 		_dm.clickNormalPenButton();
@@ -71,6 +71,6 @@ public class DrawingOnMapTest extends AbstractSelenium2Test {
 		assertThat("couldn't close penwindow", _dm.isPenWindowClosed(), is(true));
 		_dm.waitUntilNewDrawElementsCreated(drawnElementsBeforeDrawing + 1);
 		int drawnElementsAfterSaving = _dm.getSizeOfDrawnElements();
-		assertThat("didn't save drawing", drawnElementsAfterSaving == (drawnElementsBeforeDrawing + 1), is(true));
+		assertThat("didn't save drawing", drawnElementsAfterSaving, is(drawnElementsBeforeDrawing + 1));
 	}
 }
