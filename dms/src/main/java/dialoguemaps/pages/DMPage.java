@@ -14,11 +14,11 @@ public class DMPage extends PageElementCreator {
 	private EventHelper _eventhelper = new EventHelper(_driver);
 
 	public DMPage(final WebDriver driver) {
-		super(driver, By.id("isc_G"));
+		super(driver, By.id("isc_G"));//TODO id durch debug-id austauschen
 	}
 
 	public boolean isLoggedIntoMainPage() {
-		return waitUntilVisible(By.cssSelector("#isc_FW"));
+		return waitUntilVisible(By.cssSelector(_cssSelectorMainMenu));
 	}
 
 	public void openNewMap() {

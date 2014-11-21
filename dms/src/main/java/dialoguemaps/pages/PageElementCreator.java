@@ -1,7 +1,6 @@
 package dialoguemaps.pages;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -23,28 +22,35 @@ import dialoguemaps.pageelements.ZoomWindow;
  */
 public class PageElementCreator extends AbstractPage<DMPage> {
 
-	String _cssSelectorWholeMap = "#isc_FQ";
+	final String _cssSelectorWholeMap = "body>div[eventproxy^=\"isc_VLayout_\"]";
 
-	String _cssSelectorMainMenu = "#isc_FW";
+	final String _cssSelectorMainMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
+			+ "div>div>div>div>div>div.toolStrip:nth-child(1)";
 	MainMenu _mainMenu;
 
-	String _cssSelectorMapMenu = "#isc_H8";
+	final String _cssSelectorMapMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
+			+ "div>div>div>div>div>div.toolStrip:nth-child(2)";
 	MapMenu _mapMenu;
 
-	String _cssSelectorTabMenu = "#isc_IH";
+	final String _cssSelectorTabMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
+			+ "div>div>div[eventproxy^=\"isc_GWTMapElementZoomUI\"]";
 	TabMenu _tabMenu;
 
-	String _cssSelectorInteractionWindow = "#isc_JR";
+	final String _cssSelectorDialogueMap = "#DialogueMap";
+	DialogueMap _dialogueMap;
+
+	final String _cssSelectorInteractionWindow = "#isc_JR";// TODO temporäre id
+															// durch debug-id
+															// austauschen
 	InterActionWindow _interactionWindow;
 
-	String _cssSelectorPenWindow = "#isc_9P";
+	final String _cssSelectorPenWindow = "#isc_9P";// TODO temporäre id durch
+													// debug-id austauschen
 	PenWindow _penWindow;
 
-	String _cssSelectorZoomWindow = "#isc_92";
+	final String _cssSelectorZoomWindow = "#isc_92";// TODO temporäre id durch
+													// debug-id austauschen
 	ZoomWindow _zoomWindow;
-
-	String _cssSelectorDialogueMap = "#DialogueMap";
-	DialogueMap _dialogueMap;
 
 	private static Set<PageElement> _pageElements = new HashSet<>();
 
@@ -60,8 +66,8 @@ public class PageElementCreator extends AbstractPage<DMPage> {
 
 	public void sleepXseconds(final long seconds) {
 		for (int i = 0; i < 8; i++) {
-			System.out.println("!!DEBUG ONLY!!DEBUG ONLY!!DEBUG ONLY!!    Start sleeping for " + 
-		seconds + " seconds.    !!DEBUG ONLY!!DEBUG ONLY!!DEBUG ONLY!!");
+			System.out.println("!!DEBUG ONLY!!DEBUG ONLY!!DEBUG ONLY!!    Start sleeping for " + seconds
+					+ " seconds.    !!DEBUG ONLY!!DEBUG ONLY!!DEBUG ONLY!!");
 		}
 		try {
 			Thread.sleep(seconds * 1000);
@@ -78,7 +84,7 @@ public class PageElementCreator extends AbstractPage<DMPage> {
 		passwordField.submit();
 		WebElement signIn = findElement(By.cssSelector("#isc_1E"));
 		signIn.click();
-		waitUntilVisible(By.cssSelector(_cssSelectorTabMenu+">*>*>*>*>*>*"));
+		waitUntilVisible(By.cssSelector(_cssSelectorTabMenu + ">div.normal>div>div>div>div>div>table[width]"));
 
 	}
 
@@ -134,16 +140,11 @@ public class PageElementCreator extends AbstractPage<DMPage> {
 
 	protected TabMenu getTabMenu() {
 		waitUntilVisible(By.cssSelector(_cssSelectorTabMenu));
-		List<WebElement> tabs = findElements(By.cssSelector(_cssSelectorTabMenu+">*>*>*>*>*>*"));
-		Iterator<WebElement> it = tabs.iterator();
-		while (it.hasNext()) {
-			WebElement tab = (WebElement) it.next();
-			if("".equals(tab.getAttribute("class"))){
-				it.remove();
-			}
-		}
-		System.out.println(tabs.size());
-		return TabMenu.getTabMenu(tabs);
+		List<WebElement> tabs = findElements(By.cssSelector(_cssSelectorTabMenu
+				+ ">div.normal>div>div>div>div>div>table[width]"));
+		List<WebElement> buttons = findElements(By.cssSelector(_cssSelectorTabMenu
+				+ ">div.toolStrip>div>div>div>table>tbody>tr>td[align]"));
+		return TabMenu.getTabMenu(tabs, buttons);
 	}
 
 	protected DialogueMap getDialogueMap() {
