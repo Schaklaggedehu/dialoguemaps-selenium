@@ -123,7 +123,7 @@ public class PageElementCreator extends AbstractPage<DMPage> {
 	protected MainMenu getMainMenu() {
 		waitUntilVisible(By.cssSelector(_cssSelectorMainMenu));
 		WebElement mainMenu = findElement(By.cssSelector(_cssSelectorMainMenu));
-		List<WebElement> mainMenuButtons = findElements(By.cssSelector(_cssSelectorMainMenu + ">*>*>*>img"));
+		List<WebElement> mainMenuButtons = findElements(By.cssSelector(_cssSelectorMainMenu + ">div>div>div>img"));
 		MainMenu menu = MainMenu.getMainMenu(mainMenu, mainMenuButtons);
 		_pageElements.add(menu);
 		return menu;
@@ -132,7 +132,7 @@ public class PageElementCreator extends AbstractPage<DMPage> {
 	protected MapMenu getMapMenu() {
 		waitUntilVisible(By.cssSelector(_cssSelectorMapMenu));
 		WebElement mapMenu = findElement(By.cssSelector(_cssSelectorMapMenu));
-		List<WebElement> mapMenuButtons = findElements(By.cssSelector(_cssSelectorMapMenu + ">*>*>*>img"));
+		List<WebElement> mapMenuButtons = findElements(By.cssSelector(_cssSelectorMapMenu + ">div>div>div>img"));
 		MapMenu menu = MapMenu.getMapMenu(mapMenu, mapMenuButtons);
 		_pageElements.add(menu);
 		return menu;
