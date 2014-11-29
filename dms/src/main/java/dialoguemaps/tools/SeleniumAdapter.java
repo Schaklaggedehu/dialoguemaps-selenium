@@ -12,6 +12,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.browserlaunchers.locators.FirefoxLocator;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -58,8 +59,8 @@ public class SeleniumAdapter {
 			firefoxProfile.setPreference("extensions.firebug.currentVersion",
 					"1.12.8"); // Avoid firebug extension tab
 		}
-
-		File file = new File("/usr/bin/firefox");
+		String firefoxPath = prop.getProperty("firefoxPath");
+		File file = new File(prop.getProperty(firefoxPath));
 		FirefoxBinary bin = new FirefoxBinary(file);
 		WebDriver driver = new FirefoxDriver(bin, firefoxProfile);
 		driver.manage().window().setPosition(point);
