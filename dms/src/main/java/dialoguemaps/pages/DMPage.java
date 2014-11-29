@@ -14,7 +14,7 @@ public class DMPage extends PageElementCreator {
 	private EventHelper _eventhelper = new EventHelper(_driver);
 
 	public DMPage(final WebDriver driver) {
-		super(driver, By.id("isc_G"));//TODO id durch debug-id austauschen
+		super(driver);
 	}
 
 	public boolean isLoggedIntoMainPage() {

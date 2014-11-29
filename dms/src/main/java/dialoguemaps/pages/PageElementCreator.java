@@ -54,8 +54,8 @@ public class PageElementCreator extends AbstractPage<DMPage> {
 
 	private static Set<PageElement> _pageElements = new HashSet<>();
 
-	PageElementCreator(WebDriver driver, By pageLocator) {
-		super(driver, pageLocator);
+	PageElementCreator(WebDriver driver) {
+		super(driver, By.id("isc_G"));//TODO id durch debug-id austauschen
 	}
 
 	public static void clearAllMenusAndWindows() {
