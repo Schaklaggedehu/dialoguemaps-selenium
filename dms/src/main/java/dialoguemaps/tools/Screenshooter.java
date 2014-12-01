@@ -17,7 +17,7 @@ public class Screenshooter {
 
 	private static List<WebDriver> _drivers;
 
-	static void setDrivers(List<WebDriver> driver) {
+	public static void setDrivers(List<WebDriver> driver) {
 		_drivers = driver;
 	}
 

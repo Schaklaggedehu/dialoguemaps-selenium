@@ -8,25 +8,26 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import dialoguemaps.pageelements.InterActionWindow;
-import dialoguemaps.pageelements.MainMenu;
+import dialoguemaps.pageelements.DialogueMap;
+import dialoguemaps.pageelements.InteractionWindow;
+import dialoguemaps.pageelements.Mainmenu;
 import dialoguemaps.pageelements.MapMenu;
 import dialoguemaps.pageelements.PageElement;
 import dialoguemaps.pageelements.PenWindow;
-import dialoguemaps.pageelements.TabMenu;
+import dialoguemaps.pageelements.Tabmenu;
 import dialoguemaps.pageelements.ZoomWindow;
 
 /**
  * 
  * @author janis
  */
-public class PageElementCreator extends AbstractPage<DMPage> {
+public class DMPageElements extends AbstractPage<DMPage> {
 
 	final String _cssSelectorWholeMap = "body>div[eventproxy^=\"isc_VLayout_\"]";
 
 	final String _cssSelectorMainMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
 			+ "div>div>div>div>div>div.toolStrip:nth-child(1)";
-	MainMenu _mainMenu;
+	Mainmenu _mainMenu;
 
 	final String _cssSelectorMapMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
 			+ "div>div>div>div>div>div.toolStrip:nth-child(2)";
@@ -34,7 +35,7 @@ public class PageElementCreator extends AbstractPage<DMPage> {
 
 	final String _cssSelectorTabMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
 			+ "div>div>div[eventproxy^=\"isc_GWTMapElementZoomUI\"]";
-	TabMenu _tabMenu;
+	Tabmenu _tabMenu;
 
 	final String _cssSelectorDialogueMap = "#DialogueMap";
 	DialogueMap _dialogueMap;
@@ -42,7 +43,7 @@ public class PageElementCreator extends AbstractPage<DMPage> {
 	final String _cssSelectorInteractionWindow = "#isc_JR";// TODO temporäre id
 															// durch debug-id
 															// austauschen
-	InterActionWindow _interactionWindow;
+	InteractionWindow _interactionWindow;
 
 	final String _cssSelectorPenWindow = "#isc_9P";// TODO temporäre id durch
 													// debug-id austauschen
@@ -54,7 +55,7 @@ public class PageElementCreator extends AbstractPage<DMPage> {
 
 	private static Set<PageElement> _pageElements = new HashSet<>();
 
-	PageElementCreator(WebDriver driver) {
+	DMPageElements(WebDriver driver) {
 		super(driver, By.id("isc_G"));//TODO id durch debug-id austauschen
 	}
 
@@ -88,12 +89,12 @@ public class PageElementCreator extends AbstractPage<DMPage> {
 
 	}
 
-	protected InterActionWindow getInteractionWindow() {
+	protected InteractionWindow getInteractionWindow() {
 		waitUntilVisible(By.cssSelector(_cssSelectorInteractionWindow));
 		WebElement interactionWindow = findElement(By.cssSelector(_cssSelectorInteractionWindow));
 		List<WebElement> interactionButtons = findElements(By.cssSelector(_cssSelectorInteractionWindow
 				+ ">*>*>*>*>*>*>*>*>*>*>*>img"));
-		InterActionWindow window = InterActionWindow.getInterActionWindow(interactionWindow, interactionButtons);
+		InteractionWindow window = InteractionWindow.getInterActionWindow(interactionWindow, interactionButtons);
 		_pageElements.add(window);
 		return window;
 	}
@@ -120,11 +121,11 @@ public class PageElementCreator extends AbstractPage<DMPage> {
 		return window;
 	}
 
-	protected MainMenu getMainMenu() {
+	protected Mainmenu getMainMenu() {
 		waitUntilVisible(By.cssSelector(_cssSelectorMainMenu));
 		WebElement mainMenu = findElement(By.cssSelector(_cssSelectorMainMenu));
 		List<WebElement> mainMenuButtons = findElements(By.cssSelector(_cssSelectorMainMenu + ">div>div>div>img"));
-		MainMenu menu = MainMenu.getMainMenu(mainMenu, mainMenuButtons);
+		Mainmenu menu = Mainmenu.getMainMenu(mainMenu, mainMenuButtons);
 		_pageElements.add(menu);
 		return menu;
 	}
@@ -138,13 +139,13 @@ public class PageElementCreator extends AbstractPage<DMPage> {
 		return menu;
 	}
 
-	protected TabMenu getTabMenu() {
+	protected Tabmenu getTabMenu() {
 		waitUntilVisible(By.cssSelector(_cssSelectorTabMenu));
 		List<WebElement> tabs = findElements(By.cssSelector(_cssSelectorTabMenu
 				+ ">div.normal>div>div>div>div>div>table[width]"));
 		List<WebElement> buttons = findElements(By.cssSelector(_cssSelectorTabMenu
 				+ ">div.toolStrip>div>div>div>table>tbody>tr>td[align]"));
-		return TabMenu.getTabMenu(tabs, buttons);
+		return Tabmenu.getTabMenu(tabs, buttons);
 	}
 
 	protected DialogueMap getDialogueMap() {

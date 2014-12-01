@@ -8,20 +8,20 @@ import org.openqa.selenium.WebElement;
  * 
  * @author janis
  */
-public class MainMenu implements PageElement{
+public class Mainmenu implements PageElement{
 
 	private WebElement _mainMenuToolStrip;
 	private List<WebElement> _mainMenuButtons;
-	private static MainMenu _menu;
+	private static Mainmenu _menu;
 
-	public static MainMenu getMainMenu(WebElement mainMenu, List<WebElement> mainMenuButtons) {
+	public static Mainmenu getMainMenu(WebElement mainMenu, List<WebElement> mainMenuButtons) {
 		if(_menu==null){
-			_menu = new MainMenu(mainMenu, mainMenuButtons);
+			_menu = new Mainmenu(mainMenu, mainMenuButtons);
 		}
 		return _menu;
 	}
 	
-	private MainMenu(final WebElement mainMenuToolStrip, final List<WebElement> mainMenuButtons) {
+	private Mainmenu(final WebElement mainMenuToolStrip, final List<WebElement> mainMenuButtons) {
 		_mainMenuToolStrip = mainMenuToolStrip;
 		_mainMenuButtons = mainMenuButtons;
 	}

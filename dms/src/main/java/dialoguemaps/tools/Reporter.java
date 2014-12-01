@@ -24,13 +24,13 @@ public class Reporter {
 		}
 	}
 
-	static void appendMethodReport(String method, String errormessage) {
+	public static void appendMethodReport(String method, String errormessage) {
 		_errorNumber++;
 		_classname = method.substring(method.indexOf("(")+1, method.indexOf(")"));
 		_items.add(method + " " + errormessage);
 	}
 
-	static void finish() {
+	public static void finish() {
 		if (_items.size() > 0) {
 			String filename = "reports/" + getCurrentTime()
 					+"_"+_classname + "_NUMBER_OF_ERRORS_" + _errorNumber + ".txt";

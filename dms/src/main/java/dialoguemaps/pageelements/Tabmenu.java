@@ -4,16 +4,16 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-public class TabMenu implements PageElement{
+public class Tabmenu implements PageElement{
 
 	private List<WebElement> _tabs;
 	private List<WebElement> _buttons;
 	
-	public static TabMenu getTabMenu(List<WebElement> tabs, List<WebElement> buttons) {
-		return new TabMenu(tabs, buttons);
+	public static Tabmenu getTabMenu(List<WebElement> tabs, List<WebElement> buttons) {
+		return new Tabmenu(tabs, buttons);
 	}
 	
-	private TabMenu(List<WebElement> tabs, List<WebElement> buttons){
+	private Tabmenu(List<WebElement> tabs, List<WebElement> buttons){
 		_tabs = tabs;
 		_buttons = buttons;
 	}

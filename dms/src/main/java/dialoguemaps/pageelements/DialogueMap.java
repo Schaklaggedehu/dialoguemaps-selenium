@@ -1,11 +1,9 @@
-package dialoguemaps.pages;
+package dialoguemaps.pageelements;
 
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import dialoguemaps.pageelements.PageElement;
 
 public class DialogueMap implements PageElement {
 

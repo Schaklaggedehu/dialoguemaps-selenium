@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import dialoguemaps.pages.DMPage;
-import dialoguemaps.tools.AbstractSelenium2Test;
+import dialoguemaps.tests.AbstractSelenium2Test;
 
 /**
  * 
@@ -18,17 +18,17 @@ import dialoguemaps.tools.AbstractSelenium2Test;
  */
 public class LoginWithThreeUsersTest extends AbstractSelenium2Test {
 
-	private static final int _userCount = 3;
-	private static final List<String> _loginPerson0= Arrays.asList("dev","dev");
-	private static final List<String> _loginPerson1= Arrays.asList("dev","dev");
-	private static final List<String> _loginPerson2= Arrays.asList("dev","dev");
+	private static final int USERCOUNT = 3;
+	private static final List<String> LOGINPERSON0= Arrays.asList("dev","dev");
+	private static final List<String> LOGINPERSON1= Arrays.asList("dev","dev");
+	private static final List<String> LOGINPERSON2= Arrays.asList("dev","dev");
 	private DMPage _dm0;
 	private DMPage _dm1;
 	private DMPage _dm2;
 
 	@BeforeClass
 	public static void initSelenium2Test(){
-		AbstractSelenium2Test.initSelenium2Test(_userCount);
+		AbstractSelenium2Test.initSelenium2Test(USERCOUNT);
 	}
 
 	@Before
@@ -45,9 +45,9 @@ public class LoginWithThreeUsersTest extends AbstractSelenium2Test {
 		_dm0.open();
 		_dm1.open();
 		_dm2.open();
-		_dm0.logIntoMainpage(_loginPerson0.get(NAME), _loginPerson0.get(PASSWORD));
-		_dm1.logIntoMainpage(_loginPerson1.get(NAME), _loginPerson1.get(PASSWORD));
-		_dm2.logIntoMainpage(_loginPerson2.get(NAME), _loginPerson2.get(PASSWORD));
+		_dm0.logIntoMainpage(LOGINPERSON0.get(NAME), LOGINPERSON0.get(PASSWORD));
+		_dm1.logIntoMainpage(LOGINPERSON1.get(NAME), LOGINPERSON1.get(PASSWORD));
+		_dm2.logIntoMainpage(LOGINPERSON2.get(NAME), LOGINPERSON2.get(PASSWORD));
 		assertThat("person 1 not logged in", _dm0.isLoggedIntoMainPage(), is(true));
 		assertThat("person 2 not logged in", _dm1.isLoggedIntoMainPage(), is(true));
 		assertThat("person 3 not logged in", _dm2.isLoggedIntoMainPage(), is(true));

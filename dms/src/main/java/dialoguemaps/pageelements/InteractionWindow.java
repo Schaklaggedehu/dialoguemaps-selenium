@@ -8,21 +8,21 @@ import org.openqa.selenium.WebElement;
  * 
  * @author janis
  */
-public class InterActionWindow implements PageElement{
+public class InteractionWindow implements PageElement{
 
 	private WebElement _interactionWindow;
 	private List<WebElement> _interactionButtons;
-	private static InterActionWindow _window;
+	private static InteractionWindow _window;
 	
-	public static InterActionWindow getInterActionWindow(WebElement interactionWindow,
+	public static InteractionWindow getInterActionWindow(WebElement interactionWindow,
 			List<WebElement> interactionButtons) {
 		if(_window==null){
-			_window = new InterActionWindow(interactionWindow, interactionButtons);
+			_window = new InteractionWindow(interactionWindow, interactionButtons);
 		}
 		return _window;
 	}	
 	
-	private InterActionWindow(WebElement interactionWindow,
+	private InteractionWindow(WebElement interactionWindow,
 			List<WebElement> interactionButtons) {
 				_interactionWindow = interactionWindow;
 				_interactionButtons = interactionButtons;

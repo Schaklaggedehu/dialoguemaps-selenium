@@ -9,7 +9,7 @@ import dialoguemaps.tools.EventHelper;
  * 
  * @author janis
  */
-public class DMPage extends PageElementCreator {
+public class DMPage extends DMPageElements {
 
 	private EventHelper _eventhelper = new EventHelper(_driver);
 

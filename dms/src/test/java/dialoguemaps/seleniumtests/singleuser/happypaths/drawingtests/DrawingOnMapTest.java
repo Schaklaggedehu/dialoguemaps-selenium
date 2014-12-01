@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import dialoguemaps.pages.DMPage;
-import dialoguemaps.tools.AbstractSelenium2Test;
+import dialoguemaps.tests.AbstractSelenium2Test;
 
 /**
  * 
@@ -15,14 +15,14 @@ import dialoguemaps.tools.AbstractSelenium2Test;
  */
 public class DrawingOnMapTest extends AbstractSelenium2Test {
 
-	private static final int _userCount = 1;
+	private static final int USERCOUNT = 1;
 	private static final String NAME = "dev";
 	private static final String PASSWORD = "dev";
 	private DMPage _dm;
 
 	@BeforeClass
 	public static void initSelenium2Test() {
-		AbstractSelenium2Test.initSelenium2Test(_userCount);
+		AbstractSelenium2Test.initSelenium2Test(USERCOUNT);
 	}
 
 	@Before
