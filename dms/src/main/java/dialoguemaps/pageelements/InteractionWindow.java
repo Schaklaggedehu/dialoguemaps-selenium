@@ -14,7 +14,7 @@ public class InteractionWindow implements PageElement{
 	private List<WebElement> _interactionButtons;
 	private static InteractionWindow _window;
 	
-	public static InteractionWindow getInterActionWindow(WebElement interactionWindow,
+	public static InteractionWindow getInteractionWindow(WebElement interactionWindow,
 			List<WebElement> interactionButtons) {
 		if(_window==null){
 			_window = new InteractionWindow(interactionWindow, interactionButtons);

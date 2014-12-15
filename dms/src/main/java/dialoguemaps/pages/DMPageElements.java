@@ -15,6 +15,7 @@ import dialoguemaps.pageelements.MapMenu;
 import dialoguemaps.pageelements.PageElement;
 import dialoguemaps.pageelements.PenWindow;
 import dialoguemaps.pageelements.Tabmenu;
+import dialoguemaps.pageelements.TeleporterWindow;
 import dialoguemaps.pageelements.ZoomWindow;
 
 /**
@@ -36,6 +37,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	final String _cssSelectorTabMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
 			+ "div>div>div[eventproxy^=\"isc_GWTMapElementZoomUI\"]";
 	Tabmenu _tabMenu;
+	
 
 	final String _cssSelectorDialogueMap = "#DialogueMap";
 	DialogueMap _dialogueMap;
@@ -44,6 +46,9 @@ public class DMPageElements extends AbstractPage<DMPage> {
 															// durch debug-id
 															// austauschen
 	InteractionWindow _interactionWindow;
+
+	final String _cssSelectorTeleporterWindow = "body>div[eventproxy^=\"isc_TeleporterView_\"][ role=\"dialog\"]";
+	TeleporterWindow _teleporterWindow;
 
 	final String _cssSelectorPenWindow = "#isc_9P";// TODO temporäre id durch
 													// debug-id austauschen
@@ -74,6 +79,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 			Thread.sleep(seconds * 1000);
 		} catch (InterruptedException ex) {
 		}
+		System.out.println("!!DONE SLEEPING!!");
 	}
 
 	public void logIntoMainpage(String name, String password) {
@@ -86,6 +92,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		WebElement signIn = findElement(By.cssSelector("#isc_1E"));
 		signIn.click();
 		waitUntilVisible(By.cssSelector(_cssSelectorTabMenu + ">div.normal>div>div>div>div>div>table[width]"));
+		System.out.println("Logged into Mainpage");
 
 	}
 
@@ -93,8 +100,24 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		waitUntilVisible(By.cssSelector(_cssSelectorInteractionWindow));
 		WebElement interactionWindow = findElement(By.cssSelector(_cssSelectorInteractionWindow));
 		List<WebElement> interactionButtons = findElements(By.cssSelector(_cssSelectorInteractionWindow
-				+ ">*>*>*>*>*>*>*>*>*>*>*>img"));
-		InteractionWindow window = InteractionWindow.getInterActionWindow(interactionWindow, interactionButtons);
+				+ ">*>*>*>*>*>*>*>*>*>*>*>img"));//TODO: Sternchen entfernen.
+		InteractionWindow window = InteractionWindow.getInteractionWindow(interactionWindow, interactionButtons);
+		_pageElements.add(window);
+		return window;
+	}
+	
+	protected TeleporterWindow getTeleporterWindow() {
+		waitUntilVisible(By.cssSelector(_cssSelectorTeleporterWindow));
+		WebElement teleporterWindow = findElement(By.cssSelector(_cssSelectorTeleporterWindow));
+		WebElement teleporterCloseButton = findElement(By.cssSelector(_cssSelectorTeleporterWindow
+				+ ">div>div>div>div[eventproxy*=\"closeButton\"]"));
+		List<WebElement> teleporterButtons = findElements(By.cssSelector(_cssSelectorTeleporterWindow
+				+ ">div>div>div>div>div>div>div>div>div>img"));
+		List<WebElement> teleporterPaths = findElements(By.cssSelector(_cssSelectorTeleporterWindow
+				+ ">div>div>div>div>div>div>div>div>div>div>table>tbody>tr"));
+		List<WebElement> teleporterSlides = findElements(By.cssSelector(_cssSelectorTeleporterWindow
+				+ ">div>div>div>div>div>div>div>div>div>div>div>div[eventproxy^=\"isc_UITrailPoint_\"]"));
+		TeleporterWindow window = TeleporterWindow.getTeleporterWindow(teleporterWindow, teleporterCloseButton, teleporterButtons, teleporterPaths, teleporterSlides);
 		_pageElements.add(window);
 		return window;
 	}
@@ -102,8 +125,8 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	protected PenWindow getPenWindow() {
 		waitUntilVisible(By.cssSelector(_cssSelectorPenWindow));
 		WebElement penWindow = findElement(By.cssSelector(_cssSelectorPenWindow));
-		List<WebElement> penButtons = findElements(By.cssSelector(_cssSelectorPenWindow + ">*>*>*>*>*>*>*>img"));
-		WebElement penCloseButton = findElements(By.cssSelector(_cssSelectorPenWindow + ">*>*>*>*>*>img")).get(1);
+		List<WebElement> penButtons = findElements(By.cssSelector(_cssSelectorPenWindow + ">*>*>*>*>*>*>*>img"));//TODO: Sternchen entfernen.
+		WebElement penCloseButton = findElements(By.cssSelector(_cssSelectorPenWindow + ">*>*>*>*>*>img")).get(1);//TODO: Sternchen entfernen.
 		PenWindow window = PenWindow.getPenWindow(penWindow, penButtons, penCloseButton);
 		_pageElements.add(window);
 		return window;
@@ -112,9 +135,9 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	protected ZoomWindow getZoomWindow() {
 		waitUntilVisible(By.cssSelector(_cssSelectorZoomWindow));
 		WebElement zoomWindow = findElement(By.cssSelector(_cssSelectorZoomWindow));
-		List<WebElement> zoomButtons = findElements(By.cssSelector(_cssSelectorZoomWindow + ">*>*>*>img"));
-		zoomButtons.addAll(findElements(By.cssSelector(_cssSelectorZoomWindow + ">*>*>*>*>*>img")));
-		zoomButtons.add(findElement(By.cssSelector(_cssSelectorZoomWindow + ">*>*>*>*>*>*>*>img")));
+		List<WebElement> zoomButtons = findElements(By.cssSelector(_cssSelectorZoomWindow + ">*>*>*>img"));//TODO: Sternchen entfernen.
+		zoomButtons.addAll(findElements(By.cssSelector(_cssSelectorZoomWindow + ">*>*>*>*>*>img")));//TODO: Sternchen entfernen.
+		zoomButtons.add(findElement(By.cssSelector(_cssSelectorZoomWindow + ">*>*>*>*>*>*>*>img")));//TODO: Sternchen entfernen.
 		zoomButtons.remove(0);
 		ZoomWindow window = ZoomWindow.getZoomWindow(zoomWindow, zoomButtons);
 		_pageElements.add(window);

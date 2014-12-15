@@ -52,6 +52,11 @@ public class DMPage extends DMPageElements {
 		_mainMenu = getMainMenu();
 		_eventhelper.click(_mainMenu.getInteractionButton());
 	}
+	
+	public void openTeleporterWindow() {
+		_mainMenu = getMainMenu();
+		_eventhelper.click(_mainMenu.getTeleporterButton());
+	}
 
 	public void openPenWindow() {
 		_interactionWindow = getInteractionWindow();
@@ -92,11 +97,19 @@ public class DMPage extends DMPageElements {
 
 	public void waitUntilNewDrawElementsCreated(int sizeAfter) {
 		_dialogueMap = getDialogueMap();
-		for (int i = 0; i < 5; i++) {
-			if (_dialogueMap.getAllDrawElements().size() == sizeAfter) {
-				break;
-			}
-			sleep(1);
-		}
+		waitUntilNewDrawElementsCreated(sizeAfter, _dialogueMap);
+	}
+
+	public void clickSomeButtons() {
+		_teleporterWindow = getTeleporterWindow();
+		sleepXseconds(10);
+		System.out.println(_teleporterWindow.getSlides().size());
+		System.out.println(_teleporterWindow.getPaths().size());
+//		_teleporterWindow.getSlide(0).getTextbox().sendKeys("HeLLO");
+//		_teleporterWindow.getSlide(0).getTextbox().submit();
+		System.out.println(_teleporterWindow.getSlide(0).toString());
+		System.out.println();
+		_teleporterWindow.getSlide(0).getDeleteButton().click();
+		sleepXseconds(30);
 	}
 }
