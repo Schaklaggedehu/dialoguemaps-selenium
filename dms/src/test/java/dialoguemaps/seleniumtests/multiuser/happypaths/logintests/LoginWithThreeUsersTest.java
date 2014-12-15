@@ -48,8 +48,8 @@ public class LoginWithThreeUsersTest extends AbstractSelenium2Test {
 		_dm0.logIntoMainpage(LOGINPERSON0.get(NAME), LOGINPERSON0.get(PASSWORD));
 		_dm1.logIntoMainpage(LOGINPERSON1.get(NAME), LOGINPERSON1.get(PASSWORD));
 		_dm2.logIntoMainpage(LOGINPERSON2.get(NAME), LOGINPERSON2.get(PASSWORD));
-		assertThat("person 1 not logged in", _dm0.isLoggedIntoMainPage(), is(true));
-		assertThat("person 2 not logged in", _dm1.isLoggedIntoMainPage(), is(true));
-		assertThat("person 3 not logged in", _dm2.isLoggedIntoMainPage(), is(true));
+		assertThat(_dm0.isLoggedIntoMainPage(), is(true), "person 1 not logged in");
+		assertThat(_dm1.isLoggedIntoMainPage(), is(true), "person 2 not logged in");
+		assertThat(_dm2.isLoggedIntoMainPage(), is(true), "person 3 not logged in");
 	}
 }

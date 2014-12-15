@@ -30,47 +30,48 @@ public class DrawingOnMapTest extends AbstractSelenium2Test {
 		_dm = new DMPage(_drivers.get(0));
 	}
 
-	@Test
+	@Test//TODO: Element auf die leere Karte legen. Dann usePenToDraw verwenden.
+	//XXX Idee: Vielleicht verschiedene SetUps designen. Map leer. Map mit einer Shape. Map mit einer Zeichnung.
 	public void usePenToDraw() {
 		_dm.open();
-		assertThat("mainpage not open", _dm.isOpen(), is(true));
+		assertThat(_dm.isOpen(), is(true), "mainpage not open");
 		_dm.logIntoMainpage(NAME, PASSWORD);
-		assertThat("couldn't log in", _dm.isLoggedIntoMainPage(), is(true));
+		assertThat(_dm.isLoggedIntoMainPage(), is(true), "couldn't log in");
 		_dm.openInteractionWindow();
-		assertThat("couldn't open interaction window", _dm.isInteractionWindowOpen(), is(true));
+		assertThat(_dm.isInteractionWindowOpen(), is(true), "couldn't open interaction window");
 		_dm.openPenWindow();
-		assertThat("couldn't open pen window", _dm.isPenWindowOpen(), is(true));
+		assertThat(_dm.isPenWindowOpen(), is(true), "couldn't open pen window");
 		_dm.clickNormalPenButton();
 		int drawnElementsBeforeDrawing = _dm.getSizeOfDrawnElements();
 		_dm.drawOneHouseOnMap();
 		_dm.closePenWindow();
-		assertThat("couldn't close penwindow", _dm.isPenWindowClosed(), is(true));
+		assertThat(_dm.isPenWindowClosed(), is(true), "couldn't close penwindow");
 		_dm.waitUntilNewDrawElementsCreated(drawnElementsBeforeDrawing + 1);
 		int drawnElementsAfterSaving = _dm.getSizeOfDrawnElements();
-		assertThat("didn't save drawing", drawnElementsAfterSaving, is(drawnElementsBeforeDrawing + 1));
+		assertThat(drawnElementsAfterSaving, is(drawnElementsBeforeDrawing + 1), "didn't save drawing");
 	}
 
 	@Test
 	public void openNewMapAndUsePenToDraw() {
 		_dm.open();
-		assertThat("mainpage not open", _dm.isOpen(), is(true));
+		assertThat(_dm.isOpen(), is(true), "mainpage not open");
 		_dm.logIntoMainpage(NAME, PASSWORD);
-		assertThat("couldn't log in", _dm.isLoggedIntoMainPage(), is(true));
+		assertThat(_dm.isLoggedIntoMainPage(), is(true), "couldn't log in");
 		_dm.switchFromMainMenuToMapToolMenu();
 		_dm.openNewMap();
-		assertThat("couldn't open new map", _dm.isNewMapOpen(), is(true));
+		assertThat(_dm.isNewMapOpen(), is(true), "couldn't open new map");
 		_dm.switchFromMapToolMenuToMainMenu();
 		_dm.openInteractionWindow();
-		assertThat("couldn't open interaction window", _dm.isInteractionWindowOpen(), is(true));
+		assertThat(_dm.isInteractionWindowOpen(), is(true), "couldn't open interaction window");
 		_dm.openPenWindow();
-		assertThat("couldn't open pen window", _dm.isPenWindowOpen(), is(true));
+		assertThat(_dm.isPenWindowOpen(), is(true), "couldn't open pen window");
 		_dm.clickNormalPenButton();
 		int drawnElementsBeforeDrawing = _dm.getSizeOfDrawnElements();
 		_dm.drawOneHouseOnMap();
 		_dm.closePenWindow();
-		assertThat("couldn't close penwindow", _dm.isPenWindowClosed(), is(true));
+		assertThat(_dm.isPenWindowClosed(), is(true), "couldn't close penwindow");
 		_dm.waitUntilNewDrawElementsCreated(drawnElementsBeforeDrawing + 1);
 		int drawnElementsAfterSaving = _dm.getSizeOfDrawnElements();
-		assertThat("didn't save drawing", drawnElementsAfterSaving, is(drawnElementsBeforeDrawing + 1));
+		assertThat(drawnElementsAfterSaving, is(drawnElementsBeforeDrawing + 1), "didn't save drawing");
 	}
 }
