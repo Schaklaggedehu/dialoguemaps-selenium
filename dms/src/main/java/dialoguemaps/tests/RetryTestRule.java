@@ -6,6 +6,7 @@ import org.junit.runners.model.Statement;
 
 import dialoguemaps.pages.DMPageElements;
 import dialoguemaps.tools.Reporter;
+import dialoguemaps.tools.Screenshooter;
 
 class RetryTestRule implements TestRule {
 
@@ -27,23 +28,36 @@ class RetryTestRule implements TestRule {
 			public void evaluate() throws Throwable {
 				Throwable caughtThrowable = null;
 
-				for (int i = 0; i < _retryCount; i++) {
+				for (int i = 0; i <= _retryCount; i++) {
 					try {
+						System.out.print("Evaluating " + description.getClassName() + "." + description.getMethodName()
+								+ "()...");
 						base.evaluate();
+						String successrate = "";
+						if (i > 0) {
+							successrate = " on " + (i + 1) + " try";
+						}
+						System.out.println(" Successful" + successrate + ".");
 						return;
 					} catch (Throwable t) {
 						caughtThrowable = t;
 						DMPageElements.clearAllMenusAndWindows();
-                        if (i == _retryCount - (i + 1)) {
-                            
-                        	Reporter.appendMethodReport(description.getDisplayName(), ": run " + (i + 1) + " failed");
-                        } else {
-                            Reporter.appendMethodReport(description.getDisplayName(), ": run " + (i + 1) + " failed");
-//                            Screenshooter.screenshot(description.getDisplayName()+ ": run " + (i + 1) + " failed");
-                        }
+						String errormessage = ": run " + (i + 1) + " failed";
+						// if (i == _retryCount - (i + 1)) {//TODO: Errorlog.
+						// Fallunterscheidung zwischen bloßer Warnung und Error?
+						if (i < _retryCount) {
+							System.out.println(" Failed, trying again.");
+						} else {
+						}
+						Reporter.appendMethodReport(description.getDisplayName(), errormessage);
+						Screenshooter.screenshot(description.getDisplayName() + errormessage);
+						// } else {
+						// }
 					}
 				}
-				Reporter.appendMethodReport(description.getDisplayName(), ": giving up after " + _retryCount + " failures"+System.lineSeparator());
+				System.out.println(" FAIL.");
+				Reporter.appendMethodReport(description.getDisplayName(), ": giving up after " + _retryCount
+						+ " failures" + System.lineSeparator());
 				throw caughtThrowable;
 			}
 		};

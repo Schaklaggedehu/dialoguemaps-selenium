@@ -22,10 +22,12 @@ public abstract class AbstractSelenium2Test extends AbstractSeleniumAssertTest {
 	public static void initSelenium2Test(int userCount) {
 		Properties prop = PropertyReader.load(); 		
 		MAXIMUM_RETRIES = Integer.parseInt((String) prop.get("maximumRetries"));
+		System.out.print("Initiating Selenium...");
 		_adapter = new SeleniumAdapter();
 		for (int i = 0; i < userCount; i++) {
 			_adapter.initSelenium();
 		}
+		System.out.println(" Success.");
 		_drivers.addAll(_adapter.getDriver());
 		Screenshooter.setDrivers(_drivers);
 	}

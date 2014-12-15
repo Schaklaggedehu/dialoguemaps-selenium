@@ -2,9 +2,6 @@ package dialoguemaps.seleniumtests.shortcuts;
 
 import static org.hamcrest.core.Is.is;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
