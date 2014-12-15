@@ -70,6 +70,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	}
 
 	public void sleepXseconds(final long seconds) {
+		System.out.println();
 		for (int i = 0; i < 8; i++) {
 			System.out.println("!!DEBUG ONLY!!DEBUG ONLY!!DEBUG ONLY!!    Start sleeping for " + seconds
 					+ " seconds.    !!DEBUG ONLY!!DEBUG ONLY!!DEBUG ONLY!!");
@@ -79,6 +80,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		} catch (InterruptedException ex) {
 		}
 		System.out.println("!!DONE SLEEPING!!");
+		System.out.println();
 	}
 
 	public void logIntoMainpage(String name, String password) {
@@ -91,7 +93,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		WebElement signIn = findElement(By.cssSelector("#isc_1E"));//TODO temporäre id durch smarte css-Pfade austauschen
 		signIn.click();
 		waitUntilVisible(By.cssSelector(_cssSelectorTabMenu + ">div.normal>div>div>div>div>div>table[width]"));
-		System.out.println("Logged into Mainpage");
+		System.out.println("Logged into Mainpage.");
 
 	}
 

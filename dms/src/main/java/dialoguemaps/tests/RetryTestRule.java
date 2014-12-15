@@ -6,6 +6,7 @@ import org.junit.runners.model.Statement;
 
 import dialoguemaps.pages.DMPageElements;
 import dialoguemaps.tools.Reporter;
+import dialoguemaps.tools.Screenshooter;
 
 class RetryTestRule implements TestRule {
 
@@ -29,20 +30,23 @@ class RetryTestRule implements TestRule {
 
 				for (int i = 0; i < _retryCount; i++) {
 					try {
+						System.out.print("Evaluating "+description.getClassName()+"."+description.getMethodName()+"()...");
 						base.evaluate();
+						System.out.println(" Success.");
 						return;
 					} catch (Throwable t) {
 						caughtThrowable = t;
 						DMPageElements.clearAllMenusAndWindows();
-                        if (i == _retryCount - (i + 1)) {
-                            
-                        	Reporter.appendMethodReport(description.getDisplayName(), ": run " + (i + 1) + " failed");
-                        } else {
-                            Reporter.appendMethodReport(description.getDisplayName(), ": run " + (i + 1) + " failed");
-//                            Screenshooter.screenshot(description.getDisplayName()+ ": run " + (i + 1) + " failed");
-                        }
+                        String errormessage = ": run " + (i + 1) + " failed";
+//						if (i == _retryCount - (i + 1)) {//TODO: Errorlog. Fallunterscheidung zwischen bloßer Warnung und Error?
+                            System.out.println(" Failed. Retry.");
+                        	Reporter.appendMethodReport(description.getDisplayName(), errormessage);
+                        	Screenshooter.screenshot(description.getDisplayName()+ errormessage);
+//                        } else {
+//                        }
 					}
 				}
+				System.out.println("Evaluating "+description.getClassName()+"."+description.getMethodName()+"()... FAIL.");
 				Reporter.appendMethodReport(description.getDisplayName(), ": giving up after " + _retryCount + " failures"+System.lineSeparator());
 				throw caughtThrowable;
 			}
