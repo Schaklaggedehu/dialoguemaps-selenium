@@ -28,15 +28,15 @@ public class DrawingOnMapTest extends AbstractSelenium2Test {
 	@Before
 	public void setUp() {
 		_dm = new DMPage(_drivers.get(0));
+		_dm.open();
+		assertThat(_dm.isOpen(), is(true), "mainpage not open");
+		_dm.logIntoMainpage(NAME, PASSWORD);
+		assertThat(_dm.isLoggedIntoMainPage(), is(true), "couldn't log in");
 	}
 
 	@Test//TODO: Element auf die leere Karte legen. Dann usePenToDraw verwenden.
 	//XXX Idee: Vielleicht verschiedene SetUps designen. Map leer. Map mit einer Shape. Map mit einer Zeichnung.
 	public void usePenToDraw() {
-		_dm.open();
-		assertThat(_dm.isOpen(), is(true), "mainpage not open");
-		_dm.logIntoMainpage(NAME, PASSWORD);
-		assertThat(_dm.isLoggedIntoMainPage(), is(true), "couldn't log in");
 		_dm.openInteractionWindow();
 		assertThat(_dm.isInteractionWindowOpen(), is(true), "couldn't open interaction window");
 		_dm.openPenWindow();
@@ -53,10 +53,6 @@ public class DrawingOnMapTest extends AbstractSelenium2Test {
 
 	@Test
 	public void openNewMapAndUsePenToDraw() {
-		_dm.open();
-		assertThat(_dm.isOpen(), is(true), "mainpage not open");
-		_dm.logIntoMainpage(NAME, PASSWORD);
-		assertThat(_dm.isLoggedIntoMainPage(), is(true), "couldn't log in");
 		_dm.switchFromMainMenuToMapToolMenu();
 		_dm.openNewMap();
 		assertThat(_dm.isNewMapOpen(), is(true), "couldn't open new map");
