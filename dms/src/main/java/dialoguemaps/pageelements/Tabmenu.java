@@ -6,15 +6,19 @@ import org.openqa.selenium.WebElement;
 
 public class Tabmenu implements PageElement {
 
-	private List<WebElement> _tabs;
+	private static Tabmenu _menu;
+	private static List<WebElement> _tabs;
 	private List<WebElement> _buttons;
 
 	public static Tabmenu getTabMenu(List<WebElement> tabs, List<WebElement> buttons) {
-		return new Tabmenu(tabs, buttons);
+		if (_menu == null) {
+			_menu = new Tabmenu(buttons);
+		}
+		_tabs = tabs;
+		return _menu;
 	}
 
-	private Tabmenu(List<WebElement> tabs, List<WebElement> buttons) {
-		_tabs = tabs;
+	private Tabmenu(List<WebElement> buttons) {
 		_buttons = buttons;
 	}
 
@@ -32,7 +36,7 @@ public class Tabmenu implements PageElement {
 
 	@Override
 	public void clear() {
-		// No singleton, therefore nothing to do here.
+		_menu = null;
 	}
 
 }

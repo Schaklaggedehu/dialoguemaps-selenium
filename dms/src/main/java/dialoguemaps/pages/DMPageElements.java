@@ -108,7 +108,8 @@ public class DMPageElements extends AbstractPage<DMPage> {
 																	// css-Pfade
 																	// austauschen
 		signIn.click();
-		waitUntilVisible(By.cssSelector(_cssSelectorTabMenu + ">div[eventproxy^=\"isc_TabSet_\"]>div>div>div>div>div>table[width]"));
+		waitUntilVisible(By.cssSelector(_cssSelectorTabMenu
+				+ ">div[eventproxy^=\"isc_TabSet_\"]>div>div>div>div>div>table[width]"));
 
 	}
 
@@ -187,16 +188,19 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		List<WebElement> mapMenuButtons = mapMenu.findElements(By.cssSelector("div>div>div>img"));
 		MapMenu menu = MapMenu.getMapMenu(mapMenu, mapMenuButtons);
 		_pageElements.add(menu);
-		return menu; 
+		return menu;
 	}
 
 	protected Tabmenu getTabMenu() {
 		waitUntilVisible(By.cssSelector(_cssSelectorTabMenu));
 		WebElement tabMenu = findElement(By.cssSelector(_cssSelectorTabMenu));
-		List<WebElement> tabs = tabMenu.findElements(By.cssSelector("div[eventproxy^=\"isc_TabSet_\"]>div>div>div>div>div>table[width]"));
+		List<WebElement> tabs = tabMenu.findElements(By
+				.cssSelector("div[eventproxy^=\"isc_TabSet_\"]>div>div>div>div>div>table[width]"));
 		List<WebElement> buttons = tabMenu.findElements(By
 				.cssSelector("div[eventproxy^=\"isc_ToolStrip_\"]>div>div>div>table>tbody>tr>td[align]"));
-		return Tabmenu.getTabMenu(tabs, buttons);
+		Tabmenu menu = Tabmenu.getTabMenu(tabs, buttons);
+		_pageElements.add(menu);
+		return menu;
 	}
 
 	protected DialogueMap getDialogueMap() {
