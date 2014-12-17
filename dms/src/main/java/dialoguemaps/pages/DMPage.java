@@ -11,8 +11,6 @@ import dialoguemaps.tools.EventHelper;
  */
 public class DMPage extends DMPageElements {
 
-	private EventHelper _eventhelper = new EventHelper(_driver);
-
 	public DMPage(final WebDriver driver) {
 		super(driver);
 		EventHelper.setDriver(_driver);

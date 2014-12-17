@@ -18,7 +18,7 @@ class RetryTestRule implements TestRule {
 
 	@Override
 	public Statement apply(final Statement base, final Description description) {
-		return statement(base, description);
+		return statement(base, description); 
 	}
 
 	private Statement statement(final Statement base, final Description description) {

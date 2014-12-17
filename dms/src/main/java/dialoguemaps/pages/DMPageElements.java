@@ -187,7 +187,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		List<WebElement> mapMenuButtons = mapMenu.findElements(By.cssSelector("div>div>div>img"));
 		MapMenu menu = MapMenu.getMapMenu(mapMenu, mapMenuButtons);
 		_pageElements.add(menu);
-		return menu;
+		return menu; 
 	}
 
 	protected Tabmenu getTabMenu() {
