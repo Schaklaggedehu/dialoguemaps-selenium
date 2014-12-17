@@ -25,6 +25,7 @@ import dialoguemaps.pageelements.ZoomWindow;
 public class DMPageElements extends AbstractPage<DMPage> {
 
 	final String _cssSelectorWholeMap = "body>div[eventproxy^=\"isc_VLayout_\"]";
+
 	final String _cssSelectorMainMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
 			+ "div>div>div>div>div>div.toolStrip:nth-child(1)";
 	final String _cssSelectorMapMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
