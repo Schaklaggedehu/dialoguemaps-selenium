@@ -2,53 +2,63 @@ package dialoguemaps.pageelements;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class DialogueMap implements PageElement {
 
 	private static DialogueMap _map;
 	private WebElement _dialogueMap;
-	private WebElement _dmShapeElementCategory;
-	private WebElement _dmdrawElementCategory;
+	private static List<WebElement> _shapeElements;
+	private static List<WebElement> _drawElements;
+	private static List<WebElement> _previewElements;
 
-	@Override
-	public void clear() {
-		// Not a singleton, therefore no need for action
-	}
-
-	public static DialogueMap getDialogueMap(WebElement dialogueMap, WebElement dmShapeElementCategory,
-			WebElement dmdrawElementCategory) {
-		if(_map==null){
-			_map = new DialogueMap(dialogueMap, dmShapeElementCategory, dmdrawElementCategory);
+	public static DialogueMap getDialogueMap(WebElement dialogueMap, List<WebElement> dmShapeElements,
+			List<WebElement> dmdrawElements, List<WebElement> previewElements) {
+		if (_map == null) {
+			_map = new DialogueMap(dialogueMap);
 		}
+		_shapeElements = dmShapeElements;
+		_drawElements = dmdrawElements;
+		_previewElements = previewElements;
+
 		return _map;
 	}
 
-	private DialogueMap(WebElement dialogueMap, WebElement dmShapeElementCategory, WebElement dmdrawElementCategory) {
+	private DialogueMap(WebElement dialogueMap) {
 		_dialogueMap = dialogueMap;
-		_dmShapeElementCategory = dmShapeElementCategory;
-		_dmdrawElementCategory = dmdrawElementCategory;
 	}
 
 	public WebElement getMap() {
 		return _dialogueMap;
 	}
 
-	public WebElement getCategoryDMShapes() {
-		return _dmShapeElementCategory;
-	}
-
-	public WebElement getCategoryDMDrawings() {
-		return _dmdrawElementCategory;
+	public List<WebElement> getAllPreviewElements() {
+		return _previewElements;
 	}
 
 	public List<WebElement> getAllShapeElements() {
-		return _dmShapeElementCategory.findElements(By.cssSelector("g"));
+		return _shapeElements;
 	}
 
 	public List<WebElement> getAllDrawElements() {
-		return _dmdrawElementCategory.findElements(By.cssSelector("g"));
+		return _drawElements;
+	}
+
+	public WebElement getLastPreviewElement() {
+		return _previewElements.get(_previewElements.size() - 1);
+	}
+
+	public WebElement getLastShapeElement() {
+		return _shapeElements.get(_shapeElements.size() - 1);
+	}
+
+	public WebElement getLastDrawElement() {
+		return _drawElements.get(_drawElements.size() - 1);
+	}
+
+	@Override
+	public void clear() {
+		_map = null;
 	}
 
 }

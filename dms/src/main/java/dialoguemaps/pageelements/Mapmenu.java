@@ -8,20 +8,20 @@ import org.openqa.selenium.WebElement;
  * 
  * @author janis
  */
-public class MapMenu implements PageElement{
+public class Mapmenu implements PageElement{
 
 	private WebElement _mapToolsMenuToolStrip;
 	private List<WebElement> _mapMenuButtons;
-	private static MapMenu _menu;
+	private static Mapmenu _menu;
 
-	public static MapMenu getMapMenu(WebElement mapMenu, List<WebElement> mapMenuButtons) {
+	public static Mapmenu getMapMenu(WebElement mapMenu, List<WebElement> mapMenuButtons) {
 		if(_menu == null){
-			_menu = new MapMenu(mapMenu, mapMenuButtons);
+			_menu = new Mapmenu(mapMenu, mapMenuButtons);
 		}
 		return _menu;
 	}
 	
-	private MapMenu(final WebElement mapToolsMenuToolStrip, final List<WebElement> mapMenuButtons) {
+	private Mapmenu(final WebElement mapToolsMenuToolStrip, final List<WebElement> mapMenuButtons) {
 		_mapToolsMenuToolStrip = mapToolsMenuToolStrip;
 		_mapMenuButtons = mapMenuButtons;
 	}

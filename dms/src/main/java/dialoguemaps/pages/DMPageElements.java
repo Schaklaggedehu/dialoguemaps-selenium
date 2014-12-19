@@ -8,10 +8,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import dialoguemaps.pageelements.BasicShapeWindow;
+import dialoguemaps.pageelements.BoundingBoxes;
+import dialoguemaps.pageelements.Contextmenu;
 import dialoguemaps.pageelements.DialogueMap;
+import dialoguemaps.pageelements.HighlightPresentationWindow;
+import dialoguemaps.pageelements.HighlightWindow;
 import dialoguemaps.pageelements.InteractionWindow;
 import dialoguemaps.pageelements.Mainmenu;
-import dialoguemaps.pageelements.MapMenu;
+import dialoguemaps.pageelements.MapArrowWindow;
+import dialoguemaps.pageelements.Mapmenu;
 import dialoguemaps.pageelements.PageElement;
 import dialoguemaps.pageelements.PenWindow;
 import dialoguemaps.pageelements.Tabmenu;
@@ -32,8 +38,17 @@ public class DMPageElements extends AbstractPage<DMPage> {
 			+ "div>div>div>div>div>div.toolStrip:nth-child(2)";
 	final String _cssSelectorTabMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
 			+ "div>div>div[eventproxy^=\"isc_GWTMapElementZoomUI\"]";
+	final String _cssSelectorContextMenu = "body>div[eventproxy^=\"isc_VLayout_\"]"
+			+ ">div>div>div>div>div>div>div[eventproxy^=\"isc_Menu_\"]";
+	
 	final String _cssSelectorDialogueMap = "#DialogueMap";
-	final String _cssSelectorTeleporterWindow = "body>div[eventproxy^=\"isc_TeleporterView_\"][ role=\"dialog\"]";
+	final String _cssSelectorBoundingBoxes = "#BoundingBoxOverlay>g";
+	
+	final String _cssSelectorTeleporterWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_TeleporterView_\"]";
+	final String _cssSelectorHighlightWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_HighlightView_\"]";
+	final String _cssSelectorHighlightPresentationWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_HighlightPresentationView_\"]";
+	final String _cssSelectorMapArrowWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_MapArrowView_\"]";
+	final String _cssSelectorBasicShapeWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_MapFigureView_\"]";
 
 	final String _cssSelectorInteractionWindow = "#isc_JR";// TODO temporäre id
 															// durch smarte
@@ -47,13 +62,21 @@ public class DMPageElements extends AbstractPage<DMPage> {
 													// austauschen
 
 	Mainmenu _mainMenu;
-	MapMenu _mapMenu;
+	Mapmenu _mapMenu;
 	Tabmenu _tabMenu;
-	DialogueMap _dialogueMap;
+	Contextmenu _contextMenu;
+	
 	InteractionWindow _interactionWindow;
 	TeleporterWindow _teleporterWindow;
+	HighlightWindow _highlightWindow;
+	HighlightPresentationWindow _highlightPresentationWindow;
 	PenWindow _penWindow;
 	ZoomWindow _zoomWindow;
+	MapArrowWindow _MapArrowWindow;
+	BasicShapeWindow _BasicShapeWindow;
+
+	DialogueMap _dialogueMap;
+	BoundingBoxes _boundingBox;
 
 	private static Set<PageElement> _pageElements = new HashSet<>();
 
@@ -140,6 +163,34 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		_pageElements.add(window);
 		return window;
 	}
+	
+	protected HighlightWindow getHighlightWindow() {
+		waitUntilVisible(By.cssSelector(_cssSelectorHighlightWindow));
+		WebElement highlightWindow = findElement(By.cssSelector(_cssSelectorHighlightWindow));
+		WebElement highlightCloseButton = highlightWindow.findElement(By
+				.cssSelector("div>div>div>div[eventproxy*=\"closeButton\"]"));
+		List<WebElement> highlightButtons = highlightWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>div>div>img"));
+		List<WebElement> highlightSlides = highlightWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>div>div>div>div>div[eventproxy^=\"isc_Img_\"]"));
+		HighlightWindow window = HighlightWindow.getHighlightWindow(highlightWindow, highlightCloseButton,
+				highlightButtons, highlightSlides);
+		_pageElements.add(window);
+		return window;
+	}
+
+	protected HighlightPresentationWindow getHighlightPresentationPresentationWindow() {
+		waitUntilVisible(By.cssSelector(_cssSelectorHighlightPresentationWindow));
+		WebElement highlightPresentationWindow = findElement(By.cssSelector(_cssSelectorHighlightPresentationWindow));
+		WebElement highlightPresentationCloseButton = highlightPresentationWindow.findElement(By
+				.cssSelector("div>div>div>div>div[eventproxy*=\"closeButton\"]"));
+		List<WebElement> highlightPresentationButtons = highlightPresentationWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>img"));
+		HighlightPresentationWindow window = HighlightPresentationWindow.getHighlightPresentationWindow(highlightPresentationWindow, highlightPresentationCloseButton,
+				highlightPresentationButtons);
+		_pageElements.add(window);
+		return window;
+	}
 
 	protected PenWindow getPenWindow() {
 		waitUntilVisible(By.cssSelector(_cssSelectorPenWindow));
@@ -182,11 +233,11 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		return menu;
 	}
 
-	protected MapMenu getMapMenu() {
+	protected Mapmenu getMapMenu() {
 		waitUntilVisible(By.cssSelector(_cssSelectorMapMenu));
 		WebElement mapMenu = findElement(By.cssSelector(_cssSelectorMapMenu));
 		List<WebElement> mapMenuButtons = mapMenu.findElements(By.cssSelector("div>div>div>img"));
-		MapMenu menu = MapMenu.getMapMenu(mapMenu, mapMenuButtons);
+		Mapmenu menu = Mapmenu.getMapMenu(mapMenu, mapMenuButtons);
 		_pageElements.add(menu);
 		return menu;
 	}
@@ -202,16 +253,67 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		_pageElements.add(menu);
 		return menu;
 	}
+	
+	protected Contextmenu getContextMenu() {
+		waitUntilVisible(By.cssSelector(_cssSelectorContextMenu));
+		WebElement contextMenu = findElement(By.cssSelector(_cssSelectorContextMenu));
+		List<WebElement> menuItems = findElements(By.cssSelector("div>table>tbody>tr[role=\"menuitem\"]"));
+		Contextmenu menu = Contextmenu.getContextmenu(contextMenu, menuItems);
+		_pageElements.add(menu);
+		return menu;
+	}
 
 	protected DialogueMap getDialogueMap() {
 		waitUntilVisible(By.cssSelector(_cssSelectorDialogueMap));
 		WebElement dialogueMap = findElement(By.cssSelector(_cssSelectorDialogueMap));
 		List<WebElement> dialogueMapCategories = dialogueMap.findElements(By.cssSelector("g>g"));
-		WebElement dmShapeElementCategory = dialogueMapCategories.get(0);
-		WebElement dmDrawElementCategory = dialogueMapCategories.get(1);
-		DialogueMap map = DialogueMap.getDialogueMap(dialogueMap, dmShapeElementCategory, dmDrawElementCategory);
+		List<WebElement> shapeElements = dialogueMapCategories.get(0).findElements((By.cssSelector("g")));
+		List<WebElement> drawElements = dialogueMapCategories.get(1).findElements((By.cssSelector("g")));
+		List<WebElement> previewElements = dialogueMapCategories.get(2).findElements(By.cssSelector("svg"));
+		DialogueMap map = DialogueMap.getDialogueMap(dialogueMap, shapeElements, drawElements, previewElements);
 		_pageElements.add(map);
 		return map;
 	}
+	
+	protected BoundingBoxes getBoundingBoxes() {
+		waitUntilVisible(By.cssSelector(_cssSelectorBoundingBoxes));
+		List<WebElement> boundingBoxes = findElements(By.cssSelector(_cssSelectorBoundingBoxes));
+		BoundingBoxes boxes = BoundingBoxes.getBoundingBoxes(boundingBoxes);
+		return boxes;
+	}
 
+	protected MapArrowWindow getMapArrowWindow() {
+		waitUntilVisible(By.cssSelector(_cssSelectorMapArrowWindow));
+		WebElement mapArrowWindow = findElement(By.cssSelector(_cssSelectorMapArrowWindow));
+		List<WebElement> threeColumns = mapArrowWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>div>div[eventproxy^=\"isc_VLayout_\"]"));
+		WebElement closeButton = mapArrowWindow.findElement(By
+				.cssSelector("div>div>div>div>div[eventproxy*=\"closeButton\"]"));
+		List<WebElement> sizeButtons = mapArrowWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>div>div>img"));
+		List<WebElement> tails = threeColumns.get(0).findElements(By
+				.cssSelector("div[eventproxy^=\"tail\"]"));
+		List<WebElement> lines = threeColumns.get(1).findElements(By
+				.cssSelector("div[eventproxy^=\"line\"]"));
+		List<WebElement> heads = threeColumns.get(2).findElements(By
+				.cssSelector("div[eventproxy^=\"head\"]"));
+		MapArrowWindow window = MapArrowWindow.getMapArrowWindow(mapArrowWindow, closeButton, sizeButtons, tails, lines, heads);
+		_pageElements.add(window);
+		return window;
+	}
+	
+	protected BasicShapeWindow getBasicShapeWindow() {
+		waitUntilVisible(By.cssSelector(_cssSelectorBasicShapeWindow));
+		WebElement basicShapeWindow = findElement(By.cssSelector(_cssSelectorBasicShapeWindow));
+		WebElement closeButton = basicShapeWindow.findElement(By
+				.cssSelector("div>div>div>div>div[eventproxy*=\"closeButton\"]"));
+		List<WebElement> sizeButtons = basicShapeWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>div>div>img"));
+		List<WebElement> shapes = basicShapeWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div[eventproxy^=\"isc_TabSet\"]>div>div>div>div>div>div[eventproxy^=\"figureList\"]"));
+		BasicShapeWindow window = BasicShapeWindow.getBasicShapeWindow(basicShapeWindow, closeButton, sizeButtons, shapes);
+		_pageElements.add(window);
+		return window;
+	}
+	
 }
