@@ -2,28 +2,30 @@ package dialoguemaps.pageelements;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class Tabmenu implements PageElement {
 
 	private static Tabmenu _menu;
-	private static List<WebElement> _tabs;
 	private List<WebElement> _buttons;
+	private WebElement _tabMenu;
 
-	public static Tabmenu getTabMenu(List<WebElement> tabs, List<WebElement> buttons) {
+	public static Tabmenu getTabMenu(WebElement tabMenu, List<WebElement> buttons) {
 		if (_menu == null) {
-			_menu = new Tabmenu(buttons);
+			_menu = new Tabmenu(tabMenu, buttons);
 		}
-		_tabs = tabs;
 		return _menu;
 	}
 
-	private Tabmenu(List<WebElement> buttons) {
+	private Tabmenu(WebElement tabMenu, List<WebElement> buttons) {
+		_tabMenu = tabMenu;
 		_buttons = buttons;
 	}
 
 	public List<WebElement> getAllTabs() {
-		return _tabs;
+		return _tabMenu.findElements(By
+				.cssSelector("div[eventproxy^=\"isc_TabSet_\"]>div>div>div>div>div>table[width]"));
 	}
 
 	public WebElement getBackButton() {

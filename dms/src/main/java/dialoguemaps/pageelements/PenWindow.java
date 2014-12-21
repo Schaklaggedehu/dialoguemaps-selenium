@@ -4,16 +4,12 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-/**
- * 
- * @author janis
- */
 public class PenWindow implements PageElement {
 
-	private static WebElement _penWindow;
+	private static PenWindow _window;
+	private WebElement _penWindow;
 	private List<WebElement> _penButtons;
 	private WebElement _penCloseButton;
-	private static PenWindow _window;
 
 	public static PenWindow getPenWindow(WebElement penWindow, List<WebElement> penButtons, 
 			WebElement penCloseButton) {

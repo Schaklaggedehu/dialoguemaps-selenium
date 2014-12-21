@@ -5,14 +5,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-/**
- * 
- * 
- * @author janis
- * @edit Martin
- * 
- * @version November 2014
- */
 public class BoundingBoxes implements PageElement
 {
 	
@@ -88,12 +80,9 @@ public class BoundingBoxes implements PageElement
     	return boundingBox.findElement(By.cssSelector("g>g>g:nth-child(4)>rect:nth-child(2)"));
     }
     
-    /**
-     * 
-     */
     @Override
     public void clear()
     {
-    	//No singleton, therefor no action here.
+    	//No singleton, therefore no action here.
     }
 }

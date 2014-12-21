@@ -5,27 +5,22 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-/**
- * 
- */
 public class ElucidationAttributesWindow implements PageElement {
 
 	private static ElucidationAttributesWindow _window;
-	private static List<WebElement> _listItems;
 	private WebElement _closeButton;
 	private WebElement _elucidationAttributesWindow;
 
-	public static ElucidationAttributesWindow getElucidationAttributesWindow(WebElement elucidationAttributeWindow,
-			WebElement closeButton, List<WebElement> listItems) {
+	public static ElucidationAttributesWindow getElucidationAttributesWindow(WebElement elucidationAttributesWindow,
+			WebElement closeButton) {
 		if (_window == null) {
-			_window = new ElucidationAttributesWindow(elucidationAttributeWindow, closeButton);
+			_window = new ElucidationAttributesWindow(elucidationAttributesWindow, closeButton);
 		}
-		_listItems = listItems;
 		return _window;
 	}
 
-	private ElucidationAttributesWindow(WebElement elucidationAttributeWindow, WebElement closeButton) {
-		_elucidationAttributesWindow = elucidationAttributeWindow;
+	private ElucidationAttributesWindow(WebElement elucidationAttributesWindow, WebElement closeButton) {
+		_elucidationAttributesWindow = elucidationAttributesWindow;
 		_closeButton = closeButton;
 	}
 
@@ -38,7 +33,8 @@ public class ElucidationAttributesWindow implements PageElement {
 	}
 
 	public List<WebElement> getAllListItems() {
-		return _listItems;
+		return _elucidationAttributesWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>div>table>tbody>tr"));
 	}
 
 	public String getOverlayname(WebElement listItem) {

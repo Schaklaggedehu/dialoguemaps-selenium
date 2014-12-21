@@ -4,10 +4,6 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-/**
- * 
- * @author janis
- */
 public class InteractionWindow implements PageElement{
 
 	private WebElement _interactionWindow;

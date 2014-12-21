@@ -1,39 +1,22 @@
 package dialoguemaps.pageelements;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-/**
- * 
- * The DM ZoomWindow.
- * 
- * @author janis
- * @edit Martin
- * 
- * @version November 2014
- */
 public class LoadMapWindow implements PageElement {
 
 	private static LoadMapWindow _window;
-	private static List<WebElement> _mapList;
 
-	public static LoadMapWindow getLoadMapWindow(WebElement loadMapWindow, WebElement closeButton,
-			List<WebElement> mapList) {
+	public static LoadMapWindow getLoadMapWindow(WebElement loadMapWindow, WebElement closeButton) {
 		if (_window == null) {
 			_window = new LoadMapWindow(loadMapWindow, closeButton);
 		}
-		_mapList = mapList;
 		return _window;
 	}
 
 	private WebElement _closeButton;
 	private WebElement _loadMapWindow;
 
-	/**
-     * 
-     */
 	private LoadMapWindow(WebElement loadMapWindow, WebElement closeButton) {
 		_loadMapWindow = loadMapWindow;
 		_closeButton = closeButton;
@@ -48,7 +31,9 @@ public class LoadMapWindow implements PageElement {
 	}
 
 	public WebElement getListEntry(int listEntry) {
-		return _mapList.get(listEntry);
+		return _loadMapWindow
+				.findElements(By.cssSelector("div>div>div>div>div>div>div>div>div>div>div>table>tbody>tr")).get(
+						listEntry);
 	}
 
 	public String getMapID(WebElement listEntry) {
@@ -65,9 +50,6 @@ public class LoadMapWindow implements PageElement {
 
 	}
 
-	/**
-     * 
-     */
 	@Override
 	public void clear() {
 		_window = null;

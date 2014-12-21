@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-/**
- * 
- */
 public class AddAttachmentWindow implements PageElement {
 
 	private static AddAttachmentWindow _window;

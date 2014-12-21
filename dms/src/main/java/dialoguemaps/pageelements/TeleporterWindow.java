@@ -5,26 +5,18 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-/**
- * 
- * @author janis
- */
 public class TeleporterWindow implements PageElement {
 
+	private static TeleporterWindow _window;
 	private WebElement _teleporterWindow;
 	private List<WebElement> _teleporterButtons;
-	private static TeleporterWindow _window;
-	private static List<WebElement> _teleporterPaths;
-	private static List<WebElement> _teleporterSlides;
 	private WebElement _teleporterCloseButton;
 
 	public static TeleporterWindow getTeleporterWindow(WebElement teleporterWindow, WebElement teleporterCloseButton,
-			List<WebElement> teleporterButtons, List<WebElement> teleporterPaths, List<WebElement> teleporterSlides) {
+			List<WebElement> teleporterButtons) {
 		if (_window == null) {
 			_window = new TeleporterWindow(teleporterWindow, teleporterCloseButton, teleporterButtons);
 		}
-		_teleporterPaths = teleporterPaths;
-		_teleporterSlides = teleporterSlides;
 		return _window;
 	}
 
@@ -60,19 +52,24 @@ public class TeleporterWindow implements PageElement {
 	}
 
 	public List<WebElement> getSlides() {
-		return _teleporterSlides;
+		return _teleporterWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>div>div>div>div>div[eventproxy^=\"isc_UITrailPoint_\"]"));
 	}
 
 	public List<WebElement> getPaths() {
-		return _teleporterPaths;
+		return _teleporterWindow.findElements(By.cssSelector("div>div>div>div>div>div>div>div>div>div>table>tbody>tr"));
 	}
 
 	public TeleporterSlide getSlide(int position) {
-		return new TeleporterSlide(_teleporterSlides.get(position));
+		List<WebElement> teleporterSlides = _teleporterWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>div>div>div>div>div[eventproxy^=\"isc_UITrailPoint_\"]"));
+		return new TeleporterSlide(teleporterSlides.get(position));
 	}
 
 	public TeleporterPath getPath(int position) {
-		return new TeleporterPath(_teleporterPaths.get(position));
+		List<WebElement> teleporterPaths = _teleporterWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>div>div>div>table>tbody>tr"));
+		return new TeleporterPath(teleporterPaths.get(position));
 	}
 
 	public class TeleporterPath {

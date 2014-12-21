@@ -4,15 +4,11 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-/**
- * 
- * @author janis
- */
 public class Mainmenu implements PageElement{
 
+	private static Mainmenu _menu;
 	private WebElement _mainMenuToolStrip;
 	private List<WebElement> _mainMenuButtons;
-	private static Mainmenu _menu;
 
 	public static Mainmenu getMainMenu(WebElement mainMenu, List<WebElement> mainMenuButtons) {
 		if(_menu==null){

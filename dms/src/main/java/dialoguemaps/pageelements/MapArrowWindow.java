@@ -4,15 +4,6 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-/**
- * 
- * The DM ZoomWindow.
- * 
- * @author janis
- * @edit Martin
- * 
- * @version November 2014
- */
 public class MapArrowWindow implements PageElement {
 
 	private static MapArrowWindow _window;
@@ -42,10 +33,6 @@ public class MapArrowWindow implements PageElement {
 		_heads = heads;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public WebElement getMapArrowWindow() {
 		return _mapArrowWindow;
 	}
@@ -78,9 +65,6 @@ public class MapArrowWindow implements PageElement {
 		return _heads.get(head);
 	}
 
-	/**
-     * 
-     */
 	@Override
 	public void clear() {
 		_window = null;

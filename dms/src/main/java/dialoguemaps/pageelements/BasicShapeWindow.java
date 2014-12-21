@@ -4,15 +4,6 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-/**
- * 
- * The DM ZoomWindow.
- * 
- * @author janis
- * @edit Martin
- * 
- * @version November 2014
- */
 public class BasicShapeWindow implements PageElement {
 
 	private static BasicShapeWindow _window;
@@ -38,10 +29,6 @@ public class BasicShapeWindow implements PageElement {
 		_shapes = shapes;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public WebElement getMapArrowWindow() {
 		return _mapArrowWindow;
 	}
@@ -66,9 +53,6 @@ public class BasicShapeWindow implements PageElement {
 		return _shapes.get(shape);
 	}
 
-	/**
-     * 
-     */
 	@Override
 	public void clear() {
 		_window = null;

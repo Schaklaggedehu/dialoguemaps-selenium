@@ -15,7 +15,6 @@ public class AttachmentsWindow implements PageElement {
 	private WebElement _attachmentWindow;
 	private WebElement _newButton;
 
-
 	public static AttachmentsWindow getAttachmentsWindow(WebElement attachmentWindow, WebElement closeButton,
 			WebElement newButton) {
 		if (_window == null) {
@@ -37,13 +36,13 @@ public class AttachmentsWindow implements PageElement {
 	public WebElement getCloseButton() {
 		return _closeButton;
 	}
+
 	public WebElement getNewButton() {
 		return _newButton;
 	}
 
 	public List<WebElement> getAllListItems() {
-		return _attachmentWindow.findElements(By
-				.cssSelector("div>div>div>div>div>div>div>div>div>div>table>tbody>tr"));
+		return _attachmentWindow.findElements(By.cssSelector("div>div>div>div>div>div>div>div>div>div>table>tbody>tr"));
 	}
 
 	@Override

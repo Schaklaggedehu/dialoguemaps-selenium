@@ -1,26 +1,22 @@
 package dialoguemaps.pageelements;
 
-import java.util.List;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class Contextmenu implements PageElement {
 
 	private static Contextmenu _menu;
-	private List<WebElement> _menuItems;
 	private WebElement _contextMenu;
 
-	
-	public static Contextmenu getContextmenu(WebElement contextMenu, List<WebElement> menuItems) {
+	public static Contextmenu getContextmenu(WebElement contextMenu) {
 		if (_menu == null) {
-			_menu = new Contextmenu(contextMenu, menuItems);
+			_menu = new Contextmenu(contextMenu);
 		}
 		return _menu;
 	}
 
-	private Contextmenu(WebElement contextMenu, List<WebElement> menuItems) {
+	private Contextmenu(WebElement contextMenu) {
 		_contextMenu = contextMenu;
-		_menuItems = menuItems;
 	}
 
 	public WebElement getContextMenu() {
@@ -28,7 +24,7 @@ public class Contextmenu implements PageElement {
 	}
 
 	public WebElement getMenuItem(int item) {
-		return _menuItems.get(item);
+		return _contextMenu.findElements(By.cssSelector("div>table>tbody>tr[role=\"menuitem\"]")).get(item);
 	}
 
 	@Override

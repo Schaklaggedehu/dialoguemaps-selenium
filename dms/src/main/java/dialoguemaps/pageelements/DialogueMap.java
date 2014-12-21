@@ -2,32 +2,28 @@ package dialoguemaps.pageelements;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class DialogueMap implements PageElement {
 
 	private static DialogueMap _map;
 	private WebElement _dialogueMap;
-	private static List<WebElement> _shapeElements;
-	private static List<WebElement> _drawElements;
-	private static List<WebElement> _previewElements;
-	private static List<WebElement> _elucidationElements;
+	private List<WebElement> _dialogueMapCategories;
+	private WebElement _elucidationController;
 
-	public static DialogueMap getDialogueMap(WebElement dialogueMap, List<WebElement> dmShapeElements,
-			List<WebElement> dmdrawElements, List<WebElement> previewElements, List<WebElement> elucidationElements) {
+	public static DialogueMap getDialogueMap(WebElement dialogueMap, List<WebElement> dialogueMapCategories,
+			WebElement elucidationController) {
 		if (_map == null) {
-			_map = new DialogueMap(dialogueMap);
+			_map = new DialogueMap(dialogueMap, dialogueMapCategories, elucidationController);
 		}
-		_shapeElements = dmShapeElements;
-		_drawElements = dmdrawElements;
-		_previewElements = previewElements;
-		_elucidationElements = elucidationElements;
-
 		return _map;
 	}
 
-	private DialogueMap(WebElement dialogueMap) {
+	private DialogueMap(WebElement dialogueMap, List<WebElement> dialogueMapCategories, WebElement elucidationController) {
 		_dialogueMap = dialogueMap;
+		_dialogueMapCategories = dialogueMapCategories;
+		_elucidationController = elucidationController;
 	}
 
 	public WebElement getMap() {
@@ -35,35 +31,39 @@ public class DialogueMap implements PageElement {
 	}
 
 	public List<WebElement> getAllPreviewElements() {
-		return _previewElements;
+		return _dialogueMapCategories.get(2).findElements(By.cssSelector("svg"));
 	}
 
 	public List<WebElement> getAllShapeElements() {
-		return _shapeElements;
+		return _dialogueMapCategories.get(0).findElements((By.cssSelector("g")));
 	}
 
 	public List<WebElement> getAllDrawElements() {
-		return _drawElements;
+		return _dialogueMapCategories.get(1).findElements((By.cssSelector("g")));
 	}
 
 	public List<WebElement> getAllElucidationElements() {
-		return _elucidationElements;
+		return _elucidationController.findElements(By.cssSelector("g"));
 	}
 
 	public WebElement getLastPreviewElement() {
-		return _previewElements.get(_previewElements.size() - 1);
+		List<WebElement> previewElements = _dialogueMapCategories.get(2).findElements(By.cssSelector("svg"));
+		return previewElements.get(previewElements.size() - 1);
 	}
 
 	public WebElement getLastShapeElement() {
-		return _shapeElements.get(_shapeElements.size() - 1);
+		List<WebElement> shapeElements = _dialogueMapCategories.get(0).findElements((By.cssSelector("g")));
+		return shapeElements.get(shapeElements.size() - 1);
 	}
 
 	public WebElement getLastDrawElement() {
-		return _drawElements.get(_drawElements.size() - 1);
+		List<WebElement> drawElements = _dialogueMapCategories.get(1).findElements((By.cssSelector("g")));
+		return drawElements.get(drawElements.size() - 1);
 	}
 
 	public WebElement getLastElucidationElement() {
-		return _elucidationElements.get(_elucidationElements.size() - 1);
+		List<WebElement> elucidationElements = _elucidationController.findElements(By.cssSelector("g"));
+		return elucidationElements.get(elucidationElements.size() - 1);
 	}
 
 	@Override

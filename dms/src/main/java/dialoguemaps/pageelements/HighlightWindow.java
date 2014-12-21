@@ -5,24 +5,18 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-/**
- * 
- * @author janis
- */
 public class HighlightWindow implements PageElement {
 
+	private static HighlightWindow _window;
 	private WebElement _highlightWindow;
 	private List<WebElement> _highlightButtons;
-	private static HighlightWindow _window;
-	private static List<WebElement> _highlightSlides;
 	private WebElement _highlightCloseButton;
 
 	public static HighlightWindow getHighlightWindow(WebElement highlightWindow, WebElement highlightCloseButton,
-			List<WebElement> highlightButtons, List<WebElement> highlightSlides) {
+			List<WebElement> highlightButtons) {
 		if (_window == null) {
 			_window = new HighlightWindow(highlightWindow, highlightCloseButton, highlightButtons);
 		}
-		_highlightSlides = highlightSlides;
 		return _window;
 	}
 
@@ -54,11 +48,15 @@ public class HighlightWindow implements PageElement {
 	}
 
 	public List<WebElement> getSlides() {
-		return _highlightSlides;
+		return _highlightWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>div>div>div>div>div[eventproxy^=\"isc_Img_\"]"));
 	}
 
 	public HighlightSlide getSlide(int position) {
-		return new HighlightSlide(_highlightSlides.get(position));
+		List<WebElement> highlightSlides = _highlightWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>div>div>div>div>div[eventproxy^=\"isc_Img_\"]"));
+		;
+		return new HighlightSlide(highlightSlides.get(position));
 	}
 
 	public class HighlightSlide {
