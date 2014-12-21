@@ -29,7 +29,7 @@ public class OpenWindowsTest extends AbstractSelenium2Test {
 	public void setUp() {
 		_dm = new DMPage(_drivers.get(0));
 		_dm.open();
-		assertThat(_dm.isDMPageOpen(), is(true), "couldn't reach login page");
+		assertThat(_dm.isDMLoginPageOpen(), is(true), "couldn't reach login page");
 		_dm.logIntoMainpage(NAME, PASSWORD);
 		assertThat(_dm.isLoggedIntoMainPage(), is(true), "couldn't log in");
 	}

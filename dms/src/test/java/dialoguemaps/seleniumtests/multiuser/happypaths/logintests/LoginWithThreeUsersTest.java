@@ -43,11 +43,11 @@ public class LoginWithThreeUsersTest extends AbstractSelenium2Test {
 		final int NAME = 0;
 		final int PASSWORD = 1;
 		_dm0.open();
-		assertThat(_dm0.isDMPageOpen(), is(true), "couldn't reach login page");
+		assertThat(_dm0.isDMLoginPageOpen(), is(true), "couldn't reach login page");
 		_dm1.open();
-		assertThat(_dm1.isDMPageOpen(), is(true), "couldn't reach login page");
+		assertThat(_dm1.isDMLoginPageOpen(), is(true), "couldn't reach login page");
 		_dm2.open();
-		assertThat(_dm2.isDMPageOpen(), is(true), "couldn't reach login page");
+		assertThat(_dm2.isDMLoginPageOpen(), is(true), "couldn't reach login page");
 		_dm0.logIntoMainpage(LOGINPERSON0.get(NAME), LOGINPERSON0.get(PASSWORD));
 		_dm1.logIntoMainpage(LOGINPERSON1.get(NAME), LOGINPERSON1.get(PASSWORD));
 		_dm2.logIntoMainpage(LOGINPERSON2.get(NAME), LOGINPERSON2.get(PASSWORD));

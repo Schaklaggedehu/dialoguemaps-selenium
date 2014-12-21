@@ -8,10 +8,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import dialoguemaps.pageelements.AddAttachmentWindow;
+import dialoguemaps.pageelements.AttachmentsWindow;
 import dialoguemaps.pageelements.BasicShapeWindow;
 import dialoguemaps.pageelements.BoundingBoxes;
+import dialoguemaps.pageelements.ColorPicker;
 import dialoguemaps.pageelements.Contextmenu;
 import dialoguemaps.pageelements.DialogueMap;
+import dialoguemaps.pageelements.ElucidationAttributesWindow;
 import dialoguemaps.pageelements.HighlightPresentationWindow;
 import dialoguemaps.pageelements.HighlightWindow;
 import dialoguemaps.pageelements.InteractionWindow;
@@ -41,16 +45,21 @@ public class DMPageElements extends AbstractPage<DMPage> {
 			+ "div>div>div[eventproxy^=\"isc_GWTMapElementZoomUI\"]";
 	final String _cssSelectorContextMenu = "body>div[eventproxy^=\"isc_VLayout_\"]"
 			+ ">div>div>div>div>div>div>div[eventproxy^=\"isc_Menu_\"]";
-	
+
 	final String _cssSelectorDialogueMap = "#DialogueMap";
+	final String _cssSelectorElucidations = "#ElucidationController";
 	final String _cssSelectorBoundingBoxes = "#BoundingBoxOverlay>g";
-	
+	final String _cssSelectorColorPicker = "body>div[eventproxy^=\"isc_ColorPicker_\"][role=\"dialog\"]";
+
 	final String _cssSelectorTeleporterWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_TeleporterView_\"]";
 	final String _cssSelectorHighlightWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_HighlightView_\"]";
 	final String _cssSelectorHighlightPresentationWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_HighlightPresentationView_\"]";
 	final String _cssSelectorMapArrowWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_MapArrowView_\"]";
 	final String _cssSelectorBasicShapeWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_MapFigureView_\"]";
 	final String _cssSelectorLoadMapWindow = "body>div[class=\"normal\"][eventproxy^=\"isc_DialogLoadMapView_\"]>div";
+	final String _cssSelectorElucidationAttributesWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_ElucidationContextView_\"]";
+	final String _cssSelectorAttachmentsWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_AttachmentAddItemView_\"]";
+	final String _cssSelectorAddAttachmentWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_AttachmentAddView_\"]";
 
 	final String _cssSelectorInteractionWindow = "#isc_JR";// TODO temporäre id
 															// durch smarte
@@ -67,7 +76,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	Mapmenu _mapMenu;
 	Tabmenu _tabMenu;
 	Contextmenu _contextMenu;
-	
+
 	InteractionWindow _interactionWindow;
 	TeleporterWindow _teleporterWindow;
 	HighlightWindow _highlightWindow;
@@ -77,6 +86,9 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	MapArrowWindow _mapArrowWindow;
 	BasicShapeWindow _basicShapeWindow;
 	LoadMapWindow _loadMapWindow;
+	ElucidationAttributesWindow _elucidationAttributeWindow;
+	AttachmentsWindow _attachmentsWindow;
+	AddAttachmentWindow _addAttachmentWindow;
 
 	DialogueMap _dialogueMap;
 	BoundingBoxes _boundingBox;
@@ -84,7 +96,8 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	private static Set<PageElement> _pageElements = new HashSet<>();
 
 	DMPageElements(WebDriver driver) {
-		super(driver, By.cssSelector("body>div[eventproxy^=\"isc_HLayout_\"]>div>div>div>div>div[eventproxy^=\"isc_Img_\"]"));
+		super(driver, By
+				.cssSelector("body>div[eventproxy^=\"isc_HLayout_\"]>div>div>div>div>div[eventproxy^=\"isc_Img_\"]"));
 	}
 
 	public static void clearAllMenusAndWindows() {
@@ -165,7 +178,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		_pageElements.add(window);
 		return window;
 	}
-	
+
 	protected HighlightWindow getHighlightWindow() {
 		waitUntilVisible(By.cssSelector(_cssSelectorHighlightWindow));
 		WebElement highlightWindow = findElement(By.cssSelector(_cssSelectorHighlightWindow));
@@ -188,8 +201,8 @@ public class DMPageElements extends AbstractPage<DMPage> {
 				.cssSelector("div>div>div>div>div[eventproxy*=\"closeButton\"]"));
 		List<WebElement> highlightPresentationButtons = highlightPresentationWindow.findElements(By
 				.cssSelector("div>div>div>div>div>div>div>img"));
-		HighlightPresentationWindow window = HighlightPresentationWindow.getHighlightPresentationWindow(highlightPresentationWindow, highlightPresentationCloseButton,
-				highlightPresentationButtons);
+		HighlightPresentationWindow window = HighlightPresentationWindow.getHighlightPresentationWindow(
+				highlightPresentationWindow, highlightPresentationCloseButton, highlightPresentationButtons);
 		_pageElements.add(window);
 		return window;
 	}
@@ -255,7 +268,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		_pageElements.add(menu);
 		return menu;
 	}
-	
+
 	protected Contextmenu getContextMenu() {
 		waitUntilVisible(By.cssSelector(_cssSelectorContextMenu));
 		WebElement contextMenu = findElement(By.cssSelector(_cssSelectorContextMenu));
@@ -272,11 +285,13 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		List<WebElement> shapeElements = dialogueMapCategories.get(0).findElements((By.cssSelector("g")));
 		List<WebElement> drawElements = dialogueMapCategories.get(1).findElements((By.cssSelector("g")));
 		List<WebElement> previewElements = dialogueMapCategories.get(2).findElements(By.cssSelector("svg"));
-		DialogueMap map = DialogueMap.getDialogueMap(dialogueMap, shapeElements, drawElements, previewElements);
+		List<WebElement> elucidationElements = findElements(By.cssSelector(_cssSelectorElucidations + ">g"));
+		DialogueMap map = DialogueMap.getDialogueMap(dialogueMap, shapeElements, drawElements, previewElements,
+				elucidationElements);
 		_pageElements.add(map);
 		return map;
 	}
-	
+
 	protected BoundingBoxes getBoundingBoxes() {
 		waitUntilVisible(By.cssSelector(_cssSelectorBoundingBoxes));
 		List<WebElement> boundingBoxes = findElements(By.cssSelector(_cssSelectorBoundingBoxes));
@@ -293,17 +308,15 @@ public class DMPageElements extends AbstractPage<DMPage> {
 				.cssSelector("div>div>div>div>div[eventproxy*=\"closeButton\"]"));
 		List<WebElement> sizeButtons = mapArrowWindow.findElements(By
 				.cssSelector("div>div>div>div>div>div>div>div>div>img"));
-		List<WebElement> tails = threeColumns.get(0).findElements(By
-				.cssSelector("div[eventproxy^=\"tail\"]"));
-		List<WebElement> lines = threeColumns.get(1).findElements(By
-				.cssSelector("div[eventproxy^=\"line\"]"));
-		List<WebElement> heads = threeColumns.get(2).findElements(By
-				.cssSelector("div[eventproxy^=\"head\"]"));
-		MapArrowWindow window = MapArrowWindow.getMapArrowWindow(mapArrowWindow, closeButton, sizeButtons, tails, lines, heads);
+		List<WebElement> tails = threeColumns.get(0).findElements(By.cssSelector("div[eventproxy^=\"tail\"]"));
+		List<WebElement> lines = threeColumns.get(1).findElements(By.cssSelector("div[eventproxy^=\"line\"]"));
+		List<WebElement> heads = threeColumns.get(2).findElements(By.cssSelector("div[eventproxy^=\"head\"]"));
+		MapArrowWindow window = MapArrowWindow.getMapArrowWindow(mapArrowWindow, closeButton, sizeButtons, tails,
+				lines, heads);
 		_pageElements.add(window);
 		return window;
 	}
-	
+
 	protected BasicShapeWindow getBasicShapeWindow() {
 		waitUntilVisible(By.cssSelector(_cssSelectorBasicShapeWindow));
 		WebElement basicShapeWindow = findElement(By.cssSelector(_cssSelectorBasicShapeWindow));
@@ -311,13 +324,15 @@ public class DMPageElements extends AbstractPage<DMPage> {
 				.cssSelector("div>div>div>div>div[eventproxy*=\"closeButton\"]"));
 		List<WebElement> sizeButtons = basicShapeWindow.findElements(By
 				.cssSelector("div>div>div>div>div>div>div>div>div>img"));
-		List<WebElement> shapes = basicShapeWindow.findElements(By
-				.cssSelector("div>div>div>div>div>div[eventproxy^=\"isc_TabSet\"]>div>div>div>div>div>div[eventproxy^=\"figureList\"]"));
-		BasicShapeWindow window = BasicShapeWindow.getBasicShapeWindow(basicShapeWindow, closeButton, sizeButtons, shapes);
+		List<WebElement> shapes = basicShapeWindow
+				.findElements(By
+						.cssSelector("div>div>div>div>div>div[eventproxy^=\"isc_TabSet\"]>div>div>div>div>div>div[eventproxy^=\"figureList\"]"));
+		BasicShapeWindow window = BasicShapeWindow.getBasicShapeWindow(basicShapeWindow, closeButton, sizeButtons,
+				shapes);
 		_pageElements.add(window);
 		return window;
 	}
-	
+
 	protected LoadMapWindow getLoadMapWindow() {
 		waitUntilVisible(By.cssSelector(_cssSelectorLoadMapWindow));
 		WebElement loadMapWindow = findElement(By.cssSelector(_cssSelectorLoadMapWindow));
@@ -329,5 +344,60 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		_pageElements.add(window);
 		return window;
 	}
+
+	protected ElucidationAttributesWindow getElucidationAttributesWindow() {
+		waitUntilVisible(By.cssSelector(_cssSelectorElucidationAttributesWindow));
+		WebElement elucidationAttributeWindow = findElement(By.cssSelector(_cssSelectorElucidationAttributesWindow));
+		WebElement closeButton = elucidationAttributeWindow.findElement(By
+				.cssSelector("div>div>div>div>div[eventproxy*=\"closeButton\"]"));
+		List<WebElement> listItems = elucidationAttributeWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>div>table>tbody>tr"));
+		ElucidationAttributesWindow window = ElucidationAttributesWindow.getElucidationAttributesWindow(
+				elucidationAttributeWindow, closeButton, listItems);
+		_pageElements.add(window);
+		return window;
+	}
 	
+	protected AddAttachmentWindow getAddAttachmentWindow() {
+		waitUntilVisible(By.cssSelector(_cssSelectorAddAttachmentWindow));
+		WebElement addAttachmentWindow = findElement(By.cssSelector(_cssSelectorAddAttachmentWindow));
+		WebElement closeButton = addAttachmentWindow.findElement(By
+				.cssSelector("div>div>div>div[eventproxy*=\"closeButton\"]"));
+		WebElement okButton = addAttachmentWindow.findElement(By
+				.cssSelector("div>div>div>div>div>div>div>div[eventproxy^=\"isc_Button_\"]"));
+		List<WebElement> inputFields = addAttachmentWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>div>div>div>iframe"));
+		AddAttachmentWindow window = AddAttachmentWindow.getAddAttachmentWindow(
+				addAttachmentWindow, closeButton, okButton, inputFields);
+		_pageElements.add(window);
+		return window;
+	}
+	
+	protected AttachmentsWindow getAttachmentsWindow() {
+		waitUntilVisible(By.cssSelector(_cssSelectorAttachmentsWindow));
+		WebElement attachmentWindow = findElement(By.cssSelector(_cssSelectorAttachmentsWindow));
+		WebElement closeButton = attachmentWindow.findElement(By
+				.cssSelector("div>div>div>div[eventproxy*=\"closeButton\"]"));
+		WebElement newButton = attachmentWindow.findElement(By
+				.cssSelector("div>div>div>div>div>div>div>div[eventproxy^=\"isc_Button_\"]"));
+		AttachmentsWindow window = AttachmentsWindow.getAttachmentsWindow(
+				attachmentWindow, closeButton, newButton);
+		_pageElements.add(window);
+		return window;
+	}
+
+	protected ColorPicker getColorPicker() {
+		waitUntilVisible(By.cssSelector(_cssSelectorColorPicker));
+		List<WebElement> colorPickers = findElements(By.cssSelector(_cssSelectorColorPicker));
+		WebElement colorPicker = null;
+		for (WebElement webElement : colorPickers) {
+			if (!"hidden".equals(webElement.getAttribute("visibility"))) {
+				colorPicker = webElement;
+				break;
+			}
+		}
+		WebElement colorTable = colorPicker.findElement(By.cssSelector("div>div>div>div>div>div>div>div>div>div>div"));
+		return ColorPicker.getColorPicker(colorPicker, colorTable);
+	}
+
 }

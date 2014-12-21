@@ -109,10 +109,10 @@ public class DMPage extends DMPageElements {
 		return _tabMenu.getAllTabs().get(0).getText();
 	}
 
-	public Boolean isDMPageOpen() {
+	public Boolean isDMLoginPageOpen() {
 		String visibility = findElement(By.cssSelector("body>div>div>div>div>div[eventproxy^=\"isc_IButton_\"]"))
 				.getAttribute("visibility");
-		if ("hidden" == visibility) {
+		if ("hidden".equals(visibility)) {
 			return false;
 		} else {
 			return true;

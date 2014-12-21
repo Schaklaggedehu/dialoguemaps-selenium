@@ -11,15 +11,17 @@ public class DialogueMap implements PageElement {
 	private static List<WebElement> _shapeElements;
 	private static List<WebElement> _drawElements;
 	private static List<WebElement> _previewElements;
+	private static List<WebElement> _elucidationElements;
 
 	public static DialogueMap getDialogueMap(WebElement dialogueMap, List<WebElement> dmShapeElements,
-			List<WebElement> dmdrawElements, List<WebElement> previewElements) {
+			List<WebElement> dmdrawElements, List<WebElement> previewElements, List<WebElement> elucidationElements) {
 		if (_map == null) {
 			_map = new DialogueMap(dialogueMap);
 		}
 		_shapeElements = dmShapeElements;
 		_drawElements = dmdrawElements;
 		_previewElements = previewElements;
+		_elucidationElements = elucidationElements;
 
 		return _map;
 	}
@@ -44,6 +46,10 @@ public class DialogueMap implements PageElement {
 		return _drawElements;
 	}
 
+	public List<WebElement> getAllElucidationElements() {
+		return _elucidationElements;
+	}
+
 	public WebElement getLastPreviewElement() {
 		return _previewElements.get(_previewElements.size() - 1);
 	}
@@ -54,6 +60,10 @@ public class DialogueMap implements PageElement {
 
 	public WebElement getLastDrawElement() {
 		return _drawElements.get(_drawElements.size() - 1);
+	}
+
+	public WebElement getLastElucidationElement() {
+		return _elucidationElements.get(_elucidationElements.size() - 1);
 	}
 
 	@Override
