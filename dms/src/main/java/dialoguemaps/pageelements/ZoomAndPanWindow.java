@@ -13,12 +13,12 @@ import org.openqa.selenium.WebElement;
  * 
  * @version November 2014
  */
-public class ZoomWindow implements PageElement
+public class ZoomAndPanWindow implements PageElement
 {
 
     private WebElement _zoomWindow;
     private List<WebElement> _zoomButtons;
-    private static ZoomWindow _window;
+    private static ZoomAndPanWindow _window;
 
 
     /**
@@ -28,12 +28,12 @@ public class ZoomWindow implements PageElement
      * @param zoomButtons
      * @return
      */
-    public static ZoomWindow getZoomWindow(WebElement zoomWindow,
+    public static ZoomAndPanWindow getZoomWindow(WebElement zoomWindow,
             List<WebElement> zoomButtons)
     {
         if (_window == null)
         {
-            _window = new ZoomWindow(zoomWindow, zoomButtons);
+            _window = new ZoomAndPanWindow(zoomWindow, zoomButtons);
         }
         return _window;
     }
@@ -44,7 +44,7 @@ public class ZoomWindow implements PageElement
      * @param zoomWindow
      * @param zoomButtons
      */
-    private ZoomWindow(WebElement zoomWindow, List<WebElement> zoomButtons)
+    private ZoomAndPanWindow(WebElement zoomWindow, List<WebElement> zoomButtons)
     {
         _zoomWindow = zoomWindow;
         _zoomButtons = zoomButtons;

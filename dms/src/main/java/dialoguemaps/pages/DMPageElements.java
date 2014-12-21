@@ -15,6 +15,7 @@ import dialoguemaps.pageelements.DialogueMap;
 import dialoguemaps.pageelements.HighlightPresentationWindow;
 import dialoguemaps.pageelements.HighlightWindow;
 import dialoguemaps.pageelements.InteractionWindow;
+import dialoguemaps.pageelements.LoadMapWindow;
 import dialoguemaps.pageelements.Mainmenu;
 import dialoguemaps.pageelements.MapArrowWindow;
 import dialoguemaps.pageelements.Mapmenu;
@@ -22,7 +23,7 @@ import dialoguemaps.pageelements.PageElement;
 import dialoguemaps.pageelements.PenWindow;
 import dialoguemaps.pageelements.Tabmenu;
 import dialoguemaps.pageelements.TeleporterWindow;
-import dialoguemaps.pageelements.ZoomWindow;
+import dialoguemaps.pageelements.ZoomAndPanWindow;
 
 /**
  * 
@@ -49,6 +50,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	final String _cssSelectorHighlightPresentationWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_HighlightPresentationView_\"]";
 	final String _cssSelectorMapArrowWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_MapArrowView_\"]";
 	final String _cssSelectorBasicShapeWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_MapFigureView_\"]";
+	final String _cssSelectorLoadMapWindow = "body>div[class=\"normal\"][eventproxy^=\"isc_DialogLoadMapView_\"]>div";
 
 	final String _cssSelectorInteractionWindow = "#isc_JR";// TODO temporäre id
 															// durch smarte
@@ -71,9 +73,10 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	HighlightWindow _highlightWindow;
 	HighlightPresentationWindow _highlightPresentationWindow;
 	PenWindow _penWindow;
-	ZoomWindow _zoomWindow;
-	MapArrowWindow _MapArrowWindow;
-	BasicShapeWindow _BasicShapeWindow;
+	ZoomAndPanWindow _zoomWindow;
+	MapArrowWindow _mapArrowWindow;
+	BasicShapeWindow _basicShapeWindow;
+	LoadMapWindow _loadMapWindow;
 
 	DialogueMap _dialogueMap;
 	BoundingBoxes _boundingBox;
@@ -81,8 +84,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	private static Set<PageElement> _pageElements = new HashSet<>();
 
 	DMPageElements(WebDriver driver) {
-		super(driver, By.id("isc_G"));// TODO temporäre id durch smarte
-										// css-Pfade austauschen
+		super(driver, By.cssSelector("body>div[eventproxy^=\"isc_HLayout_\"]>div>div>div>div>div[eventproxy^=\"isc_Img_\"]"));
 	}
 
 	public static void clearAllMenusAndWindows() {
@@ -206,7 +208,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		return window;
 	}
 
-	protected ZoomWindow getZoomWindow() {
+	protected ZoomAndPanWindow getZoomWindow() {
 		waitUntilVisible(By.cssSelector(_cssSelectorZoomWindow));
 		WebElement zoomWindow = findElement(By.cssSelector(_cssSelectorZoomWindow));
 		List<WebElement> zoomButtons = zoomWindow.findElements(By.cssSelector(">*>*>*>img"));// TODO:
@@ -219,7 +221,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 																						// Sternchen
 																						// entfernen.
 		zoomButtons.remove(0);
-		ZoomWindow window = ZoomWindow.getZoomWindow(zoomWindow, zoomButtons);
+		ZoomAndPanWindow window = ZoomAndPanWindow.getZoomWindow(zoomWindow, zoomButtons);
 		_pageElements.add(window);
 		return window;
 	}
@@ -312,6 +314,18 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		List<WebElement> shapes = basicShapeWindow.findElements(By
 				.cssSelector("div>div>div>div>div>div[eventproxy^=\"isc_TabSet\"]>div>div>div>div>div>div[eventproxy^=\"figureList\"]"));
 		BasicShapeWindow window = BasicShapeWindow.getBasicShapeWindow(basicShapeWindow, closeButton, sizeButtons, shapes);
+		_pageElements.add(window);
+		return window;
+	}
+	
+	protected LoadMapWindow getLoadMapWindow() {
+		waitUntilVisible(By.cssSelector(_cssSelectorLoadMapWindow));
+		WebElement loadMapWindow = findElement(By.cssSelector(_cssSelectorLoadMapWindow));
+		WebElement closeButton = loadMapWindow.findElement(By
+				.cssSelector("div>div>div>div[eventproxy*=\"closeButton\"]"));
+		List<WebElement> mapList = loadMapWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>div>div>div>div>table>tbody>tr"));
+		LoadMapWindow window = LoadMapWindow.getLoadMapWindow(loadMapWindow, closeButton, mapList);
 		_pageElements.add(window);
 		return window;
 	}

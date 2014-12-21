@@ -27,9 +27,9 @@ public class DrawingOnMapTest extends AbstractSelenium2Test {
 
 	@Before
 	public void setUp() {
-		_dm = new DMPage(_drivers.get(0));
+		_dm = new DMPage(_drivers.get(0));		
 		_dm.open();
-		assertThat(_dm.isOpen(), is(true), "mainpage not open");
+		assertThat(_dm.isDMPageOpen(), is(true), "couldn't reach login page");
 		_dm.logIntoMainpage(NAME, PASSWORD);
 		assertThat(_dm.isLoggedIntoMainPage(), is(true), "couldn't log in");
 		_dm.shortcutNewMap();
