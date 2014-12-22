@@ -8,22 +8,22 @@ import org.openqa.selenium.WebElement;
 /**
  * 
  */
-public class AttachmentsWindow implements PageElement {
+public class AttachmentsWindowAdapter implements PageElementAdapter {
 
-	private static AttachmentsWindow _window;
+	private static AttachmentsWindowAdapter _window;
 	private WebElement _closeButton;
 	private WebElement _attachmentWindow;
 	private WebElement _newButton;
 
-	public static AttachmentsWindow getAttachmentsWindow(WebElement attachmentWindow, WebElement closeButton,
+	public static AttachmentsWindowAdapter getAttachmentsWindow(WebElement attachmentWindow, WebElement closeButton,
 			WebElement newButton) {
 		if (_window == null) {
-			_window = new AttachmentsWindow(attachmentWindow, closeButton, newButton);
+			_window = new AttachmentsWindowAdapter(attachmentWindow, closeButton, newButton);
 		}
 		return _window;
 	}
 
-	private AttachmentsWindow(WebElement attachmentWindow, WebElement closeButton, WebElement newButton) {
+	private AttachmentsWindowAdapter(WebElement attachmentWindow, WebElement closeButton, WebElement newButton) {
 		_attachmentWindow = attachmentWindow;
 		_closeButton = closeButton;
 		_newButton = newButton;

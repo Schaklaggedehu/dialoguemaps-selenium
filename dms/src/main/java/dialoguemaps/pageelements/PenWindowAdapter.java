@@ -4,22 +4,22 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-public class PenWindow implements PageElement {
+public class PenWindowAdapter implements PageElementAdapter {
 
-	private static PenWindow _window;
+	private static PenWindowAdapter _window;
 	private WebElement _penWindow;
 	private List<WebElement> _penButtons;
 	private WebElement _penCloseButton;
 
-	public static PenWindow getPenWindow(WebElement penWindow, List<WebElement> penButtons, 
+	public static PenWindowAdapter getPenWindow(WebElement penWindow, List<WebElement> penButtons, 
 			WebElement penCloseButton) {
 		if (_window == null) {
-			_window = new PenWindow(penWindow, penButtons, penCloseButton);
+			_window = new PenWindowAdapter(penWindow, penButtons, penCloseButton);
 		}
 		return _window;
 	}
 
-	private PenWindow(WebElement penWindow, List<WebElement> penButtons, WebElement penCloseButton) {
+	private PenWindowAdapter(WebElement penWindow, List<WebElement> penButtons, WebElement penCloseButton) {
 		_penWindow = penWindow;
 		_penButtons = penButtons;
 		_penCloseButton = penCloseButton;

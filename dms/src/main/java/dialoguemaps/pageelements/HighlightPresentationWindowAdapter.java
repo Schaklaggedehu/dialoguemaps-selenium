@@ -4,23 +4,23 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-public class HighlightPresentationWindow implements PageElement {
+public class HighlightPresentationWindowAdapter implements PageElementAdapter {
 
-	private static HighlightPresentationWindow _window;
+	private static HighlightPresentationWindowAdapter _window;
 	private WebElement _highlightPresentationWindow;
 	private List<WebElement> _highlightPresentationButtons;
 	private WebElement _highlightPresentationCloseButton;
 
-	public static HighlightPresentationWindow getHighlightPresentationWindow(WebElement highlightPresentationWindow,
+	public static HighlightPresentationWindowAdapter getHighlightPresentationWindow(WebElement highlightPresentationWindow,
 			WebElement highlightPresentationCloseButton, List<WebElement> highlightPresentationButtons) {
 		if (_window == null) {
-			_window = new HighlightPresentationWindow(highlightPresentationWindow, highlightPresentationCloseButton,
+			_window = new HighlightPresentationWindowAdapter(highlightPresentationWindow, highlightPresentationCloseButton,
 					highlightPresentationButtons);
 		}
 		return _window;
 	}
 
-	private HighlightPresentationWindow(WebElement highlightPresentationWindow,
+	private HighlightPresentationWindowAdapter(WebElement highlightPresentationWindow,
 			WebElement highlightPresentationCloseButton, List<WebElement> highlightPresentationButtons) {
 		_highlightPresentationWindow = highlightPresentationWindow;
 		_highlightPresentationCloseButton = highlightPresentationCloseButton;

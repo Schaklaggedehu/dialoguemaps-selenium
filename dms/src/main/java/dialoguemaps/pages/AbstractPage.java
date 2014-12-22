@@ -17,7 +17,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import dialoguemaps.pageelements.DialogueMap;
+import dialoguemaps.pageelements.DialogueMapAdapter;
 import dialoguemaps.tools.PropertyReader;
 
 
@@ -185,7 +185,7 @@ abstract class AbstractPage<T> {
 	public String getSource() {
 		return _driver.getPageSource();
 	}
-	public void waitUntilNewDrawElementsCreated(int sizeAfter, DialogueMap dialogueMap) {
+	public void waitUntilNewDrawElementsCreated(int sizeAfter, DialogueMapAdapter dialogueMap) {
 		for (int i = 0; i < WAIT_TIMEOUT; i++) {
 			if (dialogueMap.getAllDrawElements().size() == sizeAfter) {
 				break;

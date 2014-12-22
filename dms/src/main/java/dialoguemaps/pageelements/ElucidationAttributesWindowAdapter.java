@@ -5,21 +5,21 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class ElucidationAttributesWindow implements PageElement {
+public class ElucidationAttributesWindowAdapter implements PageElementAdapter {
 
-	private static ElucidationAttributesWindow _window;
+	private static ElucidationAttributesWindowAdapter _window;
 	private WebElement _closeButton;
 	private WebElement _elucidationAttributesWindow;
 
-	public static ElucidationAttributesWindow getElucidationAttributesWindow(WebElement elucidationAttributesWindow,
+	public static ElucidationAttributesWindowAdapter getElucidationAttributesWindow(WebElement elucidationAttributesWindow,
 			WebElement closeButton) {
 		if (_window == null) {
-			_window = new ElucidationAttributesWindow(elucidationAttributesWindow, closeButton);
+			_window = new ElucidationAttributesWindowAdapter(elucidationAttributesWindow, closeButton);
 		}
 		return _window;
 	}
 
-	private ElucidationAttributesWindow(WebElement elucidationAttributesWindow, WebElement closeButton) {
+	private ElucidationAttributesWindowAdapter(WebElement elucidationAttributesWindow, WebElement closeButton) {
 		_elucidationAttributesWindow = elucidationAttributesWindow;
 		_closeButton = closeButton;
 	}

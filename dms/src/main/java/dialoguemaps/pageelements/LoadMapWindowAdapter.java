@@ -3,13 +3,13 @@ package dialoguemaps.pageelements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class LoadMapWindow implements PageElement {
+public class LoadMapWindowAdapter implements PageElementAdapter {
 
-	private static LoadMapWindow _window;
+	private static LoadMapWindowAdapter _window;
 
-	public static LoadMapWindow getLoadMapWindow(WebElement loadMapWindow, WebElement closeButton) {
+	public static LoadMapWindowAdapter getLoadMapWindow(WebElement loadMapWindow, WebElement closeButton) {
 		if (_window == null) {
-			_window = new LoadMapWindow(loadMapWindow, closeButton);
+			_window = new LoadMapWindowAdapter(loadMapWindow, closeButton);
 		}
 		return _window;
 	}
@@ -17,7 +17,7 @@ public class LoadMapWindow implements PageElement {
 	private WebElement _closeButton;
 	private WebElement _loadMapWindow;
 
-	private LoadMapWindow(WebElement loadMapWindow, WebElement closeButton) {
+	private LoadMapWindowAdapter(WebElement loadMapWindow, WebElement closeButton) {
 		_loadMapWindow = loadMapWindow;
 		_closeButton = closeButton;
 	}

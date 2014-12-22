@@ -4,20 +4,20 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-public class Mainmenu implements PageElement{
+public class MainmenuAdapter implements PageElementAdapter{
 
-	private static Mainmenu _menu;
+	private static MainmenuAdapter _menu;
 	private WebElement _mainMenuToolStrip;
 	private List<WebElement> _mainMenuButtons;
 
-	public static Mainmenu getMainMenu(WebElement mainMenu, List<WebElement> mainMenuButtons) {
+	public static MainmenuAdapter getMainMenu(WebElement mainMenu, List<WebElement> mainMenuButtons) {
 		if(_menu==null){
-			_menu = new Mainmenu(mainMenu, mainMenuButtons);
+			_menu = new MainmenuAdapter(mainMenu, mainMenuButtons);
 		}
 		return _menu;
 	}
 	
-	private Mainmenu(final WebElement mainMenuToolStrip, final List<WebElement> mainMenuButtons) {
+	private MainmenuAdapter(final WebElement mainMenuToolStrip, final List<WebElement> mainMenuButtons) {
 		_mainMenuToolStrip = mainMenuToolStrip;
 		_mainMenuButtons = mainMenuButtons;
 	}

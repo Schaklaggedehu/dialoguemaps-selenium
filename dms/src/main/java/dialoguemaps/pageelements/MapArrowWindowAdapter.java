@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-public class MapArrowWindow implements PageElement {
+public class MapArrowWindowAdapter implements PageElementAdapter {
 
-	private static MapArrowWindow _window;
+	private static MapArrowWindowAdapter _window;
 	private WebElement _mapArrowWindow;
 	private WebElement _closeButton;
 	private List<WebElement> _sizeButtons;
@@ -14,16 +14,16 @@ public class MapArrowWindow implements PageElement {
 	private List<WebElement> _lines;
 	private List<WebElement> _heads;
 
-	public static MapArrowWindow getMapArrowWindow(WebElement mapArrowWindow, WebElement closeButton,
+	public static MapArrowWindowAdapter getMapArrowWindow(WebElement mapArrowWindow, WebElement closeButton,
 			List<WebElement> sizeButtons, List<WebElement> tails, List<WebElement> lines, List<WebElement> heads) {
 
 		if (_window == null) {
-			_window = new MapArrowWindow(mapArrowWindow, closeButton, sizeButtons, tails, lines, heads);
+			_window = new MapArrowWindowAdapter(mapArrowWindow, closeButton, sizeButtons, tails, lines, heads);
 		}
 		return _window;
 	}
 
-	private MapArrowWindow(WebElement mapArrowWindow, WebElement closeButton, List<WebElement> sizeButtons,
+	private MapArrowWindowAdapter(WebElement mapArrowWindow, WebElement closeButton, List<WebElement> sizeButtons,
 			List<WebElement> tails, List<WebElement> lines, List<WebElement> heads) {
 		_mapArrowWindow = mapArrowWindow;
 		_closeButton = closeButton;

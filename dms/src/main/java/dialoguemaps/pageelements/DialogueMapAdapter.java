@@ -5,22 +5,22 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class DialogueMap implements PageElement {
+public class DialogueMapAdapter implements PageElementAdapter {
 
-	private static DialogueMap _map;
+	private static DialogueMapAdapter _map;
 	private WebElement _dialogueMap;
 	private List<WebElement> _dialogueMapCategories;
 	private WebElement _elucidationController;
 
-	public static DialogueMap getDialogueMap(WebElement dialogueMap, List<WebElement> dialogueMapCategories,
+	public static DialogueMapAdapter getDialogueMap(WebElement dialogueMap, List<WebElement> dialogueMapCategories,
 			WebElement elucidationController) {
 		if (_map == null) {
-			_map = new DialogueMap(dialogueMap, dialogueMapCategories, elucidationController);
+			_map = new DialogueMapAdapter(dialogueMap, dialogueMapCategories, elucidationController);
 		}
 		return _map;
 	}
 
-	private DialogueMap(WebElement dialogueMap, List<WebElement> dialogueMapCategories, WebElement elucidationController) {
+	private DialogueMapAdapter(WebElement dialogueMap, List<WebElement> dialogueMapCategories, WebElement elucidationController) {
 		_dialogueMap = dialogueMap;
 		_dialogueMapCategories = dialogueMapCategories;
 		_elucidationController = elucidationController;

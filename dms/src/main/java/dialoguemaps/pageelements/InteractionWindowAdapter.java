@@ -4,21 +4,21 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-public class InteractionWindow implements PageElement{
+public class InteractionWindowAdapter implements PageElementAdapter{
 
 	private WebElement _interactionWindow;
 	private List<WebElement> _interactionButtons;
-	private static InteractionWindow _window;
+	private static InteractionWindowAdapter _window;
 	
-	public static InteractionWindow getInteractionWindow(WebElement interactionWindow,
+	public static InteractionWindowAdapter getInteractionWindow(WebElement interactionWindow,
 			List<WebElement> interactionButtons) {
 		if(_window==null){
-			_window = new InteractionWindow(interactionWindow, interactionButtons);
+			_window = new InteractionWindowAdapter(interactionWindow, interactionButtons);
 		}
 		return _window;
 	}	
 	
-	private InteractionWindow(WebElement interactionWindow,
+	private InteractionWindowAdapter(WebElement interactionWindow,
 			List<WebElement> interactionButtons) {
 				_interactionWindow = interactionWindow;
 				_interactionButtons = interactionButtons;

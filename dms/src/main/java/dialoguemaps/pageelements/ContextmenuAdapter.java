@@ -3,19 +3,19 @@ package dialoguemaps.pageelements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class Contextmenu implements PageElement {
+public class ContextmenuAdapter implements PageElementAdapter {
 
-	private static Contextmenu _menu;
+	private static ContextmenuAdapter _menu;
 	private WebElement _contextMenu;
 
-	public static Contextmenu getContextmenu(WebElement contextMenu) {
+	public static ContextmenuAdapter getContextmenu(WebElement contextMenu) {
 		if (_menu == null) {
-			_menu = new Contextmenu(contextMenu);
+			_menu = new ContextmenuAdapter(contextMenu);
 		}
 		return _menu;
 	}
 
-	private Contextmenu(WebElement contextMenu) {
+	private ContextmenuAdapter(WebElement contextMenu) {
 		_contextMenu = contextMenu;
 	}
 

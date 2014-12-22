@@ -4,23 +4,23 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-public class AddAttachmentWindow implements PageElement {
+public class AddAttachmentWindowAdapter implements PageElementAdapter {
 
-	private static AddAttachmentWindow _window;
+	private static AddAttachmentWindowAdapter _window;
 	private WebElement _closeButton;
 	private WebElement _addAttachmentWindow;
 	private WebElement _okButton;
 	private List<WebElement> _inputFields;
 
-	public static AddAttachmentWindow getAddAttachmentWindow(WebElement addAttachmentWindow, WebElement closeButton,
+	public static AddAttachmentWindowAdapter getAddAttachmentWindow(WebElement addAttachmentWindow, WebElement closeButton,
 			WebElement okButton, List<WebElement> inputFields) {
 		if (_window == null) {
-			_window = new AddAttachmentWindow(addAttachmentWindow, closeButton, okButton, inputFields);
+			_window = new AddAttachmentWindowAdapter(addAttachmentWindow, closeButton, okButton, inputFields);
 		}
 		return _window;
 	}
 
-	private AddAttachmentWindow(WebElement addAttachmentWindow, WebElement closeButton, WebElement okButton,
+	private AddAttachmentWindowAdapter(WebElement addAttachmentWindow, WebElement closeButton, WebElement okButton,
 			List<WebElement> inputFields) {
 		_addAttachmentWindow = addAttachmentWindow;
 		_closeButton = closeButton;

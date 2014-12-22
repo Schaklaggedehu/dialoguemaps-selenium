@@ -5,20 +5,20 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class Tabmenu implements PageElement {
+public class TabmenuAdapter implements PageElementAdapter {
 
-	private static Tabmenu _menu;
+	private static TabmenuAdapter _menu;
 	private List<WebElement> _buttons;
 	private WebElement _tabMenu;
 
-	public static Tabmenu getTabMenu(WebElement tabMenu, List<WebElement> buttons) {
+	public static TabmenuAdapter getTabMenu(WebElement tabMenu, List<WebElement> buttons) {
 		if (_menu == null) {
-			_menu = new Tabmenu(tabMenu, buttons);
+			_menu = new TabmenuAdapter(tabMenu, buttons);
 		}
 		return _menu;
 	}
 
-	private Tabmenu(WebElement tabMenu, List<WebElement> buttons) {
+	private TabmenuAdapter(WebElement tabMenu, List<WebElement> buttons) {
 		_tabMenu = tabMenu;
 		_buttons = buttons;
 	}

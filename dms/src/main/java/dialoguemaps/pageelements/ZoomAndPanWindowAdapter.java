@@ -4,24 +4,24 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-public class ZoomAndPanWindow implements PageElement
+public class ZoomAndPanWindowAdapter implements PageElementAdapter
 {
 
     private WebElement _zoomWindow;
     private List<WebElement> _zoomButtons;
-    private static ZoomAndPanWindow _window;
+    private static ZoomAndPanWindowAdapter _window;
 
-    public static ZoomAndPanWindow getZoomWindow(WebElement zoomWindow,
+    public static ZoomAndPanWindowAdapter getZoomWindow(WebElement zoomWindow,
             List<WebElement> zoomButtons)
     {
         if (_window == null)
         {
-            _window = new ZoomAndPanWindow(zoomWindow, zoomButtons);
+            _window = new ZoomAndPanWindowAdapter(zoomWindow, zoomButtons);
         }
         return _window;
     }
 
-    private ZoomAndPanWindow(WebElement zoomWindow, List<WebElement> zoomButtons)
+    private ZoomAndPanWindowAdapter(WebElement zoomWindow, List<WebElement> zoomButtons)
     {
         _zoomWindow = zoomWindow;
         _zoomButtons = zoomButtons;

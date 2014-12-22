@@ -4,20 +4,20 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-public class Mapmenu implements PageElement {
+public class MapmenuAdapter implements PageElementAdapter {
 
 	private WebElement _mapToolsMenuToolStrip;
 	private List<WebElement> _mapMenuButtons;
-	private static Mapmenu _menu;
+	private static MapmenuAdapter _menu;
 
-	public static Mapmenu getMapMenu(WebElement mapMenu, List<WebElement> mapMenuButtons) {
+	public static MapmenuAdapter getMapMenu(WebElement mapMenu, List<WebElement> mapMenuButtons) {
 		if (_menu == null) {
-			_menu = new Mapmenu(mapMenu, mapMenuButtons);
+			_menu = new MapmenuAdapter(mapMenu, mapMenuButtons);
 		}
 		return _menu;
 	}
 
-	private Mapmenu(final WebElement mapToolsMenuToolStrip, final List<WebElement> mapMenuButtons) {
+	private MapmenuAdapter(final WebElement mapToolsMenuToolStrip, final List<WebElement> mapMenuButtons) {
 		_mapToolsMenuToolStrip = mapToolsMenuToolStrip;
 		_mapMenuButtons = mapMenuButtons;
 	}

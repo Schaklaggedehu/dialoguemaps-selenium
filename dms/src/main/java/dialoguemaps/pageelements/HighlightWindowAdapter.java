@@ -5,22 +5,22 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class HighlightWindow implements PageElement {
+public class HighlightWindowAdapter implements PageElementAdapter {
 
-	private static HighlightWindow _window;
+	private static HighlightWindowAdapter _window;
 	private WebElement _highlightWindow;
 	private List<WebElement> _highlightButtons;
 	private WebElement _highlightCloseButton;
 
-	public static HighlightWindow getHighlightWindow(WebElement highlightWindow, WebElement highlightCloseButton,
+	public static HighlightWindowAdapter getHighlightWindow(WebElement highlightWindow, WebElement highlightCloseButton,
 			List<WebElement> highlightButtons) {
 		if (_window == null) {
-			_window = new HighlightWindow(highlightWindow, highlightCloseButton, highlightButtons);
+			_window = new HighlightWindowAdapter(highlightWindow, highlightCloseButton, highlightButtons);
 		}
 		return _window;
 	}
 
-	private HighlightWindow(WebElement highlightWindow, WebElement highlightCloseButton,
+	private HighlightWindowAdapter(WebElement highlightWindow, WebElement highlightCloseButton,
 			List<WebElement> highlightButtons) {
 		_highlightWindow = highlightWindow;
 		_highlightCloseButton = highlightCloseButton;

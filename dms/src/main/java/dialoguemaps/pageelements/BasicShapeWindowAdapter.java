@@ -4,24 +4,24 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-public class BasicShapeWindow implements PageElement {
+public class BasicShapeWindowAdapter implements PageElementAdapter {
 
-	private static BasicShapeWindow _window;
+	private static BasicShapeWindowAdapter _window;
 	private WebElement _mapArrowWindow;
 	private WebElement _closeButton;
 	private List<WebElement> _sizeButtons;
 	private List<WebElement> _shapes;
 
-	public static BasicShapeWindow getBasicShapeWindow(WebElement basicShapeWindow, WebElement closeButton,
+	public static BasicShapeWindowAdapter getBasicShapeWindow(WebElement basicShapeWindow, WebElement closeButton,
 			List<WebElement> sizeButtons, List<WebElement> shapes) {
 
 		if (_window == null) {
-			_window = new BasicShapeWindow(basicShapeWindow, closeButton, sizeButtons, shapes);
+			_window = new BasicShapeWindowAdapter(basicShapeWindow, closeButton, sizeButtons, shapes);
 		}
 		return _window;
 	}
 
-	private BasicShapeWindow(WebElement mapArrowWindow, WebElement closeButton, List<WebElement> sizeButtons,
+	private BasicShapeWindowAdapter(WebElement mapArrowWindow, WebElement closeButton, List<WebElement> sizeButtons,
 			List<WebElement> shapes) {
 		_mapArrowWindow = mapArrowWindow;
 		_closeButton = closeButton;

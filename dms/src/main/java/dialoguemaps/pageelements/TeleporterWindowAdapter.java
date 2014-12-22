@@ -5,22 +5,22 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class TeleporterWindow implements PageElement {
+public class TeleporterWindowAdapter implements PageElementAdapter {
 
-	private static TeleporterWindow _window;
+	private static TeleporterWindowAdapter _window;
 	private WebElement _teleporterWindow;
 	private List<WebElement> _teleporterButtons;
 	private WebElement _teleporterCloseButton;
 
-	public static TeleporterWindow getTeleporterWindow(WebElement teleporterWindow, WebElement teleporterCloseButton,
+	public static TeleporterWindowAdapter getTeleporterWindow(WebElement teleporterWindow, WebElement teleporterCloseButton,
 			List<WebElement> teleporterButtons) {
 		if (_window == null) {
-			_window = new TeleporterWindow(teleporterWindow, teleporterCloseButton, teleporterButtons);
+			_window = new TeleporterWindowAdapter(teleporterWindow, teleporterCloseButton, teleporterButtons);
 		}
 		return _window;
 	}
 
-	private TeleporterWindow(WebElement teleporterWindow, WebElement teleporterCloseButton,
+	private TeleporterWindowAdapter(WebElement teleporterWindow, WebElement teleporterCloseButton,
 			List<WebElement> teleporterButtons) {
 		_teleporterWindow = teleporterWindow;
 		_teleporterCloseButton = teleporterCloseButton;
