@@ -112,9 +112,13 @@ public class DMPage extends DMPageElements {
 	public Boolean isDMLoginPageOpen() {
 		String visibility = findElement(By.cssSelector("body>div>div>div>div>div[eventproxy^=\"isc_IButton_\"]"))
 				.getAttribute("visibility");
-		if ("hidden".equals(visibility)) {
+		System.out.println();
+		System.out.println("YES "+visibility);
+		if (" hidden".equals(visibility)) {
+			System.out.println("false");
 			return false;
 		} else {
+			System.out.println("true");
 			return true;
 		}
 	}
