@@ -66,8 +66,8 @@ class RetryTestRule implements TestRule {
 				if (_showPrintouts) {
 					System.out.println(" FAIL.");
 				}
-				Reporter.appendMethodReport(description.getDisplayName(), ": giving up after " + _retryCount
-						+ " failures" + System.lineSeparator());
+				Reporter.appendMethodReport(description.getDisplayName(), ": giving up after " + (_retryCount+1)
+						+ " failures." + System.lineSeparator());
 				throw caughtThrowable;
 			}
 		};
