@@ -16,12 +16,14 @@ import dialoguemaps.tools.Screenshooter;
 public abstract class AbstractSelenium2Test extends AbstractSeleniumAssertTest {
 
 	private static int MAXIMUM_RETRIES;
+	private static boolean SHOW_PRINTOUTS;
 	protected static List<WebDriver> _drivers = new ArrayList<>();
 	protected static SeleniumAdapter _adapter;
 		
 	public static void initSelenium2Test(int userCount) {
 		Properties prop = PropertyReader.load(); 		
 		MAXIMUM_RETRIES = Integer.parseInt((String) prop.get("maximumRetries"));
+		SHOW_PRINTOUTS = Boolean.parseBoolean((String) prop.get("showPrintouts"));
 		System.out.print("Initiating Selenium...");
 		_adapter = new SeleniumAdapter();
 		for (int i = 0; i < userCount; i++) {
@@ -33,7 +35,7 @@ public abstract class AbstractSelenium2Test extends AbstractSeleniumAssertTest {
 	}
 
 	@Rule
-	public RetryTestRule retryTestRule = new RetryTestRule(MAXIMUM_RETRIES);
+	public RetryTestRule retryTestRule = new RetryTestRule(MAXIMUM_RETRIES, SHOW_PRINTOUTS);
 
 	@AfterClass
 	public static void tearDownSelenium2Test() {

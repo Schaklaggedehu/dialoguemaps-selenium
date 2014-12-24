@@ -11,9 +11,11 @@ import dialoguemaps.tools.Screenshooter;
 class RetryTestRule implements TestRule {
 
 	private int _retryCount;
+	private boolean _showPrintouts;
 
-	RetryTestRule(final int retryCount) {
+	RetryTestRule(final int retryCount, final boolean showPrintouts) {
 		_retryCount = retryCount;
+		_showPrintouts = showPrintouts;
 	}
 
 	@Override
@@ -30,14 +32,18 @@ class RetryTestRule implements TestRule {
 
 				for (int i = 0; i <= _retryCount; i++) {
 					try {
-						System.out.print("Evaluating " + description.getClassName() + "." + description.getMethodName()
-								+ "()...");
+						if (_showPrintouts) {
+							System.out.print("Evaluating " + description.getClassName() + "."
+									+ description.getMethodName() + "()...");
+						}
 						base.evaluate();
 						String successrate = "";
 						if (i > 0) {
 							successrate = " on " + (i + 1) + " try";
 						}
-						System.out.println(" Successful" + successrate + ".");
+						if (_showPrintouts) {
+							System.out.println(" Successful" + successrate + ".");
+						}
 						return;
 					} catch (Throwable t) {
 						caughtThrowable = t;
@@ -45,9 +51,11 @@ class RetryTestRule implements TestRule {
 						String errormessage = ": run " + (i + 1) + " failed";
 						// if (i == _retryCount - (i + 1)) {//TODO: Errorlog.
 						// Fallunterscheidung zwischen bloßer Warnung und Error?
-						if (i < _retryCount) {
-							System.out.println(" Failed, trying again.");
-						} else {
+						if (_showPrintouts) {
+							if (i < _retryCount) {
+								System.out.println(" Failed, trying again.");
+							} else {
+							}
 						}
 						Reporter.appendMethodReport(description.getDisplayName(), errormessage);
 						Screenshooter.screenshot(description.getDisplayName() + errormessage);
@@ -55,7 +63,9 @@ class RetryTestRule implements TestRule {
 						// }
 					}
 				}
-				System.out.println(" FAIL.");
+				if (_showPrintouts) {
+					System.out.println(" FAIL.");
+				}
 				Reporter.appendMethodReport(description.getDisplayName(), ": giving up after " + _retryCount
 						+ " failures" + System.lineSeparator());
 				throw caughtThrowable;
