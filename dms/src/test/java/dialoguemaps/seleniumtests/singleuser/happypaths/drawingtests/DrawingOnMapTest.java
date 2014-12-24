@@ -9,10 +9,6 @@ import org.junit.Test;
 import dialoguemaps.pages.DMPage;
 import dialoguemaps.tests.AbstractSelenium2Test;
 
-/**
- * 
- * @author janis
- */
 public class DrawingOnMapTest extends AbstractSelenium2Test {
 
 	private static final int USERCOUNT = 1;

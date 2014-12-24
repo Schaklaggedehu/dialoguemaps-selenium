@@ -9,10 +9,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-/**
- * 
- * @author janis
- */
 public class Screenshooter {
 
 	private static List<WebDriver> _drivers;

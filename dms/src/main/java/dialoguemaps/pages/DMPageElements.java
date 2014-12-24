@@ -29,10 +29,6 @@ import dialoguemaps.pageelements.TabmenuAdapter;
 import dialoguemaps.pageelements.TeleporterWindowAdapter;
 import dialoguemaps.pageelements.ZoomAndPanWindowAdapter;
 
-/**
- * 
- * @author janis
- */
 public class DMPageElements extends AbstractPage<DMPage> {
 
 	final String _cssSelectorWholeMap = "body>div[eventproxy^=\"isc_VLayout_\"]";

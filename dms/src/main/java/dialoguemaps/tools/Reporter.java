@@ -7,10 +7,6 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 
- * @author janis
- */
 public class Reporter {
 
 	private static final List<String> _items = new ArrayList<>();

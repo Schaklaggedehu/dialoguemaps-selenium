@@ -20,11 +20,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import dialoguemaps.pageelements.DialogueMapAdapter;
 import dialoguemaps.tools.PropertyReader;
 
-
-/**
- * 
- * @author janis
- */
 abstract class AbstractPage<T> {
 
 	protected final String _urlPath;

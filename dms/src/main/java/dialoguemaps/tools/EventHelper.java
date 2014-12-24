@@ -5,10 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-/**
- * 
- * @author janis
- */
 public abstract class EventHelper {
 	private static WebDriver _driver;
 	public static void setDriver(WebDriver driver) {
@@ -16,7 +12,7 @@ public abstract class EventHelper {
 	}
 
 	public static class keys{
-		public static void ControlA(){
+		public static void controlA(){
 			Actions actions = new Actions(_driver);
 			String keys = Keys.chord(Keys.CONTROL, "a");
 			actions.sendKeys(keys).build().perform();		
