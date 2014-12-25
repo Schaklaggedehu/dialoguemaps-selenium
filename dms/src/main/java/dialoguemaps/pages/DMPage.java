@@ -21,59 +21,59 @@ public class DMPage extends DMPageElements {
 	}
 
 	public void openNewMap() {
-		_mapMenu = getMapMenu();
-		EventHelper.mouse.click(_mapMenu.getNewMapButton());
-		_tabMenu = getTabMenu();
-		waitUntilTextPresent(_tabMenu.getAllTabs().get(0), "DM-Map", 2);
+		_mapMenuAdapter = getMapMenu();
+		EventHelper.mouse.click(_mapMenuAdapter.getNewMapButton());
+		_tabMenuAdapter = getTabMenu();
+		waitUntilTextPresent(_tabMenuAdapter.getAllTabs().get(0), "DM-Map", 2);
 	}
 
 	public boolean isNewMapOpen() {
-		_tabMenu = getTabMenu();
-		return "undefined".equals(_tabMenu.getAllTabs().get(0).getText()) && _tabMenu.getAllTabs().size() == 1;
+		_tabMenuAdapter = getTabMenu();
+		return "undefined".equals(_tabMenuAdapter.getAllTabs().get(0).getText()) && _tabMenuAdapter.getAllTabs().size() == 1;
 	}
 
 	public void switchFromMainMenuToMapToolMenu() {
-		_mainMenu = getMainMenu();
-		EventHelper.mouse.click(_mainMenu.getMapToolsButton());
+		_mainMenuAdapter = getMainMenu();
+		EventHelper.mouse.click(_mainMenuAdapter.getMapToolsButton());
 		waitUntilClickable(findElement(By.cssSelector(_cssSelectorMapMenu)));
-		_mapMenu = getMapMenu();
+		_mapMenuAdapter = getMapMenu();
 	}
 
 	public void switchFromMapToolMenuToMainMenu() {
-		_mapMenu = getMapMenu();
-		EventHelper.mouse.doubleClick(_mapMenu.getMapToolMenuToolStrip());
+		_mapMenuAdapter = getMapMenu();
+		EventHelper.mouse.doubleClick(_mapMenuAdapter.getMapToolMenuToolStrip());
 		waitUntilClickable(findElement(By.cssSelector(_cssSelectorMainMenu)));
-		_mainMenu = getMainMenu();
+		_mainMenuAdapter = getMainMenu();
 	}
 
 	public void openInteractionWindow() {
-		_mainMenu = getMainMenu();
-		EventHelper.mouse.click(_mainMenu.getInteractionButton());
+		_mainMenuAdapter = getMainMenu();
+		EventHelper.mouse.click(_mainMenuAdapter.getInteractionButton());
 	}
 
 	public void openTeleporterWindow() {
-		_mainMenu = getMainMenu();
-		EventHelper.mouse.click(_mainMenu.getTeleporterButton());
+		_mainMenuAdapter = getMainMenu();
+		EventHelper.mouse.click(_mainMenuAdapter.getTeleporterButton());
 	}
 
 	public void openPenWindow() {
-		_interactionWindow = getInteractionWindow();
-		EventHelper.mouse.click(_interactionWindow.getPenButton());
+		_interactionWindowAdapter = getInteractionWindow();
+		EventHelper.mouse.click(_interactionWindowAdapter.getPenButton());
 	}
 
 	public boolean isPenWindowOpen() {
-		_penWindow = getPenWindow();
-		return waitUntilVisible(_penWindow.getPenWindow());
+		_penWindowAdapter = getPenWindow();
+		return waitUntilVisible(_penWindowAdapter.getPenWindow());
 	}
 
 	public boolean isInteractionWindowOpen() {
-		_interactionWindow = getInteractionWindow();
-		return waitUntilVisible(_interactionWindow.getInteractionWindow());
+		_interactionWindowAdapter = getInteractionWindow();
+		return waitUntilVisible(_interactionWindowAdapter.getInteractionWindow());
 	}
 
 	public void clickNormalPenButton() {
-		_penWindow = getPenWindow();
-		EventHelper.mouse.click(_penWindow.getNormalButton());
+		_penWindowAdapter = getPenWindow();
+		EventHelper.mouse.click(_penWindowAdapter.getNormalButton());
 	}
 
 	public void drawHouseOnMap() {
@@ -81,7 +81,7 @@ public class DMPage extends DMPageElements {
 	}
 
 	public void closePenWindow() {
-		EventHelper.mouse.click(_penWindow.getCloseButton());
+		EventHelper.mouse.click(_penWindowAdapter.getCloseButton());
 	}
 
 	public boolean isPenWindowClosed() {
@@ -89,24 +89,24 @@ public class DMPage extends DMPageElements {
 	}
 
 	public int getSizeOfDrawnElements() {
-		_dialogueMap = getDialogueMap();
-		return _dialogueMap.getAllDrawElements().size();
+		_dialogueMapAdapter = getDialogueMap();
+		return _dialogueMapAdapter.getAllDrawElements().size();
 	}
 
 	public void waitUntilNewDrawElementsCreated(int sizeAfter) {
-		_dialogueMap = getDialogueMap();
-		waitUntilNewDrawElementsCreated(sizeAfter, _dialogueMap);
+		_dialogueMapAdapter = getDialogueMap();
+		waitUntilNewDrawElementsCreated(sizeAfter, _dialogueMapAdapter);
 	}
 
 	public void shortcutNewMap() {
 		EventHelper.keys.controlAltN();
-		_tabMenu = getTabMenu();
-		waitUntilTextPresent(_tabMenu.getAllTabs().get(0), "DM-Map", 1);
+		_tabMenuAdapter = getTabMenu();
+		waitUntilTextPresent(_tabMenuAdapter.getAllTabs().get(0), "DM-Map", 1);
 	}
 
 	public String getTextFromTab(int tab) {
-		_tabMenu = getTabMenu();
-		return _tabMenu.getAllTabs().get(0).getText();
+		_tabMenuAdapter = getTabMenu();
+		return _tabMenuAdapter.getAllTabs().get(0).getText();
 	}
 
 	public Boolean isDMLoginPageOpen() {

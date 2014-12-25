@@ -68,28 +68,28 @@ public class DMPageElements extends AbstractPage<DMPage> {
 													// smarte css-Pfade
 													// austauschen
 
-	MainmenuAdapter _mainMenu;
-	MapmenuAdapter _mapMenu;
-	TabmenuAdapter _tabMenu;
-	ContextmenuAdapter _contextMenu;
+	MainmenuAdapter _mainMenuAdapter;
+	MapmenuAdapter _mapMenuAdapter;
+	TabmenuAdapter _tabMenuAdapter;
+	ContextmenuAdapter _contextMenuAdapter;
 
-	InteractionWindowAdapter _interactionWindow;
-	TeleporterWindowAdapter _teleporterWindow;
-	HighlightWindowAdapter _highlightWindow;
-	HighlightPresentationWindowAdapter _highlightPresentationWindow;
-	PenWindowAdapter _penWindow;
-	ZoomAndPanWindowAdapter _zoomWindow;
-	MapArrowWindowAdapter _mapArrowWindow;
-	BasicShapeWindowAdapter _basicShapeWindow;
-	LoadMapWindowAdapter _loadMapWindow;
-	ElucidationAttributesWindowAdapter _elucidationAttributeWindow;
-	AttachmentsWindowAdapter _attachmentsWindow;
-	AddAttachmentWindowAdapter _addAttachmentWindow;
+	InteractionWindowAdapter _interactionWindowAdapter;
+	TeleporterWindowAdapter _teleporterWindowAdapter;
+	HighlightWindowAdapter _highlightWindowAdapter;
+	HighlightPresentationWindowAdapter _highlightPresentationWindowAdapter;
+	PenWindowAdapter _penWindowAdapter;
+	ZoomAndPanWindowAdapter _zoomWindowAdapter;
+	MapArrowWindowAdapter _mapArrowWindowAdapter;
+	BasicShapeWindowAdapter _basicShapeWindowAdapter;
+	LoadMapWindowAdapter _loadMapWindowAdapter;
+	ElucidationAttributesWindowAdapter _elucidationAttributeWindowAdapter;
+	AttachmentsWindowAdapter _attachmentsWindowAdapter;
+	AddAttachmentWindowAdapter _addAttachmentWindowAdapter;
 
-	DialogueMapAdapter _dialogueMap;
-	BoundingBoxesAdapter _boundingBox;
+	DialogueMapAdapter _dialogueMapAdapter;
+	BoundingBoxesAdapter _boundingBoxAdapter;
 
-	private static Set<PageElementAdapter> _pageElements = new HashSet<>();
+	private static Set<PageElementAdapter> _pageElementAdapters = new HashSet<>();
 
 	DMPageElements(WebDriver driver) {
 		super(driver, By
@@ -97,7 +97,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	}
 
 	public static void clearAllMenusAndWindows() {
-		for (PageElementAdapter pageElement : _pageElements) {
+		for (PageElementAdapter pageElement : _pageElementAdapters) {
 			pageElement.clear();
 		}
 	}
@@ -154,7 +154,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 				.cssSelector("*>*>*>*>*>*>*>*>*>*>*>img"));// TODO: Sternchen
 															// entfernen.
 		InteractionWindowAdapter window = InteractionWindowAdapter.getInteractionWindow(interactionWindow, interactionButtons);
-		_pageElements.add(window);
+		_pageElementAdapters.add(window);
 		return window;
 	}
 
@@ -167,7 +167,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 				.cssSelector("div>div>div>div>div>div>div>div>div>img"));
 		TeleporterWindowAdapter window = TeleporterWindowAdapter.getTeleporterWindow(teleporterWindow, teleporterCloseButton,
 				teleporterButtons);
-		_pageElements.add(window);
+		_pageElementAdapters.add(window);
 		return window;
 	}
 
@@ -180,7 +180,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 				.cssSelector("div>div>div>div>div>div>div>div>div>img"));
 		HighlightWindowAdapter window = HighlightWindowAdapter.getHighlightWindow(highlightWindow, highlightCloseButton,
 				highlightButtons);
-		_pageElements.add(window);
+		_pageElementAdapters.add(window);
 		return window;
 	}
 
@@ -193,7 +193,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 				.cssSelector("div>div>div>div>div>div>div>img"));
 		HighlightPresentationWindowAdapter window = HighlightPresentationWindowAdapter.getHighlightPresentationWindow(
 				highlightPresentationWindow, highlightPresentationCloseButton, highlightPresentationButtons);
-		_pageElements.add(window);
+		_pageElementAdapters.add(window);
 		return window;
 	}
 
@@ -207,7 +207,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 																									// Sternchen
 																									// entfernen.
 		PenWindowAdapter window = PenWindowAdapter.getPenWindow(penWindow, penButtons, penCloseButton);
-		_pageElements.add(window);
+		_pageElementAdapters.add(window);
 		return window;
 	}
 
@@ -225,7 +225,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 																						// entfernen.
 		zoomButtons.remove(0);
 		ZoomAndPanWindowAdapter window = ZoomAndPanWindowAdapter.getZoomWindow(zoomWindow, zoomButtons);
-		_pageElements.add(window);
+		_pageElementAdapters.add(window);
 		return window;
 	}
 
@@ -234,7 +234,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		WebElement mainMenu = findElement(By.cssSelector(_cssSelectorMainMenu));
 		List<WebElement> mainMenuButtons = mainMenu.findElements(By.cssSelector("div>div>div>img"));
 		MainmenuAdapter menu = MainmenuAdapter.getMainMenu(mainMenu, mainMenuButtons);
-		_pageElements.add(menu);
+		_pageElementAdapters.add(menu);
 		return menu;
 	}
 
@@ -243,7 +243,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		WebElement mapMenu = findElement(By.cssSelector(_cssSelectorMapMenu));
 		List<WebElement> mapMenuButtons = mapMenu.findElements(By.cssSelector("div>div>div>img"));
 		MapmenuAdapter menu = MapmenuAdapter.getMapMenu(mapMenu, mapMenuButtons);
-		_pageElements.add(menu);
+		_pageElementAdapters.add(menu);
 		return menu;
 	}
 
@@ -253,7 +253,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		List<WebElement> buttons = tabMenu.findElements(By
 				.cssSelector("div[eventproxy^=\"isc_ToolStrip_\"]>div>div>div>table>tbody>tr>td[align]"));
 		TabmenuAdapter menu = TabmenuAdapter.getTabMenu(tabMenu, buttons);
-		_pageElements.add(menu);
+		_pageElementAdapters.add(menu);
 		return menu;
 	}
 
@@ -261,7 +261,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		waitUntilVisible(By.cssSelector(_cssSelectorContextMenu));
 		WebElement contextMenu = findElement(By.cssSelector(_cssSelectorContextMenu));
 		ContextmenuAdapter menu = ContextmenuAdapter.getContextmenu(contextMenu);
-		_pageElements.add(menu);
+		_pageElementAdapters.add(menu);
 		return menu;
 	}
 
@@ -271,7 +271,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		List<WebElement> dialogueMapCategories = dialogueMap.findElements(By.cssSelector("g>g"));
 		WebElement elucidationController = findElement(By.cssSelector(_cssSelectorElucidations));
 		DialogueMapAdapter map = DialogueMapAdapter.getDialogueMap(dialogueMap, dialogueMapCategories, elucidationController);
-		_pageElements.add(map);
+		_pageElementAdapters.add(map);
 		return map;
 	}
 
@@ -279,7 +279,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		waitUntilVisible(By.cssSelector(_cssSelectorBoundingBoxes));
 		List<WebElement> boundingBoxes = findElements(By.cssSelector(_cssSelectorBoundingBoxes));
 		BoundingBoxesAdapter boxes = BoundingBoxesAdapter.getBoundingBoxes(boundingBoxes);
-		_pageElements.add(boxes);
+		_pageElementAdapters.add(boxes);
 		return boxes;
 	}
 
@@ -297,7 +297,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		List<WebElement> heads = threeColumns.get(2).findElements(By.cssSelector("div[eventproxy^=\"head\"]"));
 		MapArrowWindowAdapter window = MapArrowWindowAdapter.getMapArrowWindow(mapArrowWindow, closeButton, sizeButtons, tails,
 				lines, heads);
-		_pageElements.add(window);
+		_pageElementAdapters.add(window);
 		return window;
 	}
 
@@ -313,7 +313,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 						.cssSelector("div>div>div>div>div>div[eventproxy^=\"isc_TabSet\"]>div>div>div>div>div>div[eventproxy^=\"figureList\"]"));
 		BasicShapeWindowAdapter window = BasicShapeWindowAdapter.getBasicShapeWindow(basicShapeWindow, closeButton, sizeButtons,
 				shapes);
-		_pageElements.add(window);
+		_pageElementAdapters.add(window);
 		return window;
 	}
 
@@ -323,7 +323,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		WebElement closeButton = loadMapWindow.findElement(By
 				.cssSelector("div>div>div>div[eventproxy*=\"closeButton\"]"));
 		LoadMapWindowAdapter window = LoadMapWindowAdapter.getLoadMapWindow(loadMapWindow, closeButton);
-		_pageElements.add(window);
+		_pageElementAdapters.add(window);
 		return window;
 	}
 
@@ -334,7 +334,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 				.cssSelector("div>div>div>div>div[eventproxy*=\"closeButton\"]"));
 		ElucidationAttributesWindowAdapter window = ElucidationAttributesWindowAdapter.getElucidationAttributesWindow(
 				elucidationAttributesWindow, closeButton);
-		_pageElements.add(window);
+		_pageElementAdapters.add(window);
 		return window;
 	}
 	
@@ -349,7 +349,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 				.cssSelector("div>div>div>div>div>div>div>div>div>div>iframe"));
 		AddAttachmentWindowAdapter window = AddAttachmentWindowAdapter.getAddAttachmentWindow(
 				addAttachmentWindow, closeButton, okButton, inputFields);
-		_pageElements.add(window);
+		_pageElementAdapters.add(window);
 		return window;
 	}
 	
@@ -362,7 +362,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 				.cssSelector("div>div>div>div>div>div>div>div[eventproxy^=\"isc_Button_\"]"));
 		AttachmentsWindowAdapter window = AttachmentsWindowAdapter.getAttachmentsWindow(
 				attachmentWindow, closeButton, newButton);
-		_pageElements.add(window);
+		_pageElementAdapters.add(window);
 		return window;
 	}
 
@@ -370,7 +370,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		waitUntilVisible(By.cssSelector(_cssSelectorColorPicker));
 		List<WebElement> colorPickers = findElements(By.cssSelector(_cssSelectorColorPicker));
 		ColorPickerAdapter picker =  ColorPickerAdapter.getColorPicker(colorPickers);
-		_pageElements.add(picker);
+		_pageElementAdapters.add(picker);
 		return picker;
 	}
 
