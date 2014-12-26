@@ -6,16 +6,16 @@ import org.openqa.selenium.WebElement;
 public class LoadMapWindowAdapter implements PageElementAdapter {
 
 	private static LoadMapWindowAdapter _window;
+	
+	private WebElement _closeButton;
+	private WebElement _loadMapWindow;
 
-	public static LoadMapWindowAdapter getLoadMapWindow(WebElement loadMapWindow, WebElement closeButton) {
+	public static LoadMapWindowAdapter createLoadMapWindowAdapter(WebElement loadMapWindow, WebElement closeButton) {
 		if (_window == null) {
 			_window = new LoadMapWindowAdapter(loadMapWindow, closeButton);
 		}
 		return _window;
 	}
-
-	private WebElement _closeButton;
-	private WebElement _loadMapWindow;
 
 	private LoadMapWindowAdapter(WebElement loadMapWindow, WebElement closeButton) {
 		_loadMapWindow = loadMapWindow;

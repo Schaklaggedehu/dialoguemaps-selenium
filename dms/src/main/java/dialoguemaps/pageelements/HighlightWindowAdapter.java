@@ -12,7 +12,7 @@ public class HighlightWindowAdapter implements PageElementAdapter {
 	private List<WebElement> _highlightButtons;
 	private WebElement _highlightCloseButton;
 
-	public static HighlightWindowAdapter getHighlightWindow(WebElement highlightWindow, WebElement highlightCloseButton,
+	public static HighlightWindowAdapter createHighlightWindowAdapter(WebElement highlightWindow, WebElement highlightCloseButton,
 			List<WebElement> highlightButtons) {
 		if (_window == null) {
 			_window = new HighlightWindowAdapter(highlightWindow, highlightCloseButton, highlightButtons);

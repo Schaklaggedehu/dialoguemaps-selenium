@@ -15,7 +15,7 @@ public class AttachmentsWindowAdapter implements PageElementAdapter {
 	private WebElement _attachmentWindow;
 	private WebElement _newButton;
 
-	public static AttachmentsWindowAdapter getAttachmentsWindow(WebElement attachmentWindow, WebElement closeButton,
+	public static AttachmentsWindowAdapter createAttachmentsWindowAdapter(WebElement attachmentWindow, WebElement closeButton,
 			WebElement newButton) {
 		if (_window == null) {
 			_window = new AttachmentsWindowAdapter(attachmentWindow, closeButton, newButton);

@@ -12,7 +12,7 @@ public class AddAttachmentWindowAdapter implements PageElementAdapter {
 	private WebElement _okButton;
 	private List<WebElement> _inputFields;
 
-	public static AddAttachmentWindowAdapter getAddAttachmentWindow(WebElement addAttachmentWindow, WebElement closeButton,
+	public static AddAttachmentWindowAdapter createAddAttachmentWindowAdapter(WebElement addAttachmentWindow, WebElement closeButton,
 			WebElement okButton, List<WebElement> inputFields) {
 		if (_window == null) {
 			_window = new AddAttachmentWindowAdapter(addAttachmentWindow, closeButton, okButton, inputFields);

@@ -14,7 +14,7 @@ public class MapArrowWindowAdapter implements PageElementAdapter {
 	private List<WebElement> _lines;
 	private List<WebElement> _heads;
 
-	public static MapArrowWindowAdapter getMapArrowWindow(WebElement mapArrowWindow, WebElement closeButton,
+	public static MapArrowWindowAdapter createMapArrowWindowAdapter(WebElement mapArrowWindow, WebElement closeButton,
 			List<WebElement> sizeButtons, List<WebElement> tails, List<WebElement> lines, List<WebElement> heads) {
 
 		if (_window == null) {

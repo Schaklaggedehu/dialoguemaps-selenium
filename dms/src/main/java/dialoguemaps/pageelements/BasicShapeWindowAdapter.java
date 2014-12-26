@@ -12,7 +12,7 @@ public class BasicShapeWindowAdapter implements PageElementAdapter {
 	private List<WebElement> _sizeButtons;
 	private List<WebElement> _shapes;
 
-	public static BasicShapeWindowAdapter getBasicShapeWindow(WebElement basicShapeWindow, WebElement closeButton,
+	public static BasicShapeWindowAdapter createBasicShapeWindowAdapter(WebElement basicShapeWindow, WebElement closeButton,
 			List<WebElement> sizeButtons, List<WebElement> shapes) {
 
 		if (_window == null) {

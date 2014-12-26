@@ -11,7 +11,7 @@ public class HighlightPresentationWindowAdapter implements PageElementAdapter {
 	private List<WebElement> _highlightPresentationButtons;
 	private WebElement _highlightPresentationCloseButton;
 
-	public static HighlightPresentationWindowAdapter getHighlightPresentationWindow(WebElement highlightPresentationWindow,
+	public static HighlightPresentationWindowAdapter createHighlightPresentationWindowAdapter(WebElement highlightPresentationWindow,
 			WebElement highlightPresentationCloseButton, List<WebElement> highlightPresentationButtons) {
 		if (_window == null) {
 			_window = new HighlightPresentationWindowAdapter(highlightPresentationWindow, highlightPresentationCloseButton,

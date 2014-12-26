@@ -10,7 +10,7 @@ public class MainmenuAdapter implements PageElementAdapter{
 	private WebElement _mainMenuToolStrip;
 	private List<WebElement> _mainMenuButtons;
 
-	public static MainmenuAdapter getMainMenu(WebElement mainMenu, List<WebElement> mainMenuButtons) {
+	public static MainmenuAdapter createMainMenuAdapter(WebElement mainMenu, List<WebElement> mainMenuButtons) {
 		if(_menu==null){
 			_menu = new MainmenuAdapter(mainMenu, mainMenuButtons);
 		}

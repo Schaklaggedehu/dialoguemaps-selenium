@@ -11,7 +11,7 @@ public class ZoomAndPanWindowAdapter implements PageElementAdapter
     private List<WebElement> _zoomButtons;
     private static ZoomAndPanWindowAdapter _window;
 
-    public static ZoomAndPanWindowAdapter getZoomWindow(WebElement zoomWindow,
+    public static ZoomAndPanWindowAdapter createZoomWindowAdapter(WebElement zoomWindow,
             List<WebElement> zoomButtons)
     {
         if (_window == null)

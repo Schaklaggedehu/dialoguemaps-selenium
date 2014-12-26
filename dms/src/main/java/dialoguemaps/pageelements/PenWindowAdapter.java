@@ -11,7 +11,7 @@ public class PenWindowAdapter implements PageElementAdapter {
 	private List<WebElement> _penButtons;
 	private WebElement _penCloseButton;
 
-	public static PenWindowAdapter getPenWindow(WebElement penWindow, List<WebElement> penButtons, 
+	public static PenWindowAdapter createPenWindowAdapter(WebElement penWindow, List<WebElement> penButtons, 
 			WebElement penCloseButton) {
 		if (_window == null) {
 			_window = new PenWindowAdapter(penWindow, penButtons, penCloseButton);

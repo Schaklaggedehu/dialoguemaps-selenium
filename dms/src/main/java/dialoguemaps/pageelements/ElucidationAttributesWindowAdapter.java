@@ -11,7 +11,7 @@ public class ElucidationAttributesWindowAdapter implements PageElementAdapter {
 	private WebElement _closeButton;
 	private WebElement _elucidationAttributesWindow;
 
-	public static ElucidationAttributesWindowAdapter getElucidationAttributesWindow(WebElement elucidationAttributesWindow,
+	public static ElucidationAttributesWindowAdapter createElucidationAttributesWindowAdapter(WebElement elucidationAttributesWindow,
 			WebElement closeButton) {
 		if (_window == null) {
 			_window = new ElucidationAttributesWindowAdapter(elucidationAttributesWindow, closeButton);

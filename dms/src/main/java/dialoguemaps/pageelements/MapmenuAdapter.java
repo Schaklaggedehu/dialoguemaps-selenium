@@ -10,7 +10,7 @@ public class MapmenuAdapter implements PageElementAdapter {
 	private List<WebElement> _mapMenuButtons;
 	private static MapmenuAdapter _menu;
 
-	public static MapmenuAdapter getMapMenu(WebElement mapMenu, List<WebElement> mapMenuButtons) {
+	public static MapmenuAdapter createMapMenuAdapter(WebElement mapMenu, List<WebElement> mapMenuButtons) {
 		if (_menu == null) {
 			_menu = new MapmenuAdapter(mapMenu, mapMenuButtons);
 		}

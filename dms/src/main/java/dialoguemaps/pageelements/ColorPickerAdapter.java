@@ -11,20 +11,20 @@ public class ColorPickerAdapter implements PageElementAdapter {
 	private List<WebElement> _colorPickers;
 	private WebElement _colorPicker;
 
-	public static ColorPickerAdapter getColorPicker(List<WebElement> colorPickers) {
+	public static ColorPickerAdapter createColorPickerAdapter(List<WebElement> colorPickers) {
 		if (_picker == null) {
 			_picker = new ColorPickerAdapter(colorPickers);
 		}
 		return _picker;
 	}
 
-	public ColorPickerAdapter(List<WebElement> colorPickers) {
+	private ColorPickerAdapter(List<WebElement> colorPickers) {
 		_colorPickers = colorPickers;
 	}
 
 	public WebElement getColorPicker() {
 		for (WebElement webElement : _colorPickers) {
-			if (!"hidden".equals(webElement.getAttribute("visibility"))) {
+			if (webElement.isDisplayed()) {
 				_colorPicker = webElement;
 				break;
 			}

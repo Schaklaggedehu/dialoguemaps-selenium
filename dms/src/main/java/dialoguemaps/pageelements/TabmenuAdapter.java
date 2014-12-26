@@ -11,7 +11,7 @@ public class TabmenuAdapter implements PageElementAdapter {
 	private List<WebElement> _buttons;
 	private WebElement _tabMenu;
 
-	public static TabmenuAdapter getTabMenu(WebElement tabMenu, List<WebElement> buttons) {
+	public static TabmenuAdapter createTabMenuAdapter(WebElement tabMenu, List<WebElement> buttons) {
 		if (_menu == null) {
 			_menu = new TabmenuAdapter(tabMenu, buttons);
 		}

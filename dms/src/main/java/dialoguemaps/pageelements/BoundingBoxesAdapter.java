@@ -10,7 +10,7 @@ public class BoundingBoxesAdapter implements PageElementAdapter {
 	private static BoundingBoxesAdapter _boxes;
 	private List<WebElement> _boundingBoxes;
 
-	public static BoundingBoxesAdapter getBoundingBoxes(List<WebElement> boundingBoxes) {
+	public static BoundingBoxesAdapter createBoundingBoxesAdapter(List<WebElement> boundingBoxes) {
 		if (_boxes == null) {
 			_boxes = new BoundingBoxesAdapter(boundingBoxes);
 		}

@@ -12,7 +12,7 @@ public class TeleporterWindowAdapter implements PageElementAdapter {
 	private List<WebElement> _teleporterButtons;
 	private WebElement _teleporterCloseButton;
 
-	public static TeleporterWindowAdapter getTeleporterWindow(WebElement teleporterWindow, WebElement teleporterCloseButton,
+	public static TeleporterWindowAdapter createTeleporterWindowAdapter(WebElement teleporterWindow, WebElement teleporterCloseButton,
 			List<WebElement> teleporterButtons) {
 		if (_window == null) {
 			_window = new TeleporterWindowAdapter(teleporterWindow, teleporterCloseButton, teleporterButtons);

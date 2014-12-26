@@ -10,7 +10,7 @@ public class InteractionWindowAdapter implements PageElementAdapter{
 	private List<WebElement> _interactionButtons;
 	private static InteractionWindowAdapter _window;
 	
-	public static InteractionWindowAdapter getInteractionWindow(WebElement interactionWindow,
+	public static InteractionWindowAdapter createInteractionWindowAdapter(WebElement interactionWindow,
 			List<WebElement> interactionButtons) {
 		if(_window==null){
 			_window = new InteractionWindowAdapter(interactionWindow, interactionButtons);

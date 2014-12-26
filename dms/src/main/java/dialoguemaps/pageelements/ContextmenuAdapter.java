@@ -8,7 +8,7 @@ public class ContextmenuAdapter implements PageElementAdapter {
 	private static ContextmenuAdapter _menu;
 	private WebElement _contextMenu;
 
-	public static ContextmenuAdapter getContextmenu(WebElement contextMenu) {
+	public static ContextmenuAdapter createContextMenuAdapter(WebElement contextMenu) {
 		if (_menu == null) {
 			_menu = new ContextmenuAdapter(contextMenu);
 		}

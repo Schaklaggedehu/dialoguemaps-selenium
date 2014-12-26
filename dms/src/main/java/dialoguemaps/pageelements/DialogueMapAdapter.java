@@ -12,7 +12,7 @@ public class DialogueMapAdapter implements PageElementAdapter {
 	private List<WebElement> _dialogueMapCategories;
 	private WebElement _elucidationController;
 
-	public static DialogueMapAdapter getDialogueMap(WebElement dialogueMap, List<WebElement> dialogueMapCategories,
+	public static DialogueMapAdapter createDialogueMapAdapter(WebElement dialogueMap, List<WebElement> dialogueMapCategories,
 			WebElement elucidationController) {
 		if (_map == null) {
 			_map = new DialogueMapAdapter(dialogueMap, dialogueMapCategories, elucidationController);
