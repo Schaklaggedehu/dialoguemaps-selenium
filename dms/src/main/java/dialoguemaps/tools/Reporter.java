@@ -10,26 +10,36 @@ import java.util.List;
 public class Reporter {
 
 	private static final List<String> _items = new ArrayList<>();
-	private static int _errorNumber = 0;
+	private static int _numberAsserts, _numberFails, _numberRetries = 0;
 	private static String _classname = "";
 
-	public static void appendAssertReport(final String command, final String value) {
-		if (!_items.contains(command + " " + value)) {
-			_errorNumber++;
-			_items.add(command + " " + value);
+	public static void appendAssertReport(final String path, final String value) {
+		if (!_items.contains(path + " " + value)) {
+			_numberAsserts++;
+			_items.add(path + " " + value);
 		}
 	}
 
 	public static void appendMethodReport(String path, String errormessage) {
-		_errorNumber++;
-		_classname = path;
+		if (_classname.equals("")) {
+			_classname = getClassname(path);
+		}
+		if(errormessage.contains(": giving up after")){
+		_numberFails++;
+		}else{
+		_numberRetries++;
+	}
 		_items.add(path + " " + errormessage);
+	}
+
+	private static String getClassname(String path) {
+		return path.substring(0, path.lastIndexOf("."));
 	}
 
 	public static void finish() {
 		if (_items.size() > 0) {
-			String filename = "reports/" + getCurrentTime()
-					+"_"+_classname + "_NUMBER_OF_ERRORS_" + _errorNumber + ".txt";
+			String filename = "reports/" + getCurrentTime() + "_" + "FAILS:" + _numberFails+" ASSERTS:" + _numberAsserts
+					+ " RETRIES:" + _numberRetries+ "_"+ _classname + ".txt";
 			try {
 				File reportFile = new File(filename);
 				if (!reportFile.getParentFile().exists()) {

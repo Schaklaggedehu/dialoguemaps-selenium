@@ -46,8 +46,8 @@ public class Screenshooter {
 	public static void screenshotAssert(String testMethodName) {
 		screenshot("_ASSERT_"+testMethodName);
 	}
-	public static void screenshotRetry(String testMethodName) {
-		screenshot("_RETRY_"+testMethodName);
+	public static void screenshotRetry(int count, String testMethodName) {
+		screenshot("_RETRY: "+count+"_"+testMethodName);
 	}
 
 }

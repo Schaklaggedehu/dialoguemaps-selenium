@@ -60,7 +60,7 @@ class RetryTestRule implements TestRule {
 						String path = description.getClassName() + "."
 						+ description.getMethodName();
 						Reporter.appendMethodReport(path, errormessage);
-						Screenshooter.screenshotRetry(path + errormessage);
+						Screenshooter.screenshotRetry((i + 1), path + errormessage);
 						// } else {
 						// }
 					}
@@ -71,7 +71,7 @@ class RetryTestRule implements TestRule {
 				String path = description.getClassName() + "."
 						+ description.getMethodName();
 				Reporter.appendMethodReport(path, ": giving up after " + (_retryCount+1)
-						+ " failures." + System.lineSeparator());
+						+ " failures.");
 				throw caughtThrowable;
 			}
 		};
