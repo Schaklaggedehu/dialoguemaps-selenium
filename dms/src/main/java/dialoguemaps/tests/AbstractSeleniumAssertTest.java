@@ -51,7 +51,7 @@ public abstract class AbstractSeleniumAssertTest {
 		} catch (Throwable t) {
 			if (t.getCause() instanceof AssertionError) {
 				report(method, formatParams(ctx));
-				Screenshooter.screenshot(getTestMethodName());
+				Screenshooter.screenshotAssert(getTestMethodName());
 				throw (AssertionError) t.getCause();
 			} else {
 				report(method, "internal error: " + t.getMessage());
@@ -70,7 +70,7 @@ public abstract class AbstractSeleniumAssertTest {
 			if ("dialoguemaps".equals(elements[0])
 					&& "seleniumtests".equals(elements[1])) {
 				return stackTraceElement.getClassName() + "."
-						+ stackTraceElement.getMethodName() + "_line_"
+						+ stackTraceElement.getMethodName() + ":line_"
 						+ stackTraceElement.getLineNumber();
 			}
 		}

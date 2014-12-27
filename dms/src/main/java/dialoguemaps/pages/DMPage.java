@@ -110,17 +110,9 @@ public class DMPage extends DMPageElements {
 		return _tabMenuAdapter.getAllTabs().get(0).getText();
 	}
 
-	public Boolean isDMLoginPageOpen() {
+	public boolean isDMLoginPageOpen() {
 		boolean visibility = findElement(
 				By.cssSelector("body>div[eventproxy^=\"isc_HLayout_\"]>div>div>div>div[eventproxy^=\"isc_IButton_\"]")).isDisplayed();
-		System.out.println(visibility);
-		sleepXseconds(100);
-		if (visibility) {
-			System.out.println("true");
-			return true;
-		} else {
-			System.out.println("false");
-			return false;
-		}
+		return visibility;
 	}
 }

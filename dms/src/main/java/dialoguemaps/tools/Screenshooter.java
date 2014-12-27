@@ -17,15 +17,14 @@ public class Screenshooter {
 		_drivers = driver;
 	}
 
-	public static void screenshot(String testMethodName) {
+	private static void screenshot(String testMethodName) {
 		for (int i = 0; i < _drivers.size(); i++) {
 			String filename = "";
 			if (_drivers.size() > 1) {
 				filename = "screenshots/" + getCurrentTime() + "_ERROR_USER_"
 						+ (i + 1) + "_" + testMethodName + ".png";
 			} else {
-				filename = "screenshots/" + getCurrentTime() + "_ERROR_"
-						+ testMethodName + ".png";
+				filename = "screenshots/" + getCurrentTime() + testMethodName + ".png";
 			}
 			try {
 				File screenshotFile = new File(filename);
@@ -42,6 +41,13 @@ public class Screenshooter {
 
 	private static String getCurrentTime() {
 		return DateFormat.getInstance().format(System.currentTimeMillis());
+	}
+
+	public static void screenshotAssert(String testMethodName) {
+		screenshot("_ASSERT_"+testMethodName);
+	}
+	public static void screenshotRetry(String testMethodName) {
+		screenshot("_RETRY_"+testMethodName);
 	}
 
 }

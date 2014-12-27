@@ -20,10 +20,10 @@ public class Reporter {
 		}
 	}
 
-	public static void appendMethodReport(String method, String errormessage) {
+	public static void appendMethodReport(String path, String errormessage) {
 		_errorNumber++;
-		_classname = method.substring(method.indexOf("(")+1, method.indexOf(")"));
-		_items.add(method + " " + errormessage);
+		_classname = path;
+		_items.add(path + " " + errormessage);
 	}
 
 	public static void finish() {

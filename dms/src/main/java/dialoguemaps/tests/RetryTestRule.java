@@ -57,8 +57,10 @@ class RetryTestRule implements TestRule {
 							} else {
 							}
 						}
-						Reporter.appendMethodReport(description.getDisplayName(), errormessage);
-						Screenshooter.screenshot(description.getDisplayName() + errormessage);
+						String path = description.getClassName() + "."
+						+ description.getMethodName();
+						Reporter.appendMethodReport(path, errormessage);
+						Screenshooter.screenshotRetry(path + errormessage);
 						// } else {
 						// }
 					}
