@@ -70,7 +70,7 @@ public abstract class AbstractSeleniumAssertTest {
 			if ("dialoguemaps".equals(elements[0])
 					&& "seleniumtests".equals(elements[1])) {
 				return stackTraceElement.getClassName() + "."
-						+ stackTraceElement.getMethodName() + ":line_"
+						+ stackTraceElement.getMethodName() + ": line "
 						+ stackTraceElement.getLineNumber();
 			}
 		}
