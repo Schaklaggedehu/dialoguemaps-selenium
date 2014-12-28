@@ -58,7 +58,8 @@ public class SeleniumAdapter {
         File file = new File(firefoxPath);
         if(!file.exists()){
         	System.out.println(" failed.");
-        	System.out.println("Please open selenium.properties and change firefoxPath to your firefox executable.");
+        	System.out.println("Couldn't find firefox executable.");
+        	System.out.println("Please edit firefoxPath in selenium.properties.");
         }
         FirefoxBinary bin = new FirefoxBinary(file);
         WebDriver driver = new FirefoxDriver(bin, firefoxProfile);
