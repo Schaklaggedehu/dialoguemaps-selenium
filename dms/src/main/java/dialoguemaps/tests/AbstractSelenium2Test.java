@@ -47,5 +47,4 @@ public abstract class AbstractSelenium2Test extends AbstractSeleniumAssertTest {
 		}
 		Reporter.finish();
 	}
-
 }
