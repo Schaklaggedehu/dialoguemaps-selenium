@@ -8,6 +8,14 @@ import org.junit.Assert;
 import dialoguemaps.tools.Reporter;
 import dialoguemaps.tools.Screenshooter;
 
+/**
+ * Abstract class for assertion tests with Selenium.
+ * 
+ * @author Janis Bullert
+ * @edit Martin Hinsch
+ * 
+ * @version Dezember 2014
+ */
 public abstract class AbstractSeleniumAssertTest {
 
 	protected static Reporter _reporter = new Reporter();
@@ -35,14 +43,28 @@ public abstract class AbstractSeleniumAssertTest {
 		}
 	}
 
+	/**
+	 * 
+	 * @return Reporter
+	 */
 	protected static Reporter getReport() {
 		return _reporter;
 	}
 
+	/**
+	 * 
+	 * @param parameter
+	 * @return
+	 */
 	private AssertContext invoke(final Object... parameter) {
 		return AssertContext.invoke(parameter);
 	}
 
+	/**
+	 * 
+	 * @param method
+	 * @param ctx
+	 */
 	protected void call(final String method, final AssertContext ctx) {
 		try {
 			Method m = Assert.class.getMethod(method, ctx.classes);
@@ -62,6 +84,10 @@ public abstract class AbstractSeleniumAssertTest {
 		}
 	}
 
+	/**
+	 * 
+	 * @return Name of TestMethod as string.
+	 */
 	private String getTestMethodName() {
 		StackTraceElement[] stackTraceElements = Thread.currentThread()
 				.getStackTrace();
@@ -77,10 +103,20 @@ public abstract class AbstractSeleniumAssertTest {
 		return "";
 	}
 
+	/**
+	 * 
+	 * @param command
+	 * @param parameters
+	 */
 	private void report(final String command, final String parameters) {
 		Reporter.appendAssertReport(command, parameters);
 	}
 
+	/**
+	 * 
+	 * @param ctx
+	 * @return Result as string.
+	 */
 	private String formatParams(final AssertContext ctx) {
 		StringBuilder result = new StringBuilder();
 		for (int i = 0; i < ctx.parameter.length; i++) {

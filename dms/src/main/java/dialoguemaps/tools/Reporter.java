@@ -7,6 +7,14 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class gets some reporting information such as the current time and the class name. 
+ * 
+ * @author Janis Bullert
+ * @edit Martin Hinsch
+ *
+ * @version Dezember 2014
+ */
 public class Reporter {
 
 	private static final List<String> _items = new ArrayList<>();

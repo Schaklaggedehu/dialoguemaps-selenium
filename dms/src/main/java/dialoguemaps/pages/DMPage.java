@@ -6,8 +6,12 @@ import org.openqa.selenium.WebDriver;
 import dialoguemaps.tools.EventHelper;
 
 /**
+ * The DM webpage.
  * 
- * @author janis
+ * @author Janis Bullert
+ * @edit Martin Hinsch
+ *
+ * @version Dezember 2014
  */
 public class DMPage extends DMPageElements {
 

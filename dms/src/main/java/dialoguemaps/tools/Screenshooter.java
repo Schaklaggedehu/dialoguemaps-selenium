@@ -9,6 +9,14 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
+/**
+ * This class takes automatic screenshots. The screenshots are saved as png. 
+ * 
+ * @author Janis Bullert
+ * @edit Martin Hinsch
+ *
+ * @version Dezember 2014
+ */
 public class Screenshooter {
 
 	private static List<WebDriver> _drivers;

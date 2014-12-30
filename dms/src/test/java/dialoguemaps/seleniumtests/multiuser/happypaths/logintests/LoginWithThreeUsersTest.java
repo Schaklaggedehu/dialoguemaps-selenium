@@ -12,6 +12,14 @@ import org.junit.Test;
 import dialoguemaps.pages.DMPage;
 import dialoguemaps.tests.AbstractSelenium2Test;
 
+/**
+ * This class executes a multi-user test with three DM users.
+ * 
+ * @author Janis Bullert
+ * @edit Martin Hinsch
+ *
+ * @version Dezember 2014
+ */
 public class LoginWithThreeUsersTest extends AbstractSelenium2Test {
 
 	private static final int USERCOUNT = 3;

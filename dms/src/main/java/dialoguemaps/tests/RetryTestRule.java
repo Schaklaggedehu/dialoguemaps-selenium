@@ -8,6 +8,14 @@ import dialoguemaps.pages.DMPageElements;
 import dialoguemaps.tools.Reporter;
 import dialoguemaps.tools.Screenshooter;
 
+/**
+ * This class assures that a failed test is executed several times.
+ * 
+ * @author Janis Bullert
+ * @edit Martin Hinsch
+ * 
+ * @version Dezember 2014
+ */
 class RetryTestRule implements TestRule {
 
 	private int _retryCount;
@@ -23,6 +31,12 @@ class RetryTestRule implements TestRule {
 		return statement(base, description);
 	}
 
+	/**
+	 * 
+	 * @param base
+	 * @param description
+	 * @return
+	 */
 	private Statement statement(final Statement base, final Description description) {
 		return new Statement() {
 

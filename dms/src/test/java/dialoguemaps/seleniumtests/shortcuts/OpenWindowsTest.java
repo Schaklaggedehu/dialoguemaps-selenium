@@ -9,6 +9,15 @@ import org.junit.Test;
 import dialoguemaps.pages.DMPage;
 import dialoguemaps.tests.AbstractSelenium2Test;
 
+/**
+ * This class tests if several DM windows are opened.
+ * Example: LoginPage. Does key event function?
+ * 
+ * @author Janis Bullert
+ * @edit Martin Hinsch
+ *
+ * @version Dezember 2014
+ */
 public class OpenWindowsTest extends AbstractSelenium2Test {
 
 	private static final int USERCOUNT = 1;

@@ -13,13 +13,26 @@ import dialoguemaps.tools.PropertyReader;
 import dialoguemaps.tools.Reporter;
 import dialoguemaps.tools.Screenshooter;
 
+/**
+ * Abtract class for assertion tests with Selenium.
+ * 
+ * @author Janis Bullert
+ * @edit Martin Hinsch
+ * 
+ * @version Dezember 2014
+ */
 public abstract class AbstractSelenium2Test extends AbstractSeleniumAssertTest {
 
 	private static int MAXIMUM_RETRIES;
 	private static boolean SHOW_PRINTOUTS;
 	protected static List<WebDriver> _drivers = new ArrayList<>();
 	protected static SeleniumAdapter _adapter;
-		
+
+	/**
+	 * Initalize the Selenium test with user counts.
+	 * 
+	 * @param userCount
+	 */
 	public static void initSelenium2Test(int userCount) {
 		Properties prop = PropertyReader.load(); 		
 		MAXIMUM_RETRIES = Integer.parseInt((String) prop.get("maximumRetries"));
