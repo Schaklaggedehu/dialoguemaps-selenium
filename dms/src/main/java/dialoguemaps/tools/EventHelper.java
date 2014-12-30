@@ -5,6 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+/**
+ * This class manages how to react on key and mouse events such as "Drag-and-Drop".
+ * 
+ * @author Janis Bullert
+ * @edit Martin Hinsch
+ *
+ * @version Dezember 2014
+ */
 public abstract class EventHelper {
 	private static WebDriver _driver;
 	public static void setDriver(WebDriver driver) {

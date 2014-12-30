@@ -20,6 +20,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import dialoguemaps.pageelements.DialogueMapAdapter;
 import dialoguemaps.tools.PropertyReader;
 
+/**
+ * An abstract Selenium webpage with generic methods for different page types.
+ * 
+ * @author Janis Bullert
+ * @edit Martin Hinsch
+ *
+ * @param <T>
+ * 
+ * @version Dezember 2014
+ */
 abstract class AbstractPage<T> {
 
 	protected final String _urlPath;

@@ -16,6 +16,17 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 
 import dialoguemaps.tools.PropertyReader;
 
+/**
+ * Initalize Selenium with the WebDriver. Automatically loads Firefox plugins such as GWT, FireBug and FirePath.
+ * The WebDriver API is a tool for automating web application testing.
+ * With the WebDriver "driving a browser natively as a user would either locally or on a remote machine" is possible.
+ * 
+ * @author Janis Bullert
+ * @edit Martin Hinsch
+ * 
+ * @version Dezember 2014
+ *
+ */
 public class SeleniumAdapter {
 
     Point point = new Point(0, 0);
@@ -25,6 +36,9 @@ public class SeleniumAdapter {
         return _drivers;
     }
 
+    /**
+     * Initalize Selenium with the WebDriver.
+     */
     void initSelenium() {
         Properties prop = PropertyReader.load();
         FirefoxProfile firefoxProfile = new FirefoxProfile();
@@ -78,6 +92,9 @@ public class SeleniumAdapter {
         _drivers.add(driver);
     }
 
+    /**
+     * Ends the WebDriver.
+     */
     public void quit() {
         for (WebDriver driver : _drivers) {
             driver.quit();          

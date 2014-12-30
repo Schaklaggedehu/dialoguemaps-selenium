@@ -29,6 +29,15 @@ import dialoguemaps.pageelements.TabmenuAdapter;
 import dialoguemaps.pageelements.TeleporterWindowAdapter;
 import dialoguemaps.pageelements.ZoomAndPanWindowAdapter;
 
+/**
+ * The DM webpage elements.
+ * Examples: MainMenu, MapMenu, TabMenu, ContextMenu, xyzWindow, etc.
+ * 
+ * @author Janis Bullert
+ * @edit Martin Hinsch
+ *
+ * @version Dezember 2014
+ */
 public class DMPageElements extends AbstractPage<DMPage> {
 
 	final String _cssSelectorWholeMap = "body>div[eventproxy^=\"isc_VLayout_\"]";// Mit
