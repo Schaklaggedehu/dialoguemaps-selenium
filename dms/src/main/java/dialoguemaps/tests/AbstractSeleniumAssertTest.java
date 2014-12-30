@@ -95,17 +95,17 @@ public abstract class AbstractSeleniumAssertTest {
 	}
 
 	/**
-	 * Only use this method for tests!
-	 * @param realState
-	 * @param expectation
-	 * @param errorMessage
+	 * Use this method for tests exclusively!
+	 * @param given
+	 * @param when
+	 * @param then
 	 */
-	protected <T> void assertThat(final T realState,
-			final Matcher<T> expectation, final String errorMessage) {
+	protected <T> void assertThat(final T given,
+			final Matcher<T> when, final String then) {
 		call("assertThat",
-				invoke(errorMessage, realState, expectation).withClasses(String.class,
+				invoke(then, given, when).withClasses(String.class,
 						Object.class, Matcher.class).andNames("reason",
-						"actual", "matcher"));
+						"given", "matcher"));
 	}
 
 }
