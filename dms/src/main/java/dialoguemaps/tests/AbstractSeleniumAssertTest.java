@@ -131,7 +131,7 @@ public abstract class AbstractSeleniumAssertTest {
 	}
 
 	/**
-	 * Use this method for tests exclusively!
+	 * Use this method for testing exclusively!
 	 * @param given
 	 * @param when
 	 * @param then
