@@ -1,13 +1,12 @@
 package dialoguemaps.pageelements;
 
 /**
- * 
  * A page element of DM as an interface.
  * 
- * @author Janis
- * @edit Martin
+ * @author Janis Bullert
+ * @edit Martin Hinsch
  * 
- * @version November 2014 *
+ * @version January 2015
  */
 public interface PageElementAdapter
 {
