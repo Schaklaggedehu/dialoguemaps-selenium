@@ -20,6 +20,7 @@ import dialoguemaps.pageelements.HighlightPresentationWindowAdapter;
 import dialoguemaps.pageelements.HighlightWindowAdapter;
 import dialoguemaps.pageelements.InteractionWindowAdapter;
 import dialoguemaps.pageelements.LoadMapWindowAdapter;
+import dialoguemaps.pageelements.LoginmenuAdapter;
 import dialoguemaps.pageelements.MainmenuAdapter;
 import dialoguemaps.pageelements.MapArrowWindowAdapter;
 import dialoguemaps.pageelements.MapmenuAdapter;
@@ -49,7 +50,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 																					// der
 																					// Karte
 																					// malen.
-
+	final String _cssSelectorLoginMenu = "body>div[eventproxy^=\"isc_HLayout_\"]>div>div[style*=\"cursor: default;\"]>div";
 	final String _cssSelectorMainMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
 			+ "div>div>div>div>div>div.toolStrip:nth-child(1)";
 	final String _cssSelectorMapMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
@@ -86,6 +87,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 													// austauschen
 
 	// ---------------------------------------------------------------------------
+	LoginmenuAdapter _loginmenuAdapter;
 	MainmenuAdapter _mainMenuAdapter;
 	MapmenuAdapter _mapMenuAdapter;
 	TabmenuAdapter _tabMenuAdapter;
@@ -137,34 +139,17 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	}
 
 	public void logIntoMainpage(String name, String password) {
-		WebElement nameField = findElement(By.cssSelector("#isc_P"));// TODO
-																		// temporäre
-																		// id
-																		// durch
-																		// smarte
-																		// css-Pfade
-																		// austauschen
+		_loginmenuAdapter = createLoginmenuAdapter();
+		WebElement nameField = _loginmenuAdapter.getSignInUsernameField();
 		nameField.sendKeys(name);
 		nameField.submit();
-		WebElement passwordField = findElement(By.cssSelector("#isc_S"));// TODO
-																			// temporäre
-																			// id
-																			// durch
-																			// smarte
-																			// css-Pfade
-																			// austauschen
+		WebElement passwordField = _loginmenuAdapter.getSignInPasswordField();
 		passwordField.sendKeys(password);
 		passwordField.submit();
-		WebElement signIn = findElement(By.cssSelector("#isc_1E"));// TODO
-																	// temporäre
-																	// id durch
-																	// smarte
-																	// css-Pfade
-																	// austauschen
+		WebElement signIn = _loginmenuAdapter.getSignInButton();
 		signIn.click();
 		waitUntilVisible(By.cssSelector(_cssSelectorTabMenu
 				+ ">div[eventproxy^=\"isc_TabSet_\"]>div>div>div>div>div>table[width]"));
-
 	}
 
 	protected InteractionWindowAdapter createInteractionWindowAdapter() {
@@ -179,6 +164,18 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		return window;
 	}
 
+	protected LoginmenuAdapter createLoginmenuAdapter() {
+		waitUntilVisible(By.cssSelector(_cssSelectorLoginMenu));
+		WebElement loginmenu = findElement(By.cssSelector(_cssSelectorLoginMenu));
+		List<WebElement> loginmenuButtons = loginmenu.findElements(By
+				.cssSelector("div[role=\"label\"]>div[eventproxy^=\"isc_IButton_\"]"));
+		List<WebElement> loginmenuFields = loginmenu.findElements(By
+				.cssSelector("div>div>form>table>tbody>tr>td>input"));
+		LoginmenuAdapter menu = LoginmenuAdapter.createLoginmenuAdapter(loginmenuButtons, loginmenuFields);
+		_pageElementAdapters.add(menu);
+		return menu;
+	}
+	
 	protected TeleporterWindowAdapter createTeleporterWindowAdapter() {
 		waitUntilVisible(By.cssSelector(_cssSelectorTeleporterWindow));
 		WebElement teleporterWindow = findElement(By.cssSelector(_cssSelectorTeleporterWindow));

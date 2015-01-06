@@ -115,8 +115,10 @@ public class DMPage extends DMPageElements {
 	}
 
 	public boolean isDMLoginPageOpen() {
-		boolean visibility = findElement(
-				By.cssSelector("body>div[eventproxy^=\"isc_HLayout_\"]>div>div>div>div[eventproxy^=\"isc_IButton_\"]")).isDisplayed();
+		_loginmenuAdapter = createLoginmenuAdapter();
+		boolean visibility = _loginmenuAdapter.getSignInButton().isDisplayed();//TODO: ungetestet
+//		boolean visibility = findElement(
+//				By.cssSelector("body>div[eventproxy^=\"isc_HLayout_\"]>div>div>div>div[eventproxy^=\"isc_IButton_\"]")).isDisplayed();
 		return visibility;
 	}
 }
