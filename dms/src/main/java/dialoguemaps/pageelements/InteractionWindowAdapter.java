@@ -4,6 +4,15 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
+/**
+ * An adapter class to get the elements of the Interaction window.
+ * Elements can be e.g. the window itself, buttons, fields, etc.
+ * 
+ * @author Janis Bullert
+ * @edit Martin Hinsch
+ *
+ * @version January 2015
+ */
 public class InteractionWindowAdapter implements PageElementAdapter{
 
 	private WebElement _interactionWindow;

@@ -5,6 +5,15 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+/**
+ * An adapter class to get the elements of the Tab menu.
+ * Elements can be e.g. the window itself, buttons, fields, etc.
+ * 
+ * @author Janis Bullert
+ * @edit Martin Hinsch
+ *
+ * @version January 2015
+ */
 public class TabmenuAdapter implements PageElementAdapter {
 
 	private static TabmenuAdapter _menu;
