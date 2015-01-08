@@ -87,28 +87,28 @@ public class DMPageElements extends AbstractPage<DMPage> {
 													// austauschen
 
 	// ---------------------------------------------------------------------------
-	LoginmenuAdapter _loginmenuAdapter;
-	MainmenuAdapter _mainMenuAdapter;
-	MapmenuAdapter _mapMenuAdapter;
-	TabmenuAdapter _tabMenuAdapter;
-	ContextmenuAdapter _contextMenuAdapter;
+	LoginmenuAdapter _loginmenuAdapter1;
+	MainmenuAdapter _mainmenuAdapter1;
+	MapmenuAdapter _mapmenuAdapter1;
+	TabmenuAdapter _tabmenuAdapter1;
+	ContextmenuAdapter _contextmenuAdapter1;
 	// ---------------------------------------------------------------------------
-	DialogueMapAdapter _dialogueMapAdapter;
-	BoundingBoxesAdapter _boundingBoxAdapter;
-	ColorPickerAdapter _colorPickerAdapter;
+	DialogueMapAdapter _dialogueMapAdapter1;
+	BoundingBoxesAdapter _boundingBoxAdapter1;
+	ColorPickerAdapter _colorPickerAdapter1;
 	// ---------------------------------------------------------------------------
-	InteractionWindowAdapter _interactionWindowAdapter;
-	TeleporterWindowAdapter _teleporterWindowAdapter;
-	HighlightWindowAdapter _highlightWindowAdapter;
-	HighlightPresentationWindowAdapter _highlightPresentationWindowAdapter;
-	PenWindowAdapter _penWindowAdapter;
-	ZoomAndPanWindowAdapter _zoomWindowAdapter;
-	MapArrowWindowAdapter _mapArrowWindowAdapter;
-	BasicShapeWindowAdapter _basicShapeWindowAdapter;
-	LoadMapWindowAdapter _loadMapWindowAdapter;
-	ElucidationAttributesWindowAdapter _elucidationAttributeWindowAdapter;
-	AttachmentsWindowAdapter _attachmentsWindowAdapter;
-	AddAttachmentWindowAdapter _addAttachmentWindowAdapter;
+	InteractionWindowAdapter _interactionWindowAdapter1;
+	TeleporterWindowAdapter _teleporterWindowAdapter1;
+	HighlightWindowAdapter _highlightWindowAdapter1;
+	HighlightPresentationWindowAdapter _highlightPresentationWindowAdapter1;
+	PenWindowAdapter _penWindowAdapter1;
+	ZoomAndPanWindowAdapter _zoomWindowAdapter1;
+	MapArrowWindowAdapter _mapArrowWindowAdapter1;
+	BasicShapeWindowAdapter _basicShapeWindowAdapter1;
+	LoadMapWindowAdapter _loadMapWindowAdapter1;
+	ElucidationAttributesWindowAdapter _elucidationAttributeWindowAdapter1;
+	AttachmentsWindowAdapter _attachmentsWindowAdapter1;
+	AddAttachmentWindowAdapter _addAttachmentWindowAdapter1;
 	// ---------------------------------------------------------------------------
 
 	private static Set<PageElementAdapter> _pageElementAdapters = new HashSet<>();
@@ -139,14 +139,14 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	}
 
 	public void logIntoMainpage(String name, String password) {
-		_loginmenuAdapter = createLoginmenuAdapter();
-		WebElement nameField = _loginmenuAdapter.getSignInUsernameField();
+		_loginmenuAdapter1 = createLoginmenuAdapter();
+		WebElement nameField = _loginmenuAdapter1.getSignInUsernameField();
 		nameField.sendKeys(name);
 		nameField.submit();
-		WebElement passwordField = _loginmenuAdapter.getSignInPasswordField();
+		WebElement passwordField = _loginmenuAdapter1.getSignInPasswordField();
 		passwordField.sendKeys(password);
 		passwordField.submit();
-		WebElement signIn = _loginmenuAdapter.getSignInButton();
+		WebElement signIn = _loginmenuAdapter1.getSignInButton();
 		signIn.click();
 		waitUntilVisible(By.cssSelector(_cssSelectorTabMenu
 				+ ">div[eventproxy^=\"isc_TabSet_\"]>div>div>div>div>div>table[width]"));
