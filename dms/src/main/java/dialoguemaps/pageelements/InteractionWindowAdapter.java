@@ -5,166 +5,176 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 /**
- * An adapter class to get the elements of the Interaction window.
- * Elements can be e.g. the window itself, buttons, fields, etc.
+ * An adapter class to get the elements of the Interaction window. Elements can
+ * be e.g. the window itself, buttons, fields, etc.
  * 
  * @author Janis Bullert
  * @edit Martin Hinsch
  *
  * @version January 2015
  */
-public class InteractionWindowAdapter implements PageElementAdapter{
+public class InteractionWindowAdapter implements PageElementAdapter {
 
 	private WebElement _interactionWindow;
 	private List<WebElement> _interactionButtons;
+	private WebElement _closeButton;
 	private static InteractionWindowAdapter _window;
-	
+
 	public static InteractionWindowAdapter createInteractionWindowAdapter(WebElement interactionWindow,
-			List<WebElement> interactionButtons) {
-		if(_window==null){
-			_window = new InteractionWindowAdapter(interactionWindow, interactionButtons);
+			WebElement closeButton, List<WebElement> interactionButtons) {
+		if (_window == null) {
+			_window = new InteractionWindowAdapter(interactionWindow, closeButton, interactionButtons);
 		}
 		return _window;
-	}	
-	
-	private InteractionWindowAdapter(WebElement interactionWindow,
-			List<WebElement> interactionButtons) {
-				_interactionWindow = interactionWindow;
-				_interactionButtons = interactionButtons;
 	}
-	public WebElement getInteractionWindow(){
+
+	private InteractionWindowAdapter(WebElement interactionWindow, WebElement closeButton,
+			List<WebElement> interactionButtons) {
+		_interactionWindow = interactionWindow;
+		_closeButton = closeButton;
+		_interactionButtons = interactionButtons;
+	}
+
+	public WebElement getInteractionWindow() {
 		return _interactionWindow;
 	}
-	public WebElement getShapesButton(){
+
+	public WebElement getCloseButton() {
+		return _closeButton;
+	}
+
+	public WebElement getShapesButton() {
 		return _interactionButtons.get(0);
 	}
-	
-	public WebElement getArrowsButton(){
+
+	public WebElement getArrowsButton() {
 		return _interactionButtons.get(1);
 	}
-	
-	public WebElement getTextButton(){
+
+	public WebElement getTextButton() {
 		return _interactionButtons.get(2);
 	}
-	
-	public WebElement getBasicShapesButton(){
+
+	public WebElement getBasicShapesButton() {
 		return _interactionButtons.get(3);
 	}
-	
-	public WebElement getPenButton(){
+
+	public WebElement getPenButton() {
 		return _interactionButtons.get(4);
 	}
-	
-	public WebElement getDrawingVisibilityButton(){
+
+	public WebElement getDrawingVisibilityButton() {
 		return _interactionButtons.get(5);
 	}
-	
-	public WebElement getSelectAllButton(){
+
+	public WebElement getSelectAllButton() {
 		return _interactionButtons.get(6);
 	}
-	
-	public WebElement getMultiselectionButton(){
+
+	public WebElement getMultiselectionButton() {
 		return _interactionButtons.get(7);
 	}
-	
-	public WebElement getCopyButton(){
+
+	public WebElement getCopyButton() {
 		return _interactionButtons.get(8);
 	}
-	
-	public WebElement getPasteButton(){
+
+	public WebElement getPasteButton() {
 		return _interactionButtons.get(9);
 	}
-	
-	public WebElement getMagneticLinesButton(){
+
+	public WebElement getMagneticLinesButton() {
 		return _interactionButtons.get(10);
 	}
-	
-	public WebElement getDeleteButton(){
+
+	public WebElement getDeleteButton() {
 		return _interactionButtons.get(11);
 	}
-	
-	public WebElement getShowElucidationButton(){
+
+	public WebElement getShowElucidationButton() {
 		return _interactionButtons.get(12);
 	}
-	
-	public WebElement getFlipHorizontallyButton(){
+
+	public WebElement getFlipHorizontallyButton() {
+		return _interactionButtons.get(13);
+	}
+
+	public WebElement getFlipVerticallyButton() {
 		return _interactionButtons.get(14);
 	}
-	
-	public WebElement getFlipVerticallyButton(){
+
+	public WebElement getRotateLeftButton() {
 		return _interactionButtons.get(15);
 	}
-	
-	public WebElement getRotateLeftButton(){
+
+	public WebElement getRotateRightButton() {
 		return _interactionButtons.get(16);
 	}
-	
-	public WebElement getRotateRightButton(){
+
+	public WebElement getAlignBottomHorizontallyButton() {
 		return _interactionButtons.get(17);
 	}
-	
-	public WebElement getAlignBottomHorizontallyButton(){
+
+	public WebElement getAlignCenterHorizontallyButton() {
 		return _interactionButtons.get(18);
 	}
-	
-	public WebElement getAlignCenterHorizontallyButton(){
+
+	public WebElement getAlignTopHorizontallyButton() {
 		return _interactionButtons.get(19);
 	}
-	
-	public WebElement getAlignTopHorizontallyButton(){
+
+	public WebElement getAlignLeftVerticallyButton() {
 		return _interactionButtons.get(20);
 	}
-	
-	public WebElement getAlignLeftVerticallyButton(){
+
+	public WebElement getAlignCenterVerticallyButton() {
 		return _interactionButtons.get(21);
 	}
-	
-	public WebElement getAlignCenterVerticallyButton(){
+
+	public WebElement getAlignRightVerticallyButton() {
 		return _interactionButtons.get(22);
 	}
-	
-	public WebElement getAlignRightVerticallyButton(){
+
+	public WebElement getEqualGapsHorizontallyButton() {
 		return _interactionButtons.get(23);
 	}
-	
-	public WebElement getEqualGapsHorizontallyButton(){
+
+	public WebElement getRemoveGapsHorizontallyButton() {
 		return _interactionButtons.get(24);
 	}
-	
-	public WebElement getRemoveGapsHorizontallyButton(){
+
+	public WebElement getEqualHightButton() {
 		return _interactionButtons.get(25);
 	}
-	
-	public WebElement getEqualHightButton(){
+
+	public WebElement getEqualGapsVerticallyButton() {
 		return _interactionButtons.get(26);
 	}
-	
-	public WebElement getEqualGapsVerticallyButton(){
+
+	public WebElement getRemoveGapsVerticallyButton() {
 		return _interactionButtons.get(27);
 	}
-	
-	public WebElement getRemoveGapsVerticallyButton(){
+
+	public WebElement getEqualWidthButton() {
 		return _interactionButtons.get(28);
 	}
-	
-	public WebElement getEqualWidthButton(){
+
+	public WebElement getLineButton() {
 		return _interactionButtons.get(29);
 	}
-	
-	public WebElement getLineButton(){
+
+	public WebElement getCircleButton() {
 		return _interactionButtons.get(30);
 	}
-	
-	public WebElement getCircleButton(){
+
+	public WebElement getLeftColorPickerButton() {
 		return _interactionButtons.get(31);
 	}
-	
-	public WebElement getLeftColorPickerButton(){
-		return _interactionButtons.get(33);
-	}	
-	public WebElement getRightColorPickerButton(){
-		return _interactionButtons.get(34);
+
+	public WebElement getRightColorPickerButton() {
+		return _interactionButtons.get(32);
 	}
+
 	@Override
 	public void clear() {
 		_window = null;

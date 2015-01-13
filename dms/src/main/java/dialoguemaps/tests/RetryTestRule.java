@@ -61,7 +61,7 @@ class RetryTestRule implements TestRule {
 						return;
 					} catch (Throwable t) {
 						caughtThrowable = t;
-						DMPageElements.clearAllMenusAndWindows();
+						DMPageElements.clearAllPageElementAdapters();
 						String errormessage = ": run " + (i + 1) + " failed";
 						// if (i == _retryCount - (i + 1)) {//TODO: Errorlog.
 						// Fallunterscheidung zwischen bloßer Warnung und Error?

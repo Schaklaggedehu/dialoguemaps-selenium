@@ -5,95 +5,84 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 /**
- * An adapter class to get the elements of the Zoom and Pan window.
- * Elements can be e.g. the window itself, buttons, fields, etc.
+ * An adapter class to get the elements of the Zoom and Pan window. Elements can
+ * be e.g. the window itself, buttons, fields, etc.
  * 
  * @author Janis Bullert
  * @edit Martin Hinsch
  *
  * @version January 2015
  */
-public class ZoomAndPanWindowAdapter implements PageElementAdapter
-{
+public class ZoomAndPanWindowAdapter implements PageElementAdapter {
 
-    private WebElement _zoomWindow;
-    private List<WebElement> _zoomButtons;
-    private static ZoomAndPanWindowAdapter _window;
+	private WebElement _zoomWindow;
+	private List<WebElement> _zoomButtons;
+	private List<WebElement> _panButtons;
+	private WebElement _eyeButton;
+	private static ZoomAndPanWindowAdapter _window;
 
-    public static ZoomAndPanWindowAdapter createZoomWindowAdapter(WebElement zoomWindow,
-            List<WebElement> zoomButtons)
-    {
-        if (_window == null)
-        {
-            _window = new ZoomAndPanWindowAdapter(zoomWindow, zoomButtons);
-        }
-        return _window;
-    }
+	public static ZoomAndPanWindowAdapter createZoomWindowAdapter(WebElement zoomWindow, List<WebElement> zoomButtons,
+			List<WebElement> panButtons, WebElement eyeButton) {
+		if (_window == null) {
+			_window = new ZoomAndPanWindowAdapter(zoomWindow, zoomButtons, panButtons, eyeButton);
+		}
+		return _window;
+	}
 
-    private ZoomAndPanWindowAdapter(WebElement zoomWindow, List<WebElement> zoomButtons)
-    {
-        _zoomWindow = zoomWindow;
-        _zoomButtons = zoomButtons;
-    }
+	private ZoomAndPanWindowAdapter(WebElement zoomWindow, List<WebElement> zoomButtons, List<WebElement> panButtons,
+			WebElement eyeButton) {
+		_zoomWindow = zoomWindow;
+		_zoomButtons = zoomButtons;
+		_panButtons = panButtons;
+		_eyeButton = eyeButton;
+	}
 
-    public WebElement getZoomWindow()
-    {
-        return _zoomWindow;
-    }
+	public WebElement getZoomWindow() {
+		return _zoomWindow;
+	}
 
-    public WebElement getUpButton()
-    {
-        return _zoomButtons.get(0);
-    }
+	public WebElement getUpButton() {
+		return _panButtons.get(0);
+	}
 
-    public WebElement getLeftButton()
-    {
-        return _zoomButtons.get(1);
-    }
+	public WebElement getLeftButton() {
+		return _panButtons.get(1);
+	}
 
-    public WebElement getCenterButton()
-    {
-        return _zoomButtons.get(2);
-    }
+	public WebElement getCenterButton() {
+		return _panButtons.get(2);
+	}
 
-    public WebElement getRightButton()
-    {
-        return _zoomButtons.get(3);
-    }
+	public WebElement getRightButton() {
+		return _panButtons.get(3);
+	}
 
-    public WebElement getDownButton()
-    {
-        return _zoomButtons.get(4);
-    }
+	public WebElement getDownButton() {
+		return _panButtons.get(4);
+	}
 
-    public WebElement getPlusButton()
-    {
-        return _zoomButtons.get(5);
-    }
+	public WebElement getZoomInButton() {
+		return _zoomButtons.get(0);
+	}
 
-    public WebElement getZoomIntoButton()
-    {
-        return _zoomButtons.get(6);
-    }
+	public WebElement getZoomToButton() {
+		return _zoomButtons.get(1);
+	}
 
-    public WebElement getHomeButton()
-    {
-        return _zoomButtons.get(7);
-    }
+	public WebElement getHomeButton() {
+		return _zoomButtons.get(2);
+	}
 
-    public WebElement getMinusButton()
-    {
-        return _zoomButtons.get(8);
-    }
+	public WebElement getZoomOutButton() {
+		return _zoomButtons.get(3);
+	}
 
-    public WebElement getToggleHomeButton()
-    {
-        return _zoomButtons.get(9);
-    }
+	public WebElement getToggleHomeButton() {
+		return _eyeButton;
+	}
 
-    @Override
-    public void clear()
-    {
-        _window = null;
-    }
+	@Override
+	public void clear() {
+		_window = null;
+	}
 }

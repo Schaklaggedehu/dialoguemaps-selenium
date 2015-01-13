@@ -1,4 +1,4 @@
-package dialoguemaps.seleniumtests.singleuser.happypaths.drawingtests;
+package dialoguemaps.seleniumtests.singleuser.happypaths.drawingTests;
 
 import static org.hamcrest.core.Is.is;
 

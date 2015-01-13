@@ -1,4 +1,4 @@
-package dialoguemaps.seleniumtests.multiuser.happypaths.logintests;
+package dialoguemaps.seleniumtests.multiuser.happypaths.loginTests;
 
 import static org.hamcrest.core.Is.is;
 

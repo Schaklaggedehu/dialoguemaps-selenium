@@ -9,15 +9,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import dialoguemaps.pageelements.AddAttachmentWindowAdapter;
+import dialoguemaps.pageelements.AttachmentListWindowAdapter;
 import dialoguemaps.pageelements.AttachmentsWindowAdapter;
 import dialoguemaps.pageelements.BasicShapeWindowAdapter;
 import dialoguemaps.pageelements.BoundingBoxesAdapter;
+import dialoguemaps.pageelements.ChatWindowAdapter;
 import dialoguemaps.pageelements.ColorPickerAdapter;
 import dialoguemaps.pageelements.ContextmenuAdapter;
 import dialoguemaps.pageelements.DialogueMapAdapter;
 import dialoguemaps.pageelements.ElucidationAttributesWindowAdapter;
+import dialoguemaps.pageelements.HelicopterWindowAdapter;
 import dialoguemaps.pageelements.HighlightPresentationWindowAdapter;
 import dialoguemaps.pageelements.HighlightWindowAdapter;
+import dialoguemaps.pageelements.InfoWindowAdapter;
 import dialoguemaps.pageelements.InteractionWindowAdapter;
 import dialoguemaps.pageelements.LoadMapWindowAdapter;
 import dialoguemaps.pageelements.LoginmenuAdapter;
@@ -26,8 +30,12 @@ import dialoguemaps.pageelements.MapArrowWindowAdapter;
 import dialoguemaps.pageelements.MapmenuAdapter;
 import dialoguemaps.pageelements.PageElementAdapter;
 import dialoguemaps.pageelements.PenWindowAdapter;
+import dialoguemaps.pageelements.SettingsWindowAdapter;
+import dialoguemaps.pageelements.ShapeWindowAdapter;
+import dialoguemaps.pageelements.StructureGraphWindowAdapter;
 import dialoguemaps.pageelements.TabmenuAdapter;
 import dialoguemaps.pageelements.TeleporterWindowAdapter;
+import dialoguemaps.pageelements.TextEditorWindowAdapter;
 import dialoguemaps.pageelements.ZoomAndPanWindowAdapter;
 
 /**
@@ -41,15 +49,8 @@ import dialoguemaps.pageelements.ZoomAndPanWindowAdapter;
  */
 public class DMPageElements extends AbstractPage<DMPage> {
 
-	final String _cssSelectorWholeMap = "body>div[eventproxy^=\"isc_VLayout_\"]";// Mit
-																					// diesem
-																					// Selector
-																					// kann
-																					// man
-																					// auf
-																					// der
-																					// Karte
-																					// malen.
+	final String _cssSelectorContextMenu = "body>div[eventproxy^=\"isc_VLayout_\"]"
+			+ ">div>div>div>div>div>div>div[eventproxy^=\"isc_Menu_\"]";
 	final String _cssSelectorLoginMenu = "body>div[eventproxy^=\"isc_HLayout_\"]>div>div[style*=\"cursor: default;\"]>div";
 	final String _cssSelectorMainMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
 			+ "div>div>div>div>div>div.toolStrip:nth-child(1)";
@@ -57,58 +58,64 @@ public class DMPageElements extends AbstractPage<DMPage> {
 			+ "div>div>div>div>div>div.toolStrip:nth-child(2)";
 	final String _cssSelectorTabMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
 			+ "div>div>div[eventproxy^=\"isc_GWTMapElementZoomUI\"]";
-	final String _cssSelectorContextMenu = "body>div[eventproxy^=\"isc_VLayout_\"]"
-			+ ">div>div>div>div>div>div>div[eventproxy^=\"isc_Menu_\"]";
+	final String _cssSelectorWholeMap = "body>div[eventproxy^=\"isc_VLayout_\"]";// Zum Zeichnen auf Karte
 
-	final String _cssSelectorDialogueMap = "#DialogueMap";
-	final String _cssSelectorElucidations = "#ElucidationController";
 	final String _cssSelectorBoundingBoxes = "#BoundingBoxOverlay>g";
 	final String _cssSelectorColorPicker = "body>div[eventproxy^=\"isc_ColorPicker_\"][role=\"dialog\"]";
+	final String _cssSelectorDialogueMap = "#DialogueMap";
+	final String _cssSelectorElucidations = "#ElucidationController";
 
-	final String _cssSelectorTeleporterWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_TeleporterView_\"]";
-	final String _cssSelectorHighlightWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_HighlightView_\"]";
-	final String _cssSelectorHighlightPresentationWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_HighlightPresentationView_\"]";
-	final String _cssSelectorMapArrowWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_MapArrowView_\"]";
-	final String _cssSelectorBasicShapeWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_MapFigureView_\"]";
-	final String _cssSelectorLoadMapWindow = "body>div[class=\"normal\"][eventproxy^=\"isc_DialogLoadMapView_\"]>div";
-	final String _cssSelectorElucidationAttributesWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_ElucidationContextView_\"]";
-	final String _cssSelectorAttachmentsWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_AttachmentAddItemView_\"]";
 	final String _cssSelectorAddAttachmentWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_AttachmentAddView_\"]";
-
-	final String _cssSelectorInteractionWindow = "#isc_JR";// TODO temporäre id
-															// durch smarte
-															// css-Pfade
-															// austauschen
-	final String _cssSelectorPenWindow = "#isc_9P";// TODO temporäre id durch
-													// smarte css-Pfade
-													// austauschen
-	final String _cssSelectorZoomWindow = "#isc_92";// TODO temporäre id durch
-													// smarte css-Pfade
-													// austauschen
-
+	final String _cssSelectorAttachmentListWindow = "body>div[eventproxy^=\"isc_AttachmentListWindow_\"]>div:not([eventproxy*=\"modalMask\"])";
+	final String _cssSelectorAttachmentsWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_AttachmentAddItemView_\"]";
+	final String _cssSelectorBasicShapeWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_MapFigureView_\"]";
+	final String _cssSelectorChatWindow = "body>div[eventproxy^=\"isc_ChatWindow_\"]>div";
+	final String _cssSelectorElucidationAttributesWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_ElucidationContextView_\"]";
+	final String _cssSelectorHelicopterWindow = "body>div[eventproxy^=\"isc_HelicopterView_\"]>div";
+	final String _cssSelectorHighlightPresentationWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_HighlightPresentationView_\"]";
+	final String _cssSelectorHighlightWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_HighlightView_\"]";
+	final String _cssSelectorInfoWindow = "body>div.normal[eventProxy^=\"isc_InfoWindow_\"]:not([style*=\"visibility: hidden\"])>div";
+	final String _cssSelectorInteractionWindow = "body>div[eventproxy^=\"isc_InteractionView_\"]>div";
+	final String _cssSelectorLoadMapWindow = "body>div[class=\"normal\"][eventproxy^=\"isc_DialogLoadMapView_\"]>div";
+	final String _cssSelectorMapArrowWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_MapArrowView_\"]";
+	final String _cssSelectorPenWindow = "body>div[eventproxy^=\"isc_MapFreeFormView\"]>div";
+	final String _cssSelectorSettingsWindow = "body>div[eventproxy^=\"isc_SettingsWindow_\"]>div[eventproxy^=\"isc_SettingsWindow_\"]:not([eventproxy*=\"modalMask\"])";
+	final String _cssSelectorShapeWindow = "body>div[eventproxy^=\"isc_ElementSetCollectionView_\"]>div";
+	final String _cssSelectorStructureGraphWindow = "body>div[eventproxy^=\"isc_StructureGraphWindow_\"]>div[eventproxy^=\"isc_StructureGraphWindow_\"]";
+	final String _cssSelectorTeleporterWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_TeleporterView_\"]";
+	final String _cssSelectorTextEditorWindow = "body>div[eventproxy^=\"isc_MapTextView_\"]>div";
+	final String _cssSelectorZoomWindow = "body>div[eventproxy^=\"isc_PanningView_\"]";
 	// ---------------------------------------------------------------------------
+	ContextmenuAdapter _contextmenuAdapter1;
 	LoginmenuAdapter _loginmenuAdapter1;
 	MainmenuAdapter _mainmenuAdapter1;
 	MapmenuAdapter _mapmenuAdapter1;
 	TabmenuAdapter _tabmenuAdapter1;
-	ContextmenuAdapter _contextmenuAdapter1;
 	// ---------------------------------------------------------------------------
-	DialogueMapAdapter _dialogueMapAdapter1;
 	BoundingBoxesAdapter _boundingBoxAdapter1;
 	ColorPickerAdapter _colorPickerAdapter1;
+	DialogueMapAdapter _dialogueMapAdapter1;
 	// ---------------------------------------------------------------------------
-	InteractionWindowAdapter _interactionWindowAdapter1;
-	TeleporterWindowAdapter _teleporterWindowAdapter1;
-	HighlightWindowAdapter _highlightWindowAdapter1;
-	HighlightPresentationWindowAdapter _highlightPresentationWindowAdapter1;
-	PenWindowAdapter _penWindowAdapter1;
-	ZoomAndPanWindowAdapter _zoomWindowAdapter1;
-	MapArrowWindowAdapter _mapArrowWindowAdapter1;
-	BasicShapeWindowAdapter _basicShapeWindowAdapter1;
-	LoadMapWindowAdapter _loadMapWindowAdapter1;
-	ElucidationAttributesWindowAdapter _elucidationAttributeWindowAdapter1;
-	AttachmentsWindowAdapter _attachmentsWindowAdapter1;
 	AddAttachmentWindowAdapter _addAttachmentWindowAdapter1;
+	AttachmentListWindowAdapter _attachmentListWindowAdapter1;
+	AttachmentsWindowAdapter _attachmentsWindowAdapter1;
+	BasicShapeWindowAdapter _basicShapeWindowAdapter1;
+	ChatWindowAdapter _chatWindowAdapter1;
+	ElucidationAttributesWindowAdapter _elucidationAttributeWindowAdapter1;
+	HelicopterWindowAdapter _helicopterWindowAdapter1;
+	HighlightPresentationWindowAdapter _highlightPresentationWindowAdapter1;
+	HighlightWindowAdapter _highlightWindowAdapter1;
+	InfoWindowAdapter _infoWindowAdapter1;
+	InteractionWindowAdapter _interactionWindowAdapter1;
+	LoadMapWindowAdapter _loadMapWindowAdapter1;
+	MapArrowWindowAdapter _mapArrowWindowAdapter1;
+	PenWindowAdapter _penWindowAdapter1;
+	SettingsWindowAdapter _settingsWindowAdapter1 ;
+	ShapeWindowAdapter _shapeWindowAdapter1;
+	StructureGraphWindowAdapter _structureGraphWindowAdapter1;
+	TeleporterWindowAdapter _teleporterWindowAdapter1;
+	TextEditorWindowAdapter _textEditorWindowAdapter1;
+	ZoomAndPanWindowAdapter _zoomWindowAdapter1;
 	// ---------------------------------------------------------------------------
 
 	private static Set<PageElementAdapter> _pageElementAdapters = new HashSet<>();
@@ -118,7 +125,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 				.cssSelector("body>div[eventproxy^=\"isc_HLayout_\"]>div>div>div>div>div[eventproxy^=\"isc_Img_\"]"));
 	}
 
-	public static void clearAllMenusAndWindows() {
+	public static void clearAllPageElementAdapters() {
 		for (PageElementAdapter pageElement : _pageElementAdapters) {
 			pageElement.clear();
 		}
@@ -155,15 +162,101 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	protected InteractionWindowAdapter createInteractionWindowAdapter() {
 		waitUntilVisible(By.cssSelector(_cssSelectorInteractionWindow));
 		WebElement interactionWindow = findElement(By.cssSelector(_cssSelectorInteractionWindow));
+		WebElement closeButton = interactionWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
 		List<WebElement> interactionButtons = interactionWindow.findElements(By
-				.cssSelector("*>*>*>*>*>*>*>*>*>*>*>img"));// TODO: Sternchen
-															// entfernen.
+				.cssSelector("div>div>div>div>div>div>div>div>div>div>img:not([src*=\"empty.png\"])"));
 		InteractionWindowAdapter window = InteractionWindowAdapter.createInteractionWindowAdapter(interactionWindow,
-				interactionButtons);
+				closeButton, interactionButtons);
+		_pageElementAdapters.add(window);
+		return window;
+	}
+	
+	protected HelicopterWindowAdapter createHelicopterWindowAdapter() {
+		waitUntilVisible(By.cssSelector(_cssSelectorHelicopterWindow));
+		WebElement helicopterWindow = findElement(By.cssSelector(_cssSelectorHelicopterWindow));
+		WebElement closeButton = helicopterWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
+		HelicopterWindowAdapter window = HelicopterWindowAdapter.createHelicopterWindowAdapter(helicopterWindow,
+				closeButton);
+		_pageElementAdapters.add(window);
+		return window;
+	}
+	
+	protected ChatWindowAdapter createChatWindowAdapter() {
+		waitUntilVisible(By.cssSelector(_cssSelectorChatWindow));
+		WebElement chatWindow = findElement(By.cssSelector(_cssSelectorChatWindow));
+		WebElement closeButton = chatWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
+		WebElement inviteButton = chatWindow.findElement(By.cssSelector("div>div>div>div>div>div>div>div>div>div>div>div>div>div>table>tbody>tr>td>div"));
+		WebElement textarea = chatWindow.findElement(By.cssSelector("div>div>div>div>div>div>div>div>div>div>div>div>form>table>tbody>tr>td>textarea"));
+		List<WebElement> selectItems = chatWindow.findElements(By
+				.cssSelector("div>div>div>div>div>div>div>div>div>div>form>table>tbody>tr>td>table.selectItemControl"));
+		ChatWindowAdapter window = ChatWindowAdapter.createChatWindowAdapter(chatWindow,
+				closeButton, inviteButton, textarea, selectItems);
 		_pageElementAdapters.add(window);
 		return window;
 	}
 
+	protected InfoWindowAdapter createInfoWindowAdapter() {
+		waitUntilVisible(By.cssSelector(_cssSelectorInfoWindow));
+		WebElement infoWindow = findElement(By.cssSelector(_cssSelectorInfoWindow));
+		WebElement modalmask = findElement(By.cssSelector("body>div[eventProxy*=\"modalMask\"]:not([style*=\"visibility: hidden\"])"));
+		InfoWindowAdapter window = InfoWindowAdapter.createInfoWindowAdapter(infoWindow, modalmask);
+		_pageElementAdapters.add(window);
+		return window;
+	}
+	
+	protected ShapeWindowAdapter createShapeWindowAdapter() {
+		waitUntilVisible(By.cssSelector(_cssSelectorShapeWindow));
+		WebElement shapeWindow = findElement(By.cssSelector(_cssSelectorShapeWindow));
+		WebElement closeButton = shapeWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
+		List<WebElement> tabs = shapeWindow.findElements(By.cssSelector("div>div>div>div>div>div>div>div.gwt-HTML"));
+		ShapeWindowAdapter window = ShapeWindowAdapter.createShapeWindowAdapter(shapeWindow, closeButton, tabs);
+		_pageElementAdapters.add(window);
+		return window;
+	}
+	
+	protected TextEditorWindowAdapter createTextEditorWindowAdapter() {
+		waitUntilVisible(By.cssSelector(_cssSelectorTextEditorWindow));
+		WebElement textEditorWindow = findElement(By.cssSelector(_cssSelectorTextEditorWindow));
+		WebElement closeButton = textEditorWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
+		List<WebElement> buttons = textEditorWindow.findElements(By.cssSelector("div>div>div>div>div>div>div>div>table>tbody>tr>td>div>img"));
+		List<WebElement> forms = textEditorWindow.findElements(By.cssSelector("div>div>div>div>div>div>div>div>form"));
+		WebElement textfield = findElement(By.cssSelector("div>div>div>div>div>div>form"));
+		TextEditorWindowAdapter window = TextEditorWindowAdapter.createTextEditorWindowAdapter(textEditorWindow, closeButton, buttons, forms, textfield);
+		_pageElementAdapters.add(window);
+		return window;
+	}
+	
+	protected AttachmentListWindowAdapter createAttachmentListWindowAdapter() {
+		waitUntilVisible(By.cssSelector(_cssSelectorAttachmentListWindow));
+		WebElement attachmentListWindow = findElement(By.cssSelector(_cssSelectorAttachmentListWindow));
+		WebElement closeButton = attachmentListWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
+		List<WebElement> inputFields = attachmentListWindow.findElements(By.cssSelector("div>div>div>div>div>div>form>table>tbody>tr>td.formCell"));
+		AttachmentListWindowAdapter window = AttachmentListWindowAdapter.createAttachmentListWindowAdapter(attachmentListWindow, closeButton, inputFields);
+		_pageElementAdapters.add(window);
+		return window;
+	}
+	
+	protected StructureGraphWindowAdapter createStructureGraphWindowAdapter() {
+		waitUntilVisible(By.cssSelector(_cssSelectorStructureGraphWindow));
+		WebElement structureGraphWindow = findElement(By.cssSelector(_cssSelectorStructureGraphWindow));
+		WebElement closeButton = structureGraphWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
+		List<WebElement> buttons = structureGraphWindow.findElements(By.cssSelector("div>div>div[eventproxy^=\"isc_ToolStrip_\"]>div>div[eventproxy^=\"isc_Img_\"]"));
+		StructureGraphWindowAdapter window = StructureGraphWindowAdapter.createStructureGraphWindowAdapter(structureGraphWindow, closeButton, buttons);
+		_pageElementAdapters.add(window);
+		return window;
+	}
+	
+	protected SettingsWindowAdapter createSettingsWindowAdapter() {
+		waitUntilVisible(By.cssSelector(_cssSelectorSettingsWindow));
+		WebElement settingsWindow = findElement(By.cssSelector(_cssSelectorSettingsWindow));
+		WebElement closeButton = settingsWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
+		WebElement saveButton = settingsWindow.findElement(By.cssSelector("div>div>div>div>div.stretchImgButton[eventproxy*=\"Button\"]"));
+		List<WebElement> inputFields = settingsWindow.findElements(By.cssSelector("div>div>div>div>form>table>tbody>tr>td>input"));
+		SettingsWindowAdapter window = SettingsWindowAdapter.createSettingsWindowAdapter(settingsWindow, closeButton, saveButton, inputFields);
+		_pageElementAdapters.add(window);
+		return window;
+	}
+	
 	protected LoginmenuAdapter createLoginmenuAdapter() {
 		waitUntilVisible(By.cssSelector(_cssSelectorLoginMenu));
 		WebElement loginmenu = findElement(By.cssSelector(_cssSelectorLoginMenu));
@@ -219,13 +312,9 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	protected PenWindowAdapter createPenWindowAdapter() {
 		waitUntilVisible(By.cssSelector(_cssSelectorPenWindow));
 		WebElement penWindow = findElement(By.cssSelector(_cssSelectorPenWindow));
-		List<WebElement> penButtons = penWindow.findElements(By.cssSelector("*>*>*>*>*>*>*>img"));// TODO:
-																									// Sternchen
-																									// entfernen.
-		WebElement penCloseButton = penWindow.findElements(By.cssSelector("*>*>*>*>*>img")).get(1);// TODO:
-																									// Sternchen
-																									// entfernen.
-		PenWindowAdapter window = PenWindowAdapter.createPenWindowAdapter(penWindow, penButtons, penCloseButton);
+		List<WebElement> penButtons = penWindow.findElements(By.cssSelector("div>div>div>div>div>div>img"));
+		WebElement closeButton = penWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
+		PenWindowAdapter window = PenWindowAdapter.createPenWindowAdapter(penWindow, penButtons, closeButton);
 		_pageElementAdapters.add(window);
 		return window;
 	}
@@ -233,17 +322,10 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	protected ZoomAndPanWindowAdapter createZoomWindowAdapter() {
 		waitUntilVisible(By.cssSelector(_cssSelectorZoomWindow));
 		WebElement zoomWindow = findElement(By.cssSelector(_cssSelectorZoomWindow));
-		List<WebElement> zoomButtons = zoomWindow.findElements(By.cssSelector(">*>*>*>img"));// TODO:
-																								// Sternchen
-																								// entfernen.
-		zoomButtons.addAll(zoomWindow.findElements(By.cssSelector("*>*>*>*>*>img")));// TODO:
-																						// Sternchen
-																						// entfernen.
-		zoomButtons.add(zoomWindow.findElement(By.cssSelector("*>*>*>*>*>*>*>img")));// TODO:
-																						// Sternchen
-																						// entfernen.
-		zoomButtons.remove(0);
-		ZoomAndPanWindowAdapter window = ZoomAndPanWindowAdapter.createZoomWindowAdapter(zoomWindow, zoomButtons);
+		List<WebElement> zoomButtons = zoomWindow.findElements(By.cssSelector("div>div>div>div>div>img"));
+		List<WebElement> panButtons = zoomWindow.findElements(By.cssSelector("div>div>div>img[src*=\"png\"]"));
+		WebElement eyeButton = zoomWindow.findElement(By.cssSelector("div>div>div>div>div>img"));
+		ZoomAndPanWindowAdapter window = ZoomAndPanWindowAdapter.createZoomWindowAdapter(zoomWindow, zoomButtons, panButtons, eyeButton);
 		_pageElementAdapters.add(window);
 		return window;
 	}
