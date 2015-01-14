@@ -5,8 +5,8 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 /**
- * An adapter class to get the elements of the Pen window.
- * Elements can be e.g. the window itself, buttons, fields, etc.
+ * An adapter class to get the elements of the Pen window. Elements can be e.g.
+ * the window itself, buttons, fields, etc.
  * 
  * @author Janis Bullert
  * @edit Martin Hinsch
@@ -15,17 +15,13 @@ import org.openqa.selenium.WebElement;
  */
 public class PenWindowAdapter implements PageElementAdapter {
 
-	private static PenWindowAdapter _window;
 	private WebElement _penWindow;
 	private List<WebElement> _penButtons;
 	private WebElement _penCloseButton;
 
-	public static PenWindowAdapter createPenWindowAdapter(WebElement penWindow, List<WebElement> penButtons, 
+	public static PenWindowAdapter createPenWindowAdapter(WebElement penWindow, List<WebElement> penButtons,
 			WebElement penCloseButton) {
-		if (_window == null) {
-			_window = new PenWindowAdapter(penWindow, penButtons, penCloseButton);
-		}
-		return _window;
+		return new PenWindowAdapter(penWindow, penButtons, penCloseButton);
 	}
 
 	private PenWindowAdapter(WebElement penWindow, List<WebElement> penButtons, WebElement penCloseButton) {
@@ -49,12 +45,8 @@ public class PenWindowAdapter implements PageElementAdapter {
 	public WebElement getThickButton() {
 		return _penButtons.get(2);
 	}
-	public WebElement getCloseButton(){
-		return _penCloseButton;
-	}
 
-	@Override
-	public void clear() {
-		_window = null;
+	public WebElement getCloseButton() {
+		return _penCloseButton;
 	}
 }

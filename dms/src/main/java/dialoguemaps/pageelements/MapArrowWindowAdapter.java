@@ -5,8 +5,8 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 /**
- * An adapter class to get the elements of the Map Arrow window.
- * Elements can be e.g. the window itself, buttons, fields, etc.
+ * An adapter class to get the elements of the Map Arrow window. Elements can be
+ * e.g. the window itself, buttons, fields, etc.
  * 
  * @author Janis Bullert
  * @edit Martin Hinsch
@@ -15,7 +15,6 @@ import org.openqa.selenium.WebElement;
  */
 public class MapArrowWindowAdapter implements PageElementAdapter {
 
-	private static MapArrowWindowAdapter _window;
 	private WebElement _mapArrowWindow;
 	private WebElement _closeButton;
 	private List<WebElement> _sizeButtons;
@@ -26,10 +25,7 @@ public class MapArrowWindowAdapter implements PageElementAdapter {
 	public static MapArrowWindowAdapter createMapArrowWindowAdapter(WebElement mapArrowWindow, WebElement closeButton,
 			List<WebElement> sizeButtons, List<WebElement> tails, List<WebElement> lines, List<WebElement> heads) {
 
-		if (_window == null) {
-			_window = new MapArrowWindowAdapter(mapArrowWindow, closeButton, sizeButtons, tails, lines, heads);
-		}
-		return _window;
+		return new MapArrowWindowAdapter(mapArrowWindow, closeButton, sizeButtons, tails, lines, heads);
 	}
 
 	private MapArrowWindowAdapter(WebElement mapArrowWindow, WebElement closeButton, List<WebElement> sizeButtons,
@@ -72,10 +68,5 @@ public class MapArrowWindowAdapter implements PageElementAdapter {
 
 	public WebElement getHead(int head) {
 		return _heads.get(head);
-	}
-
-	@Override
-	public void clear() {
-		_window = null;
 	}
 }

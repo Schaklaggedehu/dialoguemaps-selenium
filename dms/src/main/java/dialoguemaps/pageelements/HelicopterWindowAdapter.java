@@ -7,16 +7,12 @@ import org.openqa.selenium.WebElement;
 
 public class HelicopterWindowAdapter implements PageElementAdapter {
 
-	private static HelicopterWindowAdapter _window;
 	private WebElement _helicopterWindow;
 	private WebElement _closeButton;
 
 	public static HelicopterWindowAdapter createHelicopterWindowAdapter(WebElement helicopterWindow,
 			WebElement closeButton) {
-		if (_window == null) {
-			_window = new HelicopterWindowAdapter(helicopterWindow, closeButton);
-		}
-		return _window;
+		return new HelicopterWindowAdapter(helicopterWindow, closeButton);
 	}
 
 	private HelicopterWindowAdapter(WebElement helicopterWindow, WebElement closeButton) {
@@ -34,10 +30,5 @@ public class HelicopterWindowAdapter implements PageElementAdapter {
 
 	public List<WebElement> getAllHelicopterMapElements() {
 		return _helicopterWindow.findElements(By.cssSelector("div>div>div>div>div>div>svg>g>g>g"));
-	}
-
-	@Override
-	public void clear() {
-		_window = null;
 	}
 }

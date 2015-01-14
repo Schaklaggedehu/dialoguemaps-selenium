@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 /**
- * An adapter class to get the elements of the Tab menu.
- * Elements can be e.g. the window itself, buttons, fields, etc.
+ * An adapter class to get the elements of the Tab menu. Elements can be e.g.
+ * the window itself, buttons, fields, etc.
  * 
  * @author Janis Bullert
  * @edit Martin Hinsch
@@ -16,15 +16,11 @@ import org.openqa.selenium.WebElement;
  */
 public class TabmenuAdapter implements PageElementAdapter {
 
-	private static TabmenuAdapter _menu;
 	private List<WebElement> _buttons;
 	private WebElement _tabMenu;
 
 	public static TabmenuAdapter createTabMenuAdapter(WebElement tabMenu, List<WebElement> buttons) {
-		if (_menu == null) {
-			_menu = new TabmenuAdapter(tabMenu, buttons);
-		}
-		return _menu;
+		return new TabmenuAdapter(tabMenu, buttons);
 	}
 
 	private TabmenuAdapter(WebElement tabMenu, List<WebElement> buttons) {
@@ -44,10 +40,4 @@ public class TabmenuAdapter implements PageElementAdapter {
 	public WebElement getRootButton() {
 		return _buttons.get(1);
 	}
-
-	@Override
-	public void clear() {
-		_menu = null;
-	}
-
 }

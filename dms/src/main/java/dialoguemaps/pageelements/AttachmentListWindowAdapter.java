@@ -7,17 +7,13 @@ import org.openqa.selenium.WebElement;
 
 public class AttachmentListWindowAdapter implements PageElementAdapter {
 
-	private static AttachmentListWindowAdapter _window;
 	private WebElement _attachmentListWindow;
 	private WebElement _closeButton;
 	private List<WebElement> _inputFields;
 
 	public static AttachmentListWindowAdapter createAttachmentListWindowAdapter(WebElement attachmentListWindow,
 			WebElement closeButton, List<WebElement> inputFields) {
-		if (_window == null) {
-			_window = new AttachmentListWindowAdapter(attachmentListWindow, closeButton, inputFields);
-		}
-		return _window;
+		return new AttachmentListWindowAdapter(attachmentListWindow, closeButton, inputFields);
 	}
 
 	private AttachmentListWindowAdapter(WebElement attachmentListWindow, WebElement closeButton,
@@ -30,8 +26,8 @@ public class AttachmentListWindowAdapter implements PageElementAdapter {
 	public WebElement getAttachmentListWindow() {
 		return _attachmentListWindow;
 	}
-	
-	public WebElement getCloseButton(){
+
+	public WebElement getCloseButton() {
 		return _closeButton;
 	}
 
@@ -46,10 +42,5 @@ public class AttachmentListWindowAdapter implements PageElementAdapter {
 	public List<WebElement> getAllAttachments() {
 		return _attachmentListWindow.findElements(By
 				.cssSelector("div>div>div>div>div>div>div[eventproxy^=\"thumbnailView\"]"));
-	}
-
-	@Override
-	public void clear() {
-		_window = null;
 	}
 }

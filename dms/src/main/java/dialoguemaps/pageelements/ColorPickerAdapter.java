@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 /**
- * An adapter class to get the elements of the color picker.
- * Elements can be e.g. the window itself, buttons, fields, etc.
+ * An adapter class to get the elements of the color picker. Elements can be
+ * e.g. the window itself, buttons, fields, etc.
  * 
  * @author Janis Bullert
  * @edit Martin Hinsch
@@ -16,15 +16,11 @@ import org.openqa.selenium.WebElement;
  */
 public class ColorPickerAdapter implements PageElementAdapter {
 
-	private static ColorPickerAdapter _picker;
 	private List<WebElement> _colorPickers;
 	private WebElement _colorPicker;
 
 	public static ColorPickerAdapter createColorPickerAdapter(List<WebElement> colorPickers) {
-		if (_picker == null) {
-			_picker = new ColorPickerAdapter(colorPickers);
-		}
-		return _picker;
+		return new ColorPickerAdapter(colorPickers);
 	}
 
 	private ColorPickerAdapter(List<WebElement> colorPickers) {
@@ -45,9 +41,4 @@ public class ColorPickerAdapter implements PageElementAdapter {
 		WebElement colorTable = _colorPicker.findElement(By.cssSelector("div>div>div>div>div>div>div>div>div>div>div"));
 		return colorTable.findElement(By.cssSelector("div:nth-child(" + y + ")>div>div:nth-child(" + x + ")"));
 	}
-
-	public void clear() {
-		_picker = null;
-	}
-
 }

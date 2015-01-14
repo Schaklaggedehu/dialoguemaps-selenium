@@ -36,12 +36,13 @@ public class DrawingOnMapTest extends AbstractSelenium2Test {
 		assertThat(_dm.isDMLoginPageOpen(), is(true), "couldn't reach login page");
 		_dm.logIntoMainpage(NAME, PASSWORD);
 		assertThat(_dm.isLoggedIntoMainPage(), is(true), "couldn't log in");
-		_dm.shortcutNewMap();
-		assertThat(_dm.getTextFromTab(0), is("DM-Map"), "creating of new map failed");
+		_dm.shortcutCreateNewMap();
+		assertThat(_dm.isNewMapOpen(), is(true), "creating nof new map failed");
+//		assertThat(_dm.getTextFromTab(0), is("DM-Map"), "creating of new map failed");
 	}
 
 	@Test
-	public void usePenToDraw() {
+	public void usePenToDrawOnNewMap() {
 		_dm.openInteractionWindow();
 		assertThat(_dm.isInteractionWindowOpen(), is(true), "couldn't open interaction window");
 		_dm.openPenWindow();

@@ -51,7 +51,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 
 	final String _cssSelectorContextMenu = "body>div[eventproxy^=\"isc_VLayout_\"]"
 			+ ">div>div>div>div>div>div>div[eventproxy^=\"isc_Menu_\"]";
-	final String _cssSelectorLoginMenu = "body>div[eventproxy^=\"isc_HLayout_\"]>div>div[style*=\"cursor: default;\"]>div";
+	final String _cssSelectorLoginMenu = "body>div[eventproxy^=\"isc_HLayout_\"]>div>div>div";
 	final String _cssSelectorMainMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
 			+ "div>div>div>div>div>div.toolStrip:nth-child(1)";
 	final String _cssSelectorMapMenu = "body>div[eventproxy^=\"isc_VLayout_\"]>"
@@ -70,6 +70,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	final String _cssSelectorAttachmentsWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_AttachmentAddItemView_\"]";
 	final String _cssSelectorBasicShapeWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_MapFigureView_\"]";
 	final String _cssSelectorChatWindow = "body>div[eventproxy^=\"isc_ChatWindow_\"]>div";
+	final String _cssSelectorDeleteDialog = "";//TODO
 	final String _cssSelectorElucidationAttributesWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_ElucidationContextView_\"]";
 	final String _cssSelectorHelicopterWindow = "body>div[eventproxy^=\"isc_HelicopterView_\"]>div";
 	final String _cssSelectorHighlightPresentationWindow = "body>div[role=\"dialog\"][eventproxy^=\"isc_HighlightPresentationView_\"]";
@@ -86,36 +87,36 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	final String _cssSelectorTextEditorWindow = "body>div[eventproxy^=\"isc_MapTextView_\"]>div";
 	final String _cssSelectorZoomWindow = "body>div[eventproxy^=\"isc_PanningView_\"]";
 	// ---------------------------------------------------------------------------
-	ContextmenuAdapter _contextmenuAdapter1;
-	LoginmenuAdapter _loginmenuAdapter1;
-	MainmenuAdapter _mainmenuAdapter1;
-	MapmenuAdapter _mapmenuAdapter1;
-	TabmenuAdapter _tabmenuAdapter1;
+	ContextmenuAdapter _contextmenuAdapter;
+	LoginmenuAdapter _loginmenuAdapter;
+	MainmenuAdapter _mainmenuAdapter;
+	MapmenuAdapter _mapmenuAdapter;
+	TabmenuAdapter _tabmenuAdapter;
 	// ---------------------------------------------------------------------------
-	BoundingBoxesAdapter _boundingBoxAdapter1;
-	ColorPickerAdapter _colorPickerAdapter1;
-	DialogueMapAdapter _dialogueMapAdapter1;
+	BoundingBoxesAdapter _boundingBoxAdapter;
+	ColorPickerAdapter _colorPickerAdapter;
+	DialogueMapAdapter _dialogueMapAdapter;
 	// ---------------------------------------------------------------------------
-	AddAttachmentWindowAdapter _addAttachmentWindowAdapter1;
-	AttachmentListWindowAdapter _attachmentListWindowAdapter1;
-	AttachmentsWindowAdapter _attachmentsWindowAdapter1;
-	BasicShapeWindowAdapter _basicShapeWindowAdapter1;
-	ChatWindowAdapter _chatWindowAdapter1;
-	ElucidationAttributesWindowAdapter _elucidationAttributeWindowAdapter1;
-	HelicopterWindowAdapter _helicopterWindowAdapter1;
-	HighlightPresentationWindowAdapter _highlightPresentationWindowAdapter1;
-	HighlightWindowAdapter _highlightWindowAdapter1;
-	InfoWindowAdapter _infoWindowAdapter1;
-	InteractionWindowAdapter _interactionWindowAdapter1;
-	LoadMapWindowAdapter _loadMapWindowAdapter1;
-	MapArrowWindowAdapter _mapArrowWindowAdapter1;
-	PenWindowAdapter _penWindowAdapter1;
-	SettingsWindowAdapter _settingsWindowAdapter1 ;
-	ShapeWindowAdapter _shapeWindowAdapter1;
-	StructureGraphWindowAdapter _structureGraphWindowAdapter1;
-	TeleporterWindowAdapter _teleporterWindowAdapter1;
-	TextEditorWindowAdapter _textEditorWindowAdapter1;
-	ZoomAndPanWindowAdapter _zoomWindowAdapter1;
+	AddAttachmentWindowAdapter _addAttachmentWindowAdapter;
+	AttachmentListWindowAdapter _attachmentListWindowAdapter;
+	AttachmentsWindowAdapter _attachmentsWindowAdapter;
+	BasicShapeWindowAdapter _basicShapeWindowAdapter;
+	ChatWindowAdapter _chatWindowAdapter;
+	ElucidationAttributesWindowAdapter _elucidationAttributeWindowAdapter;
+	HelicopterWindowAdapter _helicopterWindowAdapter;
+	HighlightPresentationWindowAdapter _highlightPresentationWindowAdapter;
+	HighlightWindowAdapter _highlightWindowAdapter;
+	InfoWindowAdapter _infoWindowAdapter;
+	InteractionWindowAdapter _interactionWindowAdapter;
+	LoadMapWindowAdapter _loadMapWindowAdapter;
+	MapArrowWindowAdapter _mapArrowWindowAdapter;
+	PenWindowAdapter _penWindowAdapter;
+	SettingsWindowAdapter _settingsWindowAdapter;
+	ShapeWindowAdapter _shapeWindowAdapter;
+	StructureGraphWindowAdapter _structureGraphWindowAdapter;
+	TeleporterWindowAdapter _teleporterWindowAdapter;
+	TextEditorWindowAdapter _textEditorWindowAdapter;
+	ZoomAndPanWindowAdapter _zoomWindowAdapter;
 	// ---------------------------------------------------------------------------
 
 	private static Set<PageElementAdapter> _pageElementAdapters = new HashSet<>();
@@ -126,9 +127,7 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	}
 
 	public static void clearAllPageElementAdapters() {
-		for (PageElementAdapter pageElement : _pageElementAdapters) {
-			pageElement.clear();
-		}
+		_pageElementAdapters.clear();
 	}
 
 	public void sleepXseconds(final long seconds) {
@@ -146,20 +145,21 @@ public class DMPageElements extends AbstractPage<DMPage> {
 	}
 
 	public void logIntoMainpage(String name, String password) {
-		_loginmenuAdapter1 = createLoginmenuAdapter();
-		WebElement nameField = _loginmenuAdapter1.getSignInUsernameField();
+		createLoginmenuAdapter();
+		WebElement nameField = _loginmenuAdapter.getSignInUsernameField();
 		nameField.sendKeys(name);
 		nameField.submit();
-		WebElement passwordField = _loginmenuAdapter1.getSignInPasswordField();
+		WebElement passwordField = _loginmenuAdapter.getSignInPasswordField();
 		passwordField.sendKeys(password);
 		passwordField.submit();
-		WebElement signIn = _loginmenuAdapter1.getSignInButton();
+		WebElement signIn = _loginmenuAdapter.getSignInButton();
 		signIn.click();
 		waitUntilVisible(By.cssSelector(_cssSelectorTabMenu
 				+ ">div[eventproxy^=\"isc_TabSet_\"]>div>div>div>div>div>table[width]"));
 	}
 
-	protected InteractionWindowAdapter createInteractionWindowAdapter() {
+	protected void createInteractionWindowAdapter() {
+		if(_interactionWindowAdapter==null){
 		waitUntilVisible(By.cssSelector(_cssSelectorInteractionWindow));
 		WebElement interactionWindow = findElement(By.cssSelector(_cssSelectorInteractionWindow));
 		WebElement closeButton = interactionWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
@@ -168,20 +168,24 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		InteractionWindowAdapter window = InteractionWindowAdapter.createInteractionWindowAdapter(interactionWindow,
 				closeButton, interactionButtons);
 		_pageElementAdapters.add(window);
-		return window;
+		_interactionWindowAdapter = window;
+		}
 	}
 	
-	protected HelicopterWindowAdapter createHelicopterWindowAdapter() {
+	protected void createHelicopterWindowAdapter() {
+		if(_helicopterWindowAdapter==null){
 		waitUntilVisible(By.cssSelector(_cssSelectorHelicopterWindow));
 		WebElement helicopterWindow = findElement(By.cssSelector(_cssSelectorHelicopterWindow));
 		WebElement closeButton = helicopterWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
 		HelicopterWindowAdapter window = HelicopterWindowAdapter.createHelicopterWindowAdapter(helicopterWindow,
 				closeButton);
 		_pageElementAdapters.add(window);
-		return window;
+		_helicopterWindowAdapter = window;
+		}
 	}
 	
-	protected ChatWindowAdapter createChatWindowAdapter() {
+	protected void createChatWindowAdapter() {
+		if(_chatWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorChatWindow));
 		WebElement chatWindow = findElement(By.cssSelector(_cssSelectorChatWindow));
 		WebElement closeButton = chatWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
@@ -192,29 +196,35 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		ChatWindowAdapter window = ChatWindowAdapter.createChatWindowAdapter(chatWindow,
 				closeButton, inviteButton, textarea, selectItems);
 		_pageElementAdapters.add(window);
-		return window;
+		_chatWindowAdapter = window;
+		}
 	}
 
-	protected InfoWindowAdapter createInfoWindowAdapter() {
+	protected void createInfoWindowAdapter() {
+		if(_infoWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorInfoWindow));
 		WebElement infoWindow = findElement(By.cssSelector(_cssSelectorInfoWindow));
 		WebElement modalmask = findElement(By.cssSelector("body>div[eventProxy*=\"modalMask\"]:not([style*=\"visibility: hidden\"])"));
 		InfoWindowAdapter window = InfoWindowAdapter.createInfoWindowAdapter(infoWindow, modalmask);
 		_pageElementAdapters.add(window);
-		return window;
+		_infoWindowAdapter = window;
+		}
 	}
 	
-	protected ShapeWindowAdapter createShapeWindowAdapter() {
+	protected void createShapeWindowAdapter() {
+		if(_shapeWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorShapeWindow));
 		WebElement shapeWindow = findElement(By.cssSelector(_cssSelectorShapeWindow));
 		WebElement closeButton = shapeWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
 		List<WebElement> tabs = shapeWindow.findElements(By.cssSelector("div>div>div>div>div>div>div>div.gwt-HTML"));
 		ShapeWindowAdapter window = ShapeWindowAdapter.createShapeWindowAdapter(shapeWindow, closeButton, tabs);
 		_pageElementAdapters.add(window);
-		return window;
+		_shapeWindowAdapter = window;
+		}
 	}
 	
-	protected TextEditorWindowAdapter createTextEditorWindowAdapter() {
+	protected void createTextEditorWindowAdapter() {
+		if(_textEditorWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorTextEditorWindow));
 		WebElement textEditorWindow = findElement(By.cssSelector(_cssSelectorTextEditorWindow));
 		WebElement closeButton = textEditorWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
@@ -223,30 +233,36 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		WebElement textfield = findElement(By.cssSelector("div>div>div>div>div>div>form"));
 		TextEditorWindowAdapter window = TextEditorWindowAdapter.createTextEditorWindowAdapter(textEditorWindow, closeButton, buttons, forms, textfield);
 		_pageElementAdapters.add(window);
-		return window;
+		_textEditorWindowAdapter = window;
+		}
 	}
 	
-	protected AttachmentListWindowAdapter createAttachmentListWindowAdapter() {
+	protected void createAttachmentListWindowAdapter() {
+		if(_attachmentListWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorAttachmentListWindow));
 		WebElement attachmentListWindow = findElement(By.cssSelector(_cssSelectorAttachmentListWindow));
 		WebElement closeButton = attachmentListWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
 		List<WebElement> inputFields = attachmentListWindow.findElements(By.cssSelector("div>div>div>div>div>div>form>table>tbody>tr>td.formCell"));
 		AttachmentListWindowAdapter window = AttachmentListWindowAdapter.createAttachmentListWindowAdapter(attachmentListWindow, closeButton, inputFields);
 		_pageElementAdapters.add(window);
-		return window;
+		_attachmentListWindowAdapter = window;
+		}
 	}
 	
-	protected StructureGraphWindowAdapter createStructureGraphWindowAdapter() {
+	protected void createStructureGraphWindowAdapter() {
+		if(_structureGraphWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorStructureGraphWindow));
 		WebElement structureGraphWindow = findElement(By.cssSelector(_cssSelectorStructureGraphWindow));
 		WebElement closeButton = structureGraphWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
 		List<WebElement> buttons = structureGraphWindow.findElements(By.cssSelector("div>div>div[eventproxy^=\"isc_ToolStrip_\"]>div>div[eventproxy^=\"isc_Img_\"]"));
 		StructureGraphWindowAdapter window = StructureGraphWindowAdapter.createStructureGraphWindowAdapter(structureGraphWindow, closeButton, buttons);
 		_pageElementAdapters.add(window);
-		return window;
+		_structureGraphWindowAdapter = window;
+		}
 	}
 	
-	protected SettingsWindowAdapter createSettingsWindowAdapter() {
+	protected void createSettingsWindowAdapter() {
+		if(_settingsWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorSettingsWindow));
 		WebElement settingsWindow = findElement(By.cssSelector(_cssSelectorSettingsWindow));
 		WebElement closeButton = settingsWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
@@ -254,22 +270,27 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		List<WebElement> inputFields = settingsWindow.findElements(By.cssSelector("div>div>div>div>form>table>tbody>tr>td>input"));
 		SettingsWindowAdapter window = SettingsWindowAdapter.createSettingsWindowAdapter(settingsWindow, closeButton, saveButton, inputFields);
 		_pageElementAdapters.add(window);
-		return window;
+		_settingsWindowAdapter = window;
+		}
 	}
+		
 	
-	protected LoginmenuAdapter createLoginmenuAdapter() {
+	protected void createLoginmenuAdapter() {
+		if(_loginmenuAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorLoginMenu));
-		WebElement loginmenu = findElement(By.cssSelector(_cssSelectorLoginMenu));
+		WebElement loginmenu = findElements(By.cssSelector(_cssSelectorLoginMenu)).get(1);
 		List<WebElement> loginmenuButtons = loginmenu.findElements(By
 				.cssSelector("div[role=\"label\"]>div[eventproxy^=\"isc_IButton_\"]"));
 		List<WebElement> loginmenuFields = loginmenu.findElements(By
 				.cssSelector("div>div>form>table>tbody>tr>td>input"));
 		LoginmenuAdapter menu = LoginmenuAdapter.createLoginmenuAdapter(loginmenuButtons, loginmenuFields);
 		_pageElementAdapters.add(menu);
-		return menu;
+		_loginmenuAdapter = menu;
+		}
 	}
 	
-	protected TeleporterWindowAdapter createTeleporterWindowAdapter() {
+	protected void createTeleporterWindowAdapter() {
+		if(_teleporterWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorTeleporterWindow));
 		WebElement teleporterWindow = findElement(By.cssSelector(_cssSelectorTeleporterWindow));
 		WebElement teleporterCloseButton = teleporterWindow.findElement(By
@@ -279,10 +300,12 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		TeleporterWindowAdapter window = TeleporterWindowAdapter.createTeleporterWindowAdapter(teleporterWindow,
 				teleporterCloseButton, teleporterButtons);
 		_pageElementAdapters.add(window);
-		return window;
+		_teleporterWindowAdapter = window;
+		}
 	}
 
-	protected HighlightWindowAdapter createHighlightWindowAdapter() {
+	protected void createHighlightWindowAdapter() {
+		if(_highlightWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorHighlightWindow));
 		WebElement highlightWindow = findElement(By.cssSelector(_cssSelectorHighlightWindow));
 		WebElement highlightCloseButton = highlightWindow.findElement(By
@@ -292,10 +315,12 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		HighlightWindowAdapter window = HighlightWindowAdapter.createHighlightWindowAdapter(highlightWindow,
 				highlightCloseButton, highlightButtons);
 		_pageElementAdapters.add(window);
-		return window;
+		_highlightWindowAdapter = window;
+		}
 	}
 
-	protected HighlightPresentationWindowAdapter createHighlightPresentationWindowAdapter() {
+	protected void createHighlightPresentationWindowAdapter() {
+		if(_highlightPresentationWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorHighlightPresentationWindow));
 		WebElement highlightPresentationWindow = findElement(By.cssSelector(_cssSelectorHighlightPresentationWindow));
 		WebElement highlightPresentationCloseButton = highlightPresentationWindow.findElement(By
@@ -306,20 +331,24 @@ public class DMPageElements extends AbstractPage<DMPage> {
 				.createHighlightPresentationWindowAdapter(highlightPresentationWindow,
 						highlightPresentationCloseButton, highlightPresentationButtons);
 		_pageElementAdapters.add(window);
-		return window;
+		_highlightPresentationWindowAdapter = window;
+		}
 	}
 
-	protected PenWindowAdapter createPenWindowAdapter() {
+	protected void createPenWindowAdapter() {
+		if(_penWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorPenWindow));
 		WebElement penWindow = findElement(By.cssSelector(_cssSelectorPenWindow));
-		List<WebElement> penButtons = penWindow.findElements(By.cssSelector("div>div>div>div>div>div>img"));
+		List<WebElement> penButtons = penWindow.findElements(By.cssSelector("div.windowBody>div>div>div>div>div>img"));
 		WebElement closeButton = penWindow.findElement(By.cssSelector("div>div>div[eventproxy*=\"closeButton\"]"));
 		PenWindowAdapter window = PenWindowAdapter.createPenWindowAdapter(penWindow, penButtons, closeButton);
 		_pageElementAdapters.add(window);
-		return window;
+		_penWindowAdapter = window;
+		}
 	}
 
-	protected ZoomAndPanWindowAdapter createZoomWindowAdapter() {
+	protected void createZoomWindowAdapter() {
+		if(_zoomWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorZoomWindow));
 		WebElement zoomWindow = findElement(By.cssSelector(_cssSelectorZoomWindow));
 		List<WebElement> zoomButtons = zoomWindow.findElements(By.cssSelector("div>div>div>div>div>img"));
@@ -327,46 +356,56 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		WebElement eyeButton = zoomWindow.findElement(By.cssSelector("div>div>div>div>div>img"));
 		ZoomAndPanWindowAdapter window = ZoomAndPanWindowAdapter.createZoomWindowAdapter(zoomWindow, zoomButtons, panButtons, eyeButton);
 		_pageElementAdapters.add(window);
-		return window;
+		_zoomWindowAdapter = window;
+		}
 	}
 
-	protected MainmenuAdapter createMainMenuAdapter() {
+	protected void createMainMenuAdapter() {
+		if(_mainmenuAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorMainMenu));
 		WebElement mainMenu = findElement(By.cssSelector(_cssSelectorMainMenu));
 		List<WebElement> mainMenuButtons = mainMenu.findElements(By.cssSelector("div>div>div>img"));
 		MainmenuAdapter menu = MainmenuAdapter.createMainMenuAdapter(mainMenu, mainMenuButtons);
 		_pageElementAdapters.add(menu);
-		return menu;
+		_mainmenuAdapter = menu;
+		}
 	}
 
-	protected MapmenuAdapter createMapMenuAdapter() {
+	protected void createMapMenuAdapter() {
+		if(_mapmenuAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorMapMenu));
 		WebElement mapMenu = findElement(By.cssSelector(_cssSelectorMapMenu));
 		List<WebElement> mapMenuButtons = mapMenu.findElements(By.cssSelector("div>div>div>img"));
 		MapmenuAdapter menu = MapmenuAdapter.createMapMenuAdapter(mapMenu, mapMenuButtons);
 		_pageElementAdapters.add(menu);
-		return menu;
+		_mapmenuAdapter = menu;
+		}
 	}
 
-	protected TabmenuAdapter createTabMenuAdapter() {
+	protected void createTabMenuAdapter() {
+		if(_tabmenuAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorTabMenu));
 		WebElement tabMenu = findElement(By.cssSelector(_cssSelectorTabMenu));
 		List<WebElement> buttons = tabMenu.findElements(By
 				.cssSelector("div[eventproxy^=\"isc_ToolStrip_\"]>div>div>div>table>tbody>tr>td[align]"));
 		TabmenuAdapter menu = TabmenuAdapter.createTabMenuAdapter(tabMenu, buttons);
 		_pageElementAdapters.add(menu);
-		return menu;
+		_tabmenuAdapter = menu;
+		}
 	}
 
-	protected ContextmenuAdapter createContextMenuAdapter() {
+	protected void createContextMenuAdapter() {
+		if(_contextmenuAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorContextMenu));
 		WebElement contextMenu = findElement(By.cssSelector(_cssSelectorContextMenu));
 		ContextmenuAdapter menu = ContextmenuAdapter.createContextMenuAdapter(contextMenu);
 		_pageElementAdapters.add(menu);
-		return menu;
+		_contextmenuAdapter = menu;
+		}
 	}
 
-	protected DialogueMapAdapter createDialogueMapAdapter() {
+	protected void createDialogueMapAdapter() {
+		if(_dialogueMapAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorDialogueMap));
 		WebElement dialogueMap = findElement(By.cssSelector(_cssSelectorDialogueMap));
 		List<WebElement> dialogueMapCategories = dialogueMap.findElements(By.cssSelector("g>g"));
@@ -374,18 +413,22 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		DialogueMapAdapter map = DialogueMapAdapter.createDialogueMapAdapter(dialogueMap, dialogueMapCategories,
 				elucidationController);
 		_pageElementAdapters.add(map);
-		return map;
+		_dialogueMapAdapter = map;
+		}
 	}
 
-	protected BoundingBoxesAdapter createBoundingBoxesAdapter() {
+	protected void createBoundingBoxesAdapter() {
+		if(_boundingBoxAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorBoundingBoxes));
 		List<WebElement> boundingBoxes = findElements(By.cssSelector(_cssSelectorBoundingBoxes));
 		BoundingBoxesAdapter boxes = BoundingBoxesAdapter.createBoundingBoxesAdapter(boundingBoxes);
 		_pageElementAdapters.add(boxes);
-		return boxes;
+		_boundingBoxAdapter = boxes;
+		}
 	}
 
-	protected MapArrowWindowAdapter createMapArrowWindowAdapter() {
+	protected void createMapArrowWindowAdapter() {
+		if(_mapArrowWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorMapArrowWindow));
 		WebElement mapArrowWindow = findElement(By.cssSelector(_cssSelectorMapArrowWindow));
 		List<WebElement> threeColumns = mapArrowWindow.findElements(By
@@ -400,10 +443,12 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		MapArrowWindowAdapter window = MapArrowWindowAdapter.createMapArrowWindowAdapter(mapArrowWindow, closeButton,
 				sizeButtons, tails, lines, heads);
 		_pageElementAdapters.add(window);
-		return window;
+		_mapArrowWindowAdapter = window;
+		}
 	}
 
-	protected BasicShapeWindowAdapter createBasicShapeWindowAdapter() {
+	protected void createBasicShapeWindowAdapter() {
+		if(_basicShapeWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorBasicShapeWindow));
 		WebElement basicShapeWindow = findElement(By.cssSelector(_cssSelectorBasicShapeWindow));
 		WebElement closeButton = basicShapeWindow.findElement(By
@@ -416,20 +461,24 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		BasicShapeWindowAdapter window = BasicShapeWindowAdapter.createBasicShapeWindowAdapter(basicShapeWindow,
 				closeButton, sizeButtons, shapes);
 		_pageElementAdapters.add(window);
-		return window;
+		_basicShapeWindowAdapter = window;
+		}
 	}
 
-	protected LoadMapWindowAdapter createLoadMapWindowAdapter() {
+	protected void createLoadMapWindowAdapter() {
+		if(_loadMapWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorLoadMapWindow));
 		WebElement loadMapWindow = findElement(By.cssSelector(_cssSelectorLoadMapWindow));
 		WebElement closeButton = loadMapWindow.findElement(By
 				.cssSelector("div>div>div>div[eventproxy*=\"closeButton\"]"));
 		LoadMapWindowAdapter window = LoadMapWindowAdapter.createLoadMapWindowAdapter(loadMapWindow, closeButton);
 		_pageElementAdapters.add(window);
-		return window;
+		_loadMapWindowAdapter = window;
+		}
 	}
 
-	protected ElucidationAttributesWindowAdapter createElucidationAttributesWindowAdapter() {
+	protected void createElucidationAttributesWindowAdapter() {
+		if(_elucidationAttributeWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorElucidationAttributesWindow));
 		WebElement elucidationAttributesWindow = findElement(By.cssSelector(_cssSelectorElucidationAttributesWindow));
 		WebElement closeButton = elucidationAttributesWindow.findElement(By
@@ -437,10 +486,12 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		ElucidationAttributesWindowAdapter window = ElucidationAttributesWindowAdapter
 				.createElucidationAttributesWindowAdapter(elucidationAttributesWindow, closeButton);
 		_pageElementAdapters.add(window);
-		return window;
+		_elucidationAttributeWindowAdapter = window;
+		}
 	}
 
-	protected AddAttachmentWindowAdapter createAddAttachmentWindowAdapter() {
+	protected void createAddAttachmentWindowAdapter() {
+		if(_addAttachmentWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorAddAttachmentWindow));
 		WebElement addAttachmentWindow = findElement(By.cssSelector(_cssSelectorAddAttachmentWindow));
 		WebElement closeButton = addAttachmentWindow.findElement(By
@@ -452,10 +503,12 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		AddAttachmentWindowAdapter window = AddAttachmentWindowAdapter.createAddAttachmentWindowAdapter(
 				addAttachmentWindow, closeButton, okButton, inputFields);
 		_pageElementAdapters.add(window);
-		return window;
+		_addAttachmentWindowAdapter = window;
+		}
 	}
 
-	protected AttachmentsWindowAdapter createAttachmentsWindowAdapter() {
+	protected void createAttachmentsWindowAdapter() {
+		if(_attachmentsWindowAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorAttachmentsWindow));
 		WebElement attachmentWindow = findElement(By.cssSelector(_cssSelectorAttachmentsWindow));
 		WebElement closeButton = attachmentWindow.findElement(By
@@ -465,15 +518,18 @@ public class DMPageElements extends AbstractPage<DMPage> {
 		AttachmentsWindowAdapter window = AttachmentsWindowAdapter.createAttachmentsWindowAdapter(attachmentWindow,
 				closeButton, newButton);
 		_pageElementAdapters.add(window);
-		return window;
+		_attachmentsWindowAdapter = window;
+		}
 	}
 
-	protected ColorPickerAdapter createColorPickerAdapter() {
+	protected void createColorPickerAdapter() {
+		if(_colorPickerAdapter == null){
 		waitUntilVisible(By.cssSelector(_cssSelectorColorPicker));
 		List<WebElement> colorPickers = findElements(By.cssSelector(_cssSelectorColorPicker));
 		ColorPickerAdapter picker = ColorPickerAdapter.createColorPickerAdapter(colorPickers);
 		_pageElementAdapters.add(picker);
-		return picker;
+		_colorPickerAdapter = picker;
+		}
 	}
 
 }

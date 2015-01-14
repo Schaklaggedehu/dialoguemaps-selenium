@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 /**
- * An adapter class to get the elements of the Attachments window.
- * Elements can be e.g. the window itself, buttons, fields, etc.
+ * An adapter class to get the elements of the Attachments window. Elements can
+ * be e.g. the window itself, buttons, fields, etc.
  * 
  * @author Janis Bullert
  * @edit Martin Hinsch
@@ -16,17 +16,13 @@ import org.openqa.selenium.WebElement;
  */
 public class AttachmentsWindowAdapter implements PageElementAdapter {
 
-	private static AttachmentsWindowAdapter _window;
 	private WebElement _closeButton;
 	private WebElement _attachmentWindow;
 	private WebElement _newButton;
 
-	public static AttachmentsWindowAdapter createAttachmentsWindowAdapter(WebElement attachmentWindow, WebElement closeButton,
-			WebElement newButton) {
-		if (_window == null) {
-			_window = new AttachmentsWindowAdapter(attachmentWindow, closeButton, newButton);
-		}
-		return _window;
+	public static AttachmentsWindowAdapter createAttachmentsWindowAdapter(WebElement attachmentWindow,
+			WebElement closeButton, WebElement newButton) {
+		return new AttachmentsWindowAdapter(attachmentWindow, closeButton, newButton);
 	}
 
 	private AttachmentsWindowAdapter(WebElement attachmentWindow, WebElement closeButton, WebElement newButton) {
@@ -50,10 +46,4 @@ public class AttachmentsWindowAdapter implements PageElementAdapter {
 	public List<WebElement> getAllListItems() {
 		return _attachmentWindow.findElements(By.cssSelector("div>div>div>div>div>div>div>div>div>div>table>tbody>tr"));
 	}
-
-	@Override
-	public void clear() {
-		_window = null;
-	}
-
 }

@@ -15,18 +15,15 @@ import org.openqa.selenium.WebElement;
  */
 public class HighlightPresentationWindowAdapter implements PageElementAdapter {
 
-	private static HighlightPresentationWindowAdapter _window;
 	private WebElement _highlightPresentationWindow;
 	private List<WebElement> _highlightPresentationButtons;
 	private WebElement _highlightPresentationCloseButton;
 
-	public static HighlightPresentationWindowAdapter createHighlightPresentationWindowAdapter(WebElement highlightPresentationWindow,
-			WebElement highlightPresentationCloseButton, List<WebElement> highlightPresentationButtons) {
-		if (_window == null) {
-			_window = new HighlightPresentationWindowAdapter(highlightPresentationWindow, highlightPresentationCloseButton,
-					highlightPresentationButtons);
-		}
-		return _window;
+	public static HighlightPresentationWindowAdapter createHighlightPresentationWindowAdapter(
+			WebElement highlightPresentationWindow, WebElement highlightPresentationCloseButton,
+			List<WebElement> highlightPresentationButtons) {
+		return new HighlightPresentationWindowAdapter(highlightPresentationWindow, highlightPresentationCloseButton,
+				highlightPresentationButtons);
 	}
 
 	private HighlightPresentationWindowAdapter(WebElement highlightPresentationWindow,
@@ -58,10 +55,5 @@ public class HighlightPresentationWindowAdapter implements PageElementAdapter {
 
 	public WebElement getAddNextButton() {
 		return _highlightPresentationButtons.get(3);
-	}
-
-	@Override
-	public void clear() {
-		_window = null;
 	}
 }

@@ -19,14 +19,10 @@ public class ZoomAndPanWindowAdapter implements PageElementAdapter {
 	private List<WebElement> _zoomButtons;
 	private List<WebElement> _panButtons;
 	private WebElement _eyeButton;
-	private static ZoomAndPanWindowAdapter _window;
 
 	public static ZoomAndPanWindowAdapter createZoomWindowAdapter(WebElement zoomWindow, List<WebElement> zoomButtons,
 			List<WebElement> panButtons, WebElement eyeButton) {
-		if (_window == null) {
-			_window = new ZoomAndPanWindowAdapter(zoomWindow, zoomButtons, panButtons, eyeButton);
-		}
-		return _window;
+		return new ZoomAndPanWindowAdapter(zoomWindow, zoomButtons, panButtons, eyeButton);
 	}
 
 	private ZoomAndPanWindowAdapter(WebElement zoomWindow, List<WebElement> zoomButtons, List<WebElement> panButtons,
@@ -79,10 +75,5 @@ public class ZoomAndPanWindowAdapter implements PageElementAdapter {
 
 	public WebElement getToggleHomeButton() {
 		return _eyeButton;
-	}
-
-	@Override
-	public void clear() {
-		_window = null;
 	}
 }

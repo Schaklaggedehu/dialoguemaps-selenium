@@ -5,8 +5,8 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 /**
- * An adapter class to get the elements of the Map menu.
- * Elements can be e.g. the window itself, buttons, fields, etc.
+ * An adapter class to get the elements of the Map menu. Elements can be e.g.
+ * the window itself, buttons, fields, etc.
  * 
  * @author Janis Bullert
  * @edit Martin Hinsch
@@ -17,13 +17,9 @@ public class MapmenuAdapter implements PageElementAdapter {
 
 	private WebElement _mapToolsMenuToolStrip;
 	private List<WebElement> _mapMenuButtons;
-	private static MapmenuAdapter _menu;
 
 	public static MapmenuAdapter createMapMenuAdapter(WebElement mapMenu, List<WebElement> mapMenuButtons) {
-		if (_menu == null) {
-			_menu = new MapmenuAdapter(mapMenu, mapMenuButtons);
-		}
-		return _menu;
+		return new MapmenuAdapter(mapMenu, mapMenuButtons);
 	}
 
 	private MapmenuAdapter(final WebElement mapToolsMenuToolStrip, final List<WebElement> mapMenuButtons) {
@@ -57,10 +53,5 @@ public class MapmenuAdapter implements PageElementAdapter {
 
 	public WebElement getReturnButton() {
 		return _mapMenuButtons.get(5);
-	}
-
-	@Override
-	public void clear() {
-		_menu = null;
 	}
 }

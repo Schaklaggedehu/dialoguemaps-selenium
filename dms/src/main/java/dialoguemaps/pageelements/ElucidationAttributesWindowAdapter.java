@@ -16,16 +16,12 @@ import org.openqa.selenium.WebElement;
  */
 public class ElucidationAttributesWindowAdapter implements PageElementAdapter {
 
-	private static ElucidationAttributesWindowAdapter _window;
 	private WebElement _closeButton;
 	private WebElement _elucidationAttributesWindow;
 
-	public static ElucidationAttributesWindowAdapter createElucidationAttributesWindowAdapter(WebElement elucidationAttributesWindow,
-			WebElement closeButton) {
-		if (_window == null) {
-			_window = new ElucidationAttributesWindowAdapter(elucidationAttributesWindow, closeButton);
-		}
-		return _window;
+	public static ElucidationAttributesWindowAdapter createElucidationAttributesWindowAdapter(
+			WebElement elucidationAttributesWindow, WebElement closeButton) {
+		return new ElucidationAttributesWindowAdapter(elucidationAttributesWindow, closeButton);
 	}
 
 	private ElucidationAttributesWindowAdapter(WebElement elucidationAttributesWindow, WebElement closeButton) {
@@ -52,10 +48,5 @@ public class ElucidationAttributesWindowAdapter implements PageElementAdapter {
 
 	public String getName(WebElement listItem) {
 		return listItem.findElement(By.cssSelector("td:nth-child(2)>div>nobr")).getText();
-	}
-
-	@Override
-	public void clear() {
-		_window = null;
 	}
 }

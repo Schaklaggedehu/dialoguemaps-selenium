@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 
 public class TextEditorWindowAdapter implements PageElementAdapter {
 
-	private static TextEditorWindowAdapter _window;
 	private WebElement _closeButton;
 	private WebElement _textEditorWindow;
 	private List<WebElement> _buttons;
@@ -15,10 +14,7 @@ public class TextEditorWindowAdapter implements PageElementAdapter {
 
 	public static TextEditorWindowAdapter createTextEditorWindowAdapter(WebElement textEditorWindow,
 			WebElement closeButton, List<WebElement> buttons, List<WebElement> forms, WebElement textfield) {
-		if (_window == null) {
-			_window = new TextEditorWindowAdapter(textEditorWindow, closeButton, buttons, forms, textfield);
-		}
-		return _window;
+		return new TextEditorWindowAdapter(textEditorWindow, closeButton, buttons, forms, textfield);
 	}
 
 	private TextEditorWindowAdapter(WebElement textEditorWindow, WebElement closeButton, List<WebElement> buttons,
@@ -72,10 +68,5 @@ public class TextEditorWindowAdapter implements PageElementAdapter {
 
 	public WebElement getTextEditorInputForm() {
 		return _textfield;
-	}
-
-	@Override
-	public void clear() {
-		_window = null;
 	}
 }

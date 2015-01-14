@@ -5,8 +5,8 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 /**
- * An adapter class to get the elements of the Add Attachment window.
- * Elements can be e.g. the window itself, buttons, fields, etc.
+ * An adapter class to get the elements of the Add Attachment window. Elements
+ * can be e.g. the window itself, buttons, fields, etc.
  * 
  * @author Janis Bullert
  * @edit Martin Hinsch
@@ -15,18 +15,14 @@ import org.openqa.selenium.WebElement;
  */
 public class AddAttachmentWindowAdapter implements PageElementAdapter {
 
-	private static AddAttachmentWindowAdapter _window;
 	private WebElement _closeButton;
 	private WebElement _addAttachmentWindow;
 	private WebElement _okButton;
 	private List<WebElement> _inputFields;
 
-	public static AddAttachmentWindowAdapter createAddAttachmentWindowAdapter(WebElement addAttachmentWindow, WebElement closeButton,
-			WebElement okButton, List<WebElement> inputFields) {
-		if (_window == null) {
-			_window = new AddAttachmentWindowAdapter(addAttachmentWindow, closeButton, okButton, inputFields);
-		}
-		return _window;
+	public static AddAttachmentWindowAdapter createAddAttachmentWindowAdapter(WebElement addAttachmentWindow,
+			WebElement closeButton, WebElement okButton, List<WebElement> inputFields) {
+		return new AddAttachmentWindowAdapter(addAttachmentWindow, closeButton, okButton, inputFields);
 	}
 
 	private AddAttachmentWindowAdapter(WebElement addAttachmentWindow, WebElement closeButton, WebElement okButton,
@@ -56,10 +52,4 @@ public class AddAttachmentWindowAdapter implements PageElementAdapter {
 	public WebElement getAddressField() {
 		return _inputFields.get(1);
 	}
-
-	@Override
-	public void clear() {
-		_window = null;
-	}
-
 }

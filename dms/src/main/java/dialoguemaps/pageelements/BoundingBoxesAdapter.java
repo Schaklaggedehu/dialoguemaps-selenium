@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 /**
- * An adapter class to get the elements of the bounding boxes.
- * Elements can be e.g. the window itself, buttons, fields, etc.
+ * An adapter class to get the elements of the bounding boxes. Elements can be
+ * e.g. the window itself, buttons, fields, etc.
  * 
  * @author Janis Bullert
  * @edit Martin Hinsch
@@ -16,14 +16,10 @@ import org.openqa.selenium.WebElement;
  */
 public class BoundingBoxesAdapter implements PageElementAdapter {
 
-	private static BoundingBoxesAdapter _boxes;
 	private List<WebElement> _boundingBoxes;
 
 	public static BoundingBoxesAdapter createBoundingBoxesAdapter(List<WebElement> boundingBoxes) {
-		if (_boxes == null) {
-			_boxes = new BoundingBoxesAdapter(boundingBoxes);
-		}
-		return _boxes;
+		return new BoundingBoxesAdapter(boundingBoxes);
 	}
 
 	private BoundingBoxesAdapter(List<WebElement> boundingBoxes) {
@@ -88,10 +84,5 @@ public class BoundingBoxesAdapter implements PageElementAdapter {
 
 	public WebElement getResizeButtonE(WebElement boundingBox) {
 		return boundingBox.findElement(By.cssSelector("g>g>g:nth-child(4)>rect:nth-child(2)"));
-	}
-
-	@Override
-	public void clear() {
-		_boxes = null;
 	}
 }

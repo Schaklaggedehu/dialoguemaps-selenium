@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 /**
- * An adapter class to get the elements of the Dialogue Map.
- * Elements can be e.g. the window itself, buttons, fields, etc.
+ * An adapter class to get the elements of the Dialogue Map. Elements can be
+ * e.g. the window itself, buttons, fields, etc.
  * 
  * @author Janis Bullert
  * @edit Martin Hinsch
@@ -16,20 +16,17 @@ import org.openqa.selenium.WebElement;
  */
 public class DialogueMapAdapter implements PageElementAdapter {
 
-	private static DialogueMapAdapter _map;
 	private WebElement _dialogueMap;
 	private List<WebElement> _dialogueMapCategories;
 	private WebElement _elucidationController;
 
-	public static DialogueMapAdapter createDialogueMapAdapter(WebElement dialogueMap, List<WebElement> dialogueMapCategories,
-			WebElement elucidationController) {
-		if (_map == null) {
-			_map = new DialogueMapAdapter(dialogueMap, dialogueMapCategories, elucidationController);
-		}
-		return _map;
+	public static DialogueMapAdapter createDialogueMapAdapter(WebElement dialogueMap,
+			List<WebElement> dialogueMapCategories, WebElement elucidationController) {
+		return new DialogueMapAdapter(dialogueMap, dialogueMapCategories, elucidationController);
 	}
 
-	private DialogueMapAdapter(WebElement dialogueMap, List<WebElement> dialogueMapCategories, WebElement elucidationController) {
+	private DialogueMapAdapter(WebElement dialogueMap, List<WebElement> dialogueMapCategories,
+			WebElement elucidationController) {
 		_dialogueMap = dialogueMap;
 		_dialogueMapCategories = dialogueMapCategories;
 		_elucidationController = elucidationController;
@@ -74,10 +71,4 @@ public class DialogueMapAdapter implements PageElementAdapter {
 		List<WebElement> elucidationElements = _elucidationController.findElements(By.cssSelector("g"));
 		return elucidationElements.get(elucidationElements.size() - 1);
 	}
-
-	@Override
-	public void clear() {
-		_map = null;
-	}
-
 }

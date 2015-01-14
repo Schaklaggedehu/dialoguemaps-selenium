@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 
 public class SettingsWindowAdapter implements PageElementAdapter {
 
-	private static SettingsWindowAdapter _window;
 	private WebElement _settingsWindow;
 	private WebElement _closeButton;
 	private WebElement _saveButton;
@@ -14,10 +13,7 @@ public class SettingsWindowAdapter implements PageElementAdapter {
 
 	public static SettingsWindowAdapter createSettingsWindowAdapter(WebElement settingsWindow, WebElement closeButton,
 			WebElement saveButton, List<WebElement> inputFields) {
-		if (_window == null) {
-			_window = new SettingsWindowAdapter(settingsWindow, closeButton, saveButton, inputFields);
-		}
-		return _window;
+			return new SettingsWindowAdapter(settingsWindow, closeButton, saveButton, inputFields);
 	}
 
 	private SettingsWindowAdapter(WebElement settingsWindow, WebElement closeButton, WebElement saveButton,
@@ -66,10 +62,5 @@ public class SettingsWindowAdapter implements PageElementAdapter {
 
 	public WebElement getSMTPSenderAddressField() {
 		return _inputFields.get(6);
-	}
-
-	@Override
-	public void clear() {
-		_window = null;
 	}
 }

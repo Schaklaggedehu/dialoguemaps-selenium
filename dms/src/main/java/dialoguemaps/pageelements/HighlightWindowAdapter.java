@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 /**
- * An adapter class to get the elements of the Highlight window.
- * Elements can be e.g. the window itself, buttons, fields, etc.
+ * An adapter class to get the elements of the Highlight window. Elements can be
+ * e.g. the window itself, buttons, fields, etc.
  * 
  * @author Janis Bullert
  * @edit Martin Hinsch
@@ -16,17 +16,13 @@ import org.openqa.selenium.WebElement;
  */
 public class HighlightWindowAdapter implements PageElementAdapter {
 
-	private static HighlightWindowAdapter _window;
 	private WebElement _highlightWindow;
 	private List<WebElement> _highlightButtons;
 	private WebElement _highlightCloseButton;
 
-	public static HighlightWindowAdapter createHighlightWindowAdapter(WebElement highlightWindow, WebElement highlightCloseButton,
-			List<WebElement> highlightButtons) {
-		if (_window == null) {
-			_window = new HighlightWindowAdapter(highlightWindow, highlightCloseButton, highlightButtons);
-		}
-		return _window;
+	public static HighlightWindowAdapter createHighlightWindowAdapter(WebElement highlightWindow,
+			WebElement highlightCloseButton, List<WebElement> highlightButtons) {
+		return new HighlightWindowAdapter(highlightWindow, highlightCloseButton, highlightButtons);
 	}
 
 	private HighlightWindowAdapter(WebElement highlightWindow, WebElement highlightCloseButton,
@@ -83,10 +79,5 @@ public class HighlightWindowAdapter implements PageElementAdapter {
 		public WebElement getDeleteButton() {
 			return _slide.findElement(By.cssSelector("div>div>div[eventproxy^=\"isc_Img_\"]"));
 		}
-	}
-
-	@Override
-	public void clear() {
-		_window = null;
 	}
 }

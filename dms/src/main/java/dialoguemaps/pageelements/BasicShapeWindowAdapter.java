@@ -5,8 +5,8 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 /**
- * An adapter class to get the elements of the Basic Shape window.
- * Elements can be e.g. the window itself, buttons, fields, etc.
+ * An adapter class to get the elements of the Basic Shape window. Elements can
+ * be e.g. the window itself, buttons, fields, etc.
  * 
  * @author Janis Bullert
  * @edit Martin Hinsch
@@ -15,19 +15,15 @@ import org.openqa.selenium.WebElement;
  */
 public class BasicShapeWindowAdapter implements PageElementAdapter {
 
-	private static BasicShapeWindowAdapter _window;
 	private WebElement _mapArrowWindow;
 	private WebElement _closeButton;
 	private List<WebElement> _sizeButtons;
 	private List<WebElement> _shapes;
 
-	public static BasicShapeWindowAdapter createBasicShapeWindowAdapter(WebElement basicShapeWindow, WebElement closeButton,
-			List<WebElement> sizeButtons, List<WebElement> shapes) {
+	public static BasicShapeWindowAdapter createBasicShapeWindowAdapter(WebElement basicShapeWindow,
+			WebElement closeButton, List<WebElement> sizeButtons, List<WebElement> shapes) {
 
-		if (_window == null) {
-			_window = new BasicShapeWindowAdapter(basicShapeWindow, closeButton, sizeButtons, shapes);
-		}
-		return _window;
+		return new BasicShapeWindowAdapter(basicShapeWindow, closeButton, sizeButtons, shapes);
 	}
 
 	private BasicShapeWindowAdapter(WebElement mapArrowWindow, WebElement closeButton, List<WebElement> sizeButtons,
@@ -60,10 +56,5 @@ public class BasicShapeWindowAdapter implements PageElementAdapter {
 
 	public WebElement getShape(int shape) {
 		return _shapes.get(shape);
-	}
-
-	@Override
-	public void clear() {
-		_window = null;
 	}
 }

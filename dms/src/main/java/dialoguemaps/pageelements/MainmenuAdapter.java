@@ -5,27 +5,24 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 /**
- * An adapter class to get the elements of the Main menu.
- * Elements can be e.g. the window itself, buttons, fields, etc.
+ * An adapter class to get the elements of the Main menu. Elements can be e.g.
+ * the window itself, buttons, fields, etc.
  * 
  * @author Janis Bullert
  * @edit Martin Hinsch
  *
  * @version January 2015
  */
-public class MainmenuAdapter implements PageElementAdapter{
+public class MainmenuAdapter implements PageElementAdapter {
 
-	private static MainmenuAdapter _menu;
 	private WebElement _mainMenuToolStrip;
 	private List<WebElement> _mainMenuButtons;
 
 	public static MainmenuAdapter createMainMenuAdapter(WebElement mainMenu, List<WebElement> mainMenuButtons) {
-		if(_menu==null){
-			_menu = new MainmenuAdapter(mainMenu, mainMenuButtons);
-		}
-		return _menu;
+
+		return new MainmenuAdapter(mainMenu, mainMenuButtons);
 	}
-	
+
 	private MainmenuAdapter(final WebElement mainMenuToolStrip, final List<WebElement> mainMenuButtons) {
 		_mainMenuToolStrip = mainMenuToolStrip;
 		_mainMenuButtons = mainMenuButtons;
@@ -81,10 +78,5 @@ public class MainmenuAdapter implements PageElementAdapter{
 
 	public WebElement getInfoButton() {
 		return _mainMenuButtons.get(11);
-	}
-
-	@Override
-	public void clear() {
-		_menu = null;
 	}
 }

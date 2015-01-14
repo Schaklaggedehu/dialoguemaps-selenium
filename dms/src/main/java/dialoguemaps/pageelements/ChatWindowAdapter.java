@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 
 public class ChatWindowAdapter implements PageElementAdapter {
 
-	private static ChatWindowAdapter _window;
 	private WebElement _chatWindow;
 	private WebElement _closeButton;
 	private WebElement _inviteButton;
@@ -16,10 +15,7 @@ public class ChatWindowAdapter implements PageElementAdapter {
 
 	public static ChatWindowAdapter createChatWindowAdapter(WebElement chatWindow, WebElement closeButton,
 			WebElement inviteButton, WebElement textarea, List<WebElement> selectItems) {
-		if (_window == null) {
-			_window = new ChatWindowAdapter(chatWindow, closeButton, inviteButton, textarea, selectItems);
-		}
-		return _window;
+		return new ChatWindowAdapter(chatWindow, closeButton, inviteButton, textarea, selectItems);
 	}
 
 	private ChatWindowAdapter(WebElement chatWindow, WebElement closeButton, WebElement inviteButton,
@@ -67,10 +63,5 @@ public class ChatWindowAdapter implements PageElementAdapter {
 		return _chatWindow.findElement(
 				By.cssSelector("div>div>div>div>div>div>div>div>div>div>div>div[eventproxy^=\"isc_HTMLPane_\"]"))
 				.getText();
-	}
-
-	@Override
-	public void clear() {
-		_window = null;
 	}
 }

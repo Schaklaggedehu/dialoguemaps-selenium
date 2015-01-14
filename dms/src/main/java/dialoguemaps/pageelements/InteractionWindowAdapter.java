@@ -18,14 +18,10 @@ public class InteractionWindowAdapter implements PageElementAdapter {
 	private WebElement _interactionWindow;
 	private List<WebElement> _interactionButtons;
 	private WebElement _closeButton;
-	private static InteractionWindowAdapter _window;
 
 	public static InteractionWindowAdapter createInteractionWindowAdapter(WebElement interactionWindow,
 			WebElement closeButton, List<WebElement> interactionButtons) {
-		if (_window == null) {
-			_window = new InteractionWindowAdapter(interactionWindow, closeButton, interactionButtons);
-		}
-		return _window;
+		return new InteractionWindowAdapter(interactionWindow, closeButton, interactionButtons);
 	}
 
 	private InteractionWindowAdapter(WebElement interactionWindow, WebElement closeButton,
@@ -173,10 +169,5 @@ public class InteractionWindowAdapter implements PageElementAdapter {
 
 	public WebElement getRightColorPickerButton() {
 		return _interactionButtons.get(32);
-	}
-
-	@Override
-	public void clear() {
-		_window = null;
 	}
 }

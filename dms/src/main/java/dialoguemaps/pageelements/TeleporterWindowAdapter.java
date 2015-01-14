@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 /**
- * An adapter class to get the elements of the Teleporter window.
- * Elements can be e.g. the window itself, buttons, fields, etc.
+ * An adapter class to get the elements of the Teleporter window. Elements can
+ * be e.g. the window itself, buttons, fields, etc.
  * 
  * @author Janis Bullert
  * @edit Martin Hinsch
@@ -16,17 +16,13 @@ import org.openqa.selenium.WebElement;
  */
 public class TeleporterWindowAdapter implements PageElementAdapter {
 
-	private static TeleporterWindowAdapter _window;
 	private WebElement _teleporterWindow;
 	private List<WebElement> _teleporterButtons;
 	private WebElement _teleporterCloseButton;
 
-	public static TeleporterWindowAdapter createTeleporterWindowAdapter(WebElement teleporterWindow, WebElement teleporterCloseButton,
-			List<WebElement> teleporterButtons) {
-		if (_window == null) {
-			_window = new TeleporterWindowAdapter(teleporterWindow, teleporterCloseButton, teleporterButtons);
-		}
-		return _window;
+	public static TeleporterWindowAdapter createTeleporterWindowAdapter(WebElement teleporterWindow,
+			WebElement teleporterCloseButton, List<WebElement> teleporterButtons) {
+		return new TeleporterWindowAdapter(teleporterWindow, teleporterCloseButton, teleporterButtons);
 	}
 
 	private TeleporterWindowAdapter(WebElement teleporterWindow, WebElement teleporterCloseButton,
@@ -120,11 +116,5 @@ public class TeleporterWindowAdapter implements PageElementAdapter {
 		public WebElement getPreviewSVG() {
 			return _slide.findElement(By.cssSelector("div>div>div>div>div>div>div>svg"));
 		}
-
-	}
-
-	@Override
-	public void clear() {
-		_window = null;
 	}
 }

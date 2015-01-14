@@ -7,17 +7,13 @@ import org.openqa.selenium.WebElement;
 
 public class ShapeWindowAdapter implements PageElementAdapter {
 
-	private static ShapeWindowAdapter _window;
 	private WebElement _shapeWindow;
 	private WebElement _closeButton;
 	private List<WebElement> _tabs;
 
 	public static ShapeWindowAdapter createShapeWindowAdapter(WebElement shapeWindow, WebElement closeButton,
 			List<WebElement> tabs) {
-		if (_window == null) {
-			_window = new ShapeWindowAdapter(shapeWindow, closeButton, tabs);
-		}
-		return _window;
+		return new ShapeWindowAdapter(shapeWindow, closeButton, tabs);
 	}
 
 	private ShapeWindowAdapter(WebElement shapeWindow, WebElement closeButton, List<WebElement> tabs) {
@@ -44,10 +40,5 @@ public class ShapeWindowAdapter implements PageElementAdapter {
 
 	public WebElement getVisibleShape(int number) {
 		return _shapeWindow.findElements(By.cssSelector("div>div>div>div>div>div>div>div>div>div>svg>g")).get(number);
-	}
-
-	@Override
-	public void clear() {
-		_window = null;
 	}
 }

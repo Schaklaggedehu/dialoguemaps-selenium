@@ -8,8 +8,6 @@ package dialoguemaps.pageelements;
  * 
  * @version January 2015
  */
-public interface PageElementAdapter
-{
+public interface PageElementAdapter {
 
-    public void clear();
 }
